@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  background-color: black;
+  background-color: rgb(35, 37, 47);
 }
 
 body {
@@ -12,8 +12,8 @@ body {
 
 /* Style tab links */
 .tablink {
-  background-color: rgb(128, 128, 128);
-  color: white;
+  background-color: rgb(200, 200, 200);
+  color: black;
   font-weight: bold;
   float: left;
   border: none;
@@ -50,20 +50,61 @@ body {
 
 .tabcontent h1 {
   font-family: 'Abril Fatface', Georgia, serif;
-  font-size: 2.6em;
+  font-size: 2.4em;
   color: orange;
 }
 
 .tabcontent p {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: white;
 }
 
 a {
-  color: blue;
+  color: violet;
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+#links {
+  line-height: 300%;
+}
+
+.tabcontent .fa {
+  border-radius: 50%;
+  display: inline;
+  padding: 20px;
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  margin: 1vw;
+}
+
+
+.fa:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-envelope {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
 }
