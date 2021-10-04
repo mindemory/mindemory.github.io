@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   background-color: rgb(35, 37, 47);
+  background-color: #FFE4B5;
 }
 
 body {
@@ -8,6 +9,7 @@ body {
   padding: 0;
   height: 100%;
   font-family: 'Poppins', Verdana, sans-serif;
+  font-family: 'Montserrat';
 }
 
 /* Style tab links */
@@ -50,17 +52,18 @@ body {
 
 .tabcontent h1 {
   font-family: 'Abril Fatface', Georgia, serif;
+  font-family: Verdana;
   font-size: 2.4em;
-  color: orange;
+  color: brown;
 }
 
 .tabcontent p {
   font-size: 1.1em;
-  color: white;
+  color: black;
 }
 
 a {
-  color: violet;
+  color: blue;
   text-decoration: none;
 }
 
