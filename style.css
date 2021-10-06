@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   background-color: rgb(35, 37, 47);
-  background-color: #FFE4B5;
+  background-color: #AFA9CB;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
 
 /* Style tab links */
 .tablink {
-  background-color: rgb(200, 200, 200);
+  background-color: #BEB9D5;
   color: black;
   font-weight: bold;
   float: left;
@@ -22,7 +22,7 @@ body {
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  font-size: 2vw;
+  font-size: 1.8vw;
   width: 25%;
 }
 
@@ -63,7 +63,7 @@ body {
 }
 
 a {
-  color: blue;
+  color: purple;
   text-decoration: none;
 }
 

@@ -10,7 +10,7 @@ function openPage(pageName,elmnt) {
     tablinks[i].style.color = "black";
   }
   document.getElementById(pageName).style.display = "block";
-  elmnt.style.backgroundColor = "#FFE4B5";
+  elmnt.style.backgroundColor = "#AFA9CB";
   elmnt.style.color = "black";
 }
 
