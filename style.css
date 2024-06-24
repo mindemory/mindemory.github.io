@@ -30,13 +30,9 @@ body {
 #sidebar #social-links {
     margin-top: 2%;
     margin-bottom: 2%; 
-    /* add a box around social-links */
-
     border-top: 0.5em solid rgb(128, 128, 128);
     border-bottom: 0.5em solid rgb(128, 128, 128);
     background-color: rgb(128, 128, 128);
-    /* padding: 1%; */
-
 }
 
 #sidebar #author_img {
