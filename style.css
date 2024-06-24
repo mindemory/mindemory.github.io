@@ -9,15 +9,34 @@ body {
 }
 
 #sidebar {
-    flex: 0 0 15%; 
+    position: fixed;
+    top: 1vh;
+    left: 0;
+    width: 15vw;
     background: #f0f0f0;
-    height: 100vh;
+    height: 90vh;
     padding: 1.5%; 
     text-align: center;
-    font-size: 1.1em;
+    font-size: 1.3em;
+    line-height: 2em;
     margin-left: 1%; 
     border: 2px solid #ddd; 
     border-radius: 10px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#sidebar #social-links {
+    margin-top: 2%;
+    margin-bottom: 2%; 
+    /* add a box around social-links */
+
+    border-top: 0.5em solid rgb(128, 128, 128);
+    border-bottom: 0.5em solid rgb(128, 128, 128);
+    background-color: rgb(128, 128, 128);
+    /* padding: 1%; */
+
 }
 
 #sidebar #author_img {
@@ -42,7 +61,7 @@ body {
     display: block;
     padding: 1%;
     border-radius: 5%; 
-    transition: background-color 0.3s;
+    transition: background-color 0.3s; 
 }
 
 #sidebar ul li a:hover {
@@ -72,26 +91,63 @@ body {
     font-size: 1.1em;
     max-width: 100%;
     margin: auto;
+    margin-left: 30vw;
+}
+
+#research p {
+    text-indent: -2em; 
+    padding-left: 4em; 
 }
 
 section {
     margin-bottom: 3%; 
 }
 
-@media (min-width: 576px) { /* Small devices (landscape phones) */
+
+@media (max-width: 1200px) { /* Large devices (desktops, 992px and up) */
     #content {
-        max-width: 90%; 
+        margin-left: 30vw; 
     }
 }
 
-@media (min-width: 768px) { /* Medium devices (tablets) */
+@media (max-width: 992px) { /* Medium devices (tablets, 768px and up) */
+    #sidebar {
+        width: 20vw;
+        font-size: 1.3em;
+
+    }
+
     #content {
-        max-width: 80%; 
+        margin-left: 30vw;
     }
 }
 
-@media (min-width: 992px) { /* Large devices (desktops) */
+@media (max-width: 768px) { /* Small devices (landscape phones, 576px and up) */
+    #sidebar {
+        width: 25vw;
+    }
+
     #content {
-        max-width: 730px; 
+        margin-left: 28vw;
+    }
+}
+
+@media (max-width: 576px) { /* Extra small devices (portrait phones and smaller) */
+    body {
+        flex-direction: column;
+    }
+
+    #sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        border: none;
+        border-radius: 0;
+    }
+
+    #content {
+        margin-left: 0;
+        margin-top: 1vh;
     }
 }
