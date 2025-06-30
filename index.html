@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 	<meta charset = "UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +7,9 @@
 	<title> Mrugank Dake </title>
 	<link rel="icon" href="img/Logo.png">
 	<link rel = "stylesheet" href = "style.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap">
 	<!-- Add icon library -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 
@@ -25,68 +25,129 @@
 </script>
 
 <body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle hidden" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+
     <div id="sidebar">
-		<img id="author_img" src="img/Mrugank2.jpg" alt="Mrugank Dake display picture">
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+        
+		<img id="author_img" src="img/Mrugank8.jpg" alt="Mrugank Dake display picture">
+        <h1>Mrugank Dake</h1>
+        <p>PhD Student in Neuroscience<br>NYU Clayspace Lab</p>
+        
         <ul>
-            <li><a href="#about-me">About Me</a></li>
-            <li><a href="#research">Research</a></li>
-			
+            <li><a href="#about-me" class="nav-link active">About Me</a></li>
+            <li><a href="#research" class="nav-link">Research</a></li>
         </ul>
+		
 		<div id="social-links">
-            <a href="mailto:mrugank.dake@nyu.edu" class="fa fa-envelope" target="_blank"></a>
-            <a href="https://www.linkedin.com/in/mrugank-dake-71911113b/" class="fa fa-linkedin" target="_blank"></a>
-            <a href="https://twitter.com/the_memory_guy" class="fa fa-twitter" target="_blank"></a>
-			<a href="https://github.com/mindemory" class="fa fa-github" target="_blank"></a>
+            <a href="mailto:mrugank.dake@nyu.edu" class="fa-solid fa-envelope" target="_blank" aria-label="Email"></a>
+            <a href="https://www.linkedin.com/in/mrugank-dake-71911113b/" class="fa-brands fa-linkedin" target="_blank" aria-label="LinkedIn"></a>
+            <a href="https://twitter.com/the_memory_guy" class="fa-brands fa-twitter" target="_blank" aria-label="Twitter"></a>
+			<a href="https://github.com/mindemory" class="fa-brands fa-github" target="_blank" aria-label="GitHub"></a>
         </div>
     </div>
+    
     <div id="content">
         <section id="about-me">
-            <h2>About Me</h2>
-            <p> Hi, I am Mrugank Dake and I am a graduate student at
-				<a href="https://www.clayspacelab.com/lab" target="_blank">Clayspace Lab</a>, <a href="https://as.nyu.edu/psychology/people/GraduateStudents.html" target="_blank">New York University</a>
-				working on understanding the role of distributed representation in working memory. I am broadly interested in how memories are represented in the brain. </p>
-			<p>Prior to this, I completed my Bachelors and Masters dual degree from the
-				<a href="http://www.iisertirupati.ac.in/" target="_blank">Indian
-					Institute of Science Education and Research (IISER) Tirupati</a> in 2021 with a major in Biology and a minor in Physics.
-					During this period, I have worked on a range of topics in the domains of Synthetic biology,
-					Cancer, Neurobiology, Computational Neuroscience, Ecoacoustics and Machine Learning. </p>
-			<p> When not having my nth cup of coffee or working with data, you can find me playing chess, biking, hiking, or my new found interest in learning guitar. </p>
+			<h2>About Me</h2>
+			<p>Hi, I am Mrugank Dake, a neuroscience graduate student at 
+				<a href="https://www.clayspacelab.com/researchteam" target="_blank">Clayspace Lab</a>, 
+				<a href="https://as.nyu.edu/psychology/people/GraduateStudents.html" target="_blank">New York University</a>. 
+				I study how memories are represented in the brain, with a focus on distributed coding and network-level coordination in working memory. 
+				In particular, I use multimodal neuroimaging methods (MEG, EEG, fMRI, ECoG, TMS) to understand how distributed neural populations bring about the representation and transformation of information in working memory.
+			</p>
+		
+			<p>My journey into neuroscience began over a decade ago with the BrainBee competition in India, where a chapter on memory in the <a href="https://www.brainfacts.org/" target="_blank">BrainFacts</a> book sparked a lifelong fascination. 
+			   That early interest evolved into an academic path aimed at understanding how information is represented in biological systems, both with and without brains.
+			</p>
+		
+			<p>To pursue this, I earned a dual degree (BS-MS) in Biology with a minor in Physics from the 
+				<a href="http://www.iisertirupati.ac.in/" target="_blank">Indian Institute of Science Education and Research (IISER) Tirupati</a> in 2021. 
+				Influenced by Eric Kandel's <a href="https://www.amazon.com/Search-Memory-Emergence-Science-Mind/dp/0393329372" target="_blank"><em>In Search of Memory</em></a>, specifically his advice to pursue problems in biology/neuroscience starting with simple systems I spent my undergraduate years exploring a wide range of systems 
+				from <i>E. coli</i>, <i>Arabidopsis</i> to <i>Drosophila</i>, mice, and even squirrels 
+				understanding information across scales from genetics, neurobiology, to behavior.
+			</p>
+		
+			<p>Over time, I transitioned from reductionist approaches to systems neuroscience and neuroimaging, where I now study memory from a top-down perspective. 
+				I am especially interested in how distributed neural populations coordinate activity to represent information, a question so simple and elegant yet so complex that it keeps me wondering what's the right approach to even pursue it. 
+				As of now, my research goal is to bridge borders between the reductionist and holistic approaches and pursue this problem from a dynamical systems / control theory perspective. 
+			</p>
+		
+			<p>When not working with data or debugging code, I am probably out biking, hiking, playing chess, or learning some new skill that catches my attention. 
+				I love thoughtful conversations, especially over good coffee, and I am always up for a long walk or a deep dive into a weird idea.
+			</p>
+		
 			<p>Check out my <a href="docs/resume.pdf" target="_blank">CV</a> for more details.</p>
-        </section>
+		</section>
+		
+        
         <section id="research">
             <h2>Research</h2>
+			
 			<h3>Publications</h3>
-			<p>
-				<b><u>Dake M.</u></b>, Rajamani N. (<i>in prep</i>). Inter and intra species similarities and differences using acoustic analysis of
-<i>Funambulus </i> squirrels of the Indian subcontinent.
-			</p>
-			<p>
-				<b><u>Dake M.</u></b>, Curtis C. E. (<i>in press</i>). Perturbing human V1 degrades the fidelity of visual working memory. <i><a href="https://www.nature.com/articles/s41467-025-57882-8" target="_blank">Nature Communications</a></i>
-
-			</p>
+			
+			<div class="publication-card">
+				<h4>Perturbing human V1 degrades the fidelity of visual working memory</h4>
+				<p class="authors"><strong>Dake M.</strong>, Curtis C. E.</p>
+				<a href="https://www.nature.com/articles/s41467-025-57882-8" target="_blank" class="journal-badge">Nature Communications</a>
+			</div>
 
 			<h3>Posters</h3>
-			<p>
-				<b><u>Dake M.</u></b>, Curtis C. E. Do perturbations to visual cortex impact working memory?; In <i>Society for Neuroscience (SfN),
-Washington D.C.</i>, USA (2023) <a href="docs/Dake_SfN2023_poster.pdf" target="_blank">View Poster</a>
-			</p>
-			<p>
-				Khare S., Chopra S., Grover H., Vohra T., Mahmood U., Jatwani K., Kaushik D., Pandey A., Bhardwaj S., Tanwar A.,
-Singh J., Shekhar C., <b><u>Dake M.</u></b>, Krishnamoorthy K., Kumar K.; Li-Koff: To Detect and Degrade N-Nitrosamines;
-In <i>Giant Jamboree (iGEM), Boston</i>, USA (2020) <a href="https://2020.igem.org/Team:MRIIRS_FARIDABAD/Poster" target="_blank">View Poster</a>
-			</p>
-			<p>
-				Amar I., Avadhani K., Bajaj M., Balasubramanian D., Bhagat S., Chutani N., <b><u>Dake M.</u></b>, Khatri U., Krishna N., Jacob M.,
-Mal S., Mohapatra O., Pal A., Saha D., Tripathy B., Mukherjee R., Rao B.J.; CoCa coli: probiotic immunotherapy
-against colon cancer; In <i>Giant Jamboree (iGEM), Boston</i>, USA (2019) <a href="docs/igem_poster.pdf" target="_blank">View Poster</a>
-			</p>
+			<div class="research-item">
+				<h4>Do perturbations to visual cortex impact working memory?</h4>
+				<p class="venue"><i>Society for Neuroscience (SfN), Washington D.C., USA (2023)</i></p>
+				<a href="docs/Dake_SfN2023_poster.pdf" target="_blank" class="link">
+					<i class="fas fa-external-link-alt"></i> View Poster
+				</a>
+			</div>
+			
+			<div class="research-item">
+				<h4>Li-Koff: To Detect and Degrade N-Nitrosamines</h4>
+				<p class="venue"><i>Giant Jamboree (iGEM), Boston, USA (2020)</i></p>
+				<p class="authors">Khare S., Chopra S., Grover H., Vohra T., Mahmood U., Jatwani K., Kaushik D., Pandey A., Bhardwaj S., Tanwar A., Singh J., Shekhar C., <strong>Dake M.</strong>, Krishnamoorthy K., Kumar K.</p>
+				<a href="https://2020.igem.org/Team:MRIIRS_FARIDABAD/Poster" target="_blank" class="link">
+					<i class="fas fa-external-link-alt"></i> View Poster
+				</a>
+			</div>
+			
+			<div class="research-item">
+				<h4>CoCa coli: probiotic immunotherapy against colon cancer</h4>
+				<p class="venue"><i>Giant Jamboree (iGEM), Boston, USA (2019)</i></p>
+				<p class="authors">Amar I., Avadhani K., Bajaj M., Balasubramanian D., Bhagat S., Chutani N., <strong>Dake M.</strong>, Khatri U., Krishna N., Jacob M., Mal S., Mohapatra O., Pal A., Saha D., Tripathy B., Mukherjee R., Rao B.J.</p>
+				<a href="docs/igem_poster.pdf" target="_blank" class="link">
+					<i class="fas fa-external-link-alt"></i> View Poster
+				</a>
+			</div>
 
 			<h3>Talks & Symposia</h3>
-			<p>
-				<b><u>Dake M.</u></b>, Curtis C. E.. Perturbing human V1 degrades the fidelity of visual working memory; In <i>Working Memory Symposium (WMS) (Virtual)</i> (2024)
-			</p>
+			<div class="research-item">
+				<h4>Perturbing human V1 degrades the fidelity of visual working memory</h4>
+				<p class="venue"><i>Working Memory Symposium (WMS) (Virtual) (2024)</i></p>
+			</div>
         </section>
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="script.js"></script>
 </body>
 </html>
