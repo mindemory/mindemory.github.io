@@ -330,6 +330,21 @@ section a:hover {
     margin-top: 0.5rem;
 }
 
+.pub-year {
+    float: right;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-left: 1rem;
+    margin-top: 0.2rem;
+}
+
+.publication-card::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 /* Poster and talk cards */
 .research-item {
     background: var(--bg-card);
