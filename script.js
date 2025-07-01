@@ -274,8 +274,8 @@ function createParticles() {
         const particle = document.createElement('div');
         particle.style.cssText = `
             position: absolute;
-            width: 2px;
-            height: 2px;
+            width: 6px;
+            height: 6px;
             background: var(--primary-color);
             border-radius: 50%;
             opacity: 0.3;
