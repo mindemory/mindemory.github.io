@@ -606,3 +606,25 @@ section a:hover {
     background: var(--secondary-color);
     color: #fff;
 }
+
+/* Highlight for Mindemory link in sidebar */
+.mindemory-highlight {
+    background: linear-gradient(90deg, #6ec1e4 0%, #b388ff 100%);
+    color: #181818 !important;
+    font-weight: bold;
+    border-radius: 1.2em;
+    padding: 0.3em 1em;
+    margin-top: 0.5em;
+    box-shadow: 0 2px 8px rgba(110,193,228,0.15);
+    transition: background 0.2s, color 0.2s;
+}
+.mindemory-highlight:hover {
+    background: linear-gradient(90deg, #b388ff 0%, #6ec1e4 100%);
+    color: #fff !important;
+}
+
+.mindemory-title-font {
+    font-family: 'Pacifico', cursive !important;
+    font-size: 1.25em;
+    letter-spacing: 0.5px;
+}

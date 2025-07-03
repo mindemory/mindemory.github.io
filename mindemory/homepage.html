@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindemory</title>
+    <link rel="icon" href="../img/Logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Charter:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="blog-container">
+        <header class="blog-header">
+            <div class="blog-header-row">
+                <div class="logo-and-message">
+                    <span class="fancy-title">Mindemory</span>
+                    <div class="header-message"><em>Mind + Memory: Exploring what makes us who we are</em></div>
+                </div>
+                <nav class="blog-nav">
+                    <div class="blog-tab open" data-card="about">About</div>
+                    <div class="blog-tab" data-card="philosophy">Philosophical Musings</div>
+                    <div class="blog-tab" data-card="science">Scientific Curiosities</div>
+                    <div class="blog-tab" data-card="history">Historical Insights</div>
+                </nav>
+            </div>
+        </header>
+        <main class="blog-main">
+            <div class="main-content" id="mainContent">
+                <div class="main-content-section" data-content="about">
+Mindemory is a space I created to slow down and reflect on some of the deeper questions that often go unspoken. It's about understanding what makes us who we are by looking through the lenses of philosophy, science, and history. At its core, this blog is driven by a quiet but persistent curiosity about the mind, memory, and identity.<br><br>
+
+Through my research in neuroscience and my own lived experiences, I have often found myself circling around the same questions. What defines a person? How do memories shape us over time? Can science explain who we are, or do we also need to turn to philosophy, art, and the past to get closer to the truth? These aren't questions I expect to fully answer, but I believe they're worth asking, again and again.<br><br>
+
+Mindemory is where I try to put those thoughts into words. Some posts will be personal reflections. Others explore scientific ideas or historical events that have shifted how we think about the self. Often, they blend together.<br><br>
+
+The blog is loosely organized around three themes:<br>
+<ul>
+  <li><b>Philosophical Musings</b>: questions about consciousness, ethics, meaning, and identity</li>
+  <li><b>Scientific Curiosities</b>: topics in neuroscience, cognition, and how the brain processes the world</li>
+  <li><b>Historical Insights</b>: stories from the past that help us understand how people have thought about themselves and others over time</li>
+</ul>
+
+This isn't a space for hot takes. It's more like a quiet notebook where I can explore ideas at my own pace and hopefully offer something thoughtful for anyone reading. I'm not trying to chase trends or write for algorithms. I'm just hoping to connect with others who enjoy thinking deeply, slowly, and with care.<br><br>
+
+If that sounds like you, I'm glad you're here.<br><br>
+Welcome to Mindemory.
+                </div>
+                <div class="main-content-section" data-content="philosophy" style="display:none;">
+                    Coming up soon, buckle up, as I churn my neurons.
+                </div>
+                <div class="main-content-section" data-content="science" style="display:none;">
+                    Coming up soon, buckle up, as I churn my neurons.
+                </div>
+                <div class="main-content-section" data-content="history" style="display:none;">
+                    Coming up soon, buckle up, as I churn my neurons.
+                </div>
+            </div>
+        </main>
+        <script>
+        // Tab-like behavior: show main content below grid
+        document.querySelectorAll('.blog-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.blog-tab').forEach(t => t.classList.remove('open'));
+                tab.classList.add('open');
+                var cardType = tab.getAttribute('data-card');
+                document.querySelectorAll('.main-content-section').forEach(sec => {
+                    sec.style.display = (sec.getAttribute('data-content') === cardType) ? '' : 'none';
+                });
+            });
+        });
+        </script>
+    </div>
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTypingEffect();
+        // ... any other DOM-ready code ...
+    });
+    </script>
+</body>
+</html> 

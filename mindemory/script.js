@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollIndicator();
     initBackToTop();
     initScrollAnimations();
+    initTypingEffect();
 });
 
 // Loading Screen
@@ -217,6 +218,24 @@ function initScrollAnimations() {
     });
 }
 
+// Typing Effect for Mindemory Title
+function initTypingEffect() {
+    const titleElement = document.querySelector('.fancy-title');
+    console.log('initTypingEffect called, titleElement:', titleElement);
+    if (!titleElement) return;
+    const text = 'Mindemory';
+    titleElement.textContent = '';
+    let i = 0;
+    const typeWriter = () => {
+        if (i < text.length) {
+            titleElement.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 200);
+        }
+    };
+    setTimeout(typeWriter, 200);
+}
+
 // Enhanced hover effects for cards
 document.addEventListener('DOMContentLoaded', function() {
     const cards = document.querySelectorAll('.publication-card, .research-item');
@@ -248,20 +267,22 @@ function createParticles() {
     
     document.body.appendChild(particlesContainer);
     
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.style.cssText = `
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: #6ec1e4;
+            width: 6px;
+            height: 6px;
+            background: var(--primary-color);
             border-radius: 50%;
-            opacity: 0.18;
+            opacity: 0.3;
             animation: float 6s ease-in-out infinite;
             animation-delay: ${Math.random() * 6}s;
         `;
+        
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
+        
         particlesContainer.appendChild(particle);
     }
 }
