@@ -333,3 +333,14 @@ body {
     display: block;
     margin-bottom: 0.2rem;
 }
+
+a {
+    color: #6ec1e4;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #8dd4f0;
+    text-decoration: underline;
+}
