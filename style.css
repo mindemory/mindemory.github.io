@@ -402,7 +402,21 @@ section a:hover {
 }
 
 .research-item .link:hover {
-    gap: 0.75rem;
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.poster-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.poster-links .link {
+    flex: 0 1 auto;
+    min-width: 120px;
 }
 
 /* Animations */
@@ -525,6 +539,17 @@ section a:hover {
     .overlay.open {
         opacity: 1;
         pointer-events: all;
+    }
+
+    .poster-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .poster-links .link {
+        min-width: auto;
+        width: 100%;
+        text-align: center;
     }
 }
 
