@@ -464,6 +464,7 @@ section a:hover {
     #sidebar {
         transform: translateX(-100%);
         width: 280px;
+        transition: transform 0.3s ease-in-out;
     }
     
     #sidebar.open {
@@ -483,10 +484,25 @@ section a:hover {
         background: var(--primary-color);
         color: white;
         border: none;
-        padding: 0.5rem;
+        padding: 0.75rem;
         border-radius: 8px;
         cursor: pointer;
         display: block;
+        font-size: 1.2rem;
+        min-width: 44px;
+        min-height: 44px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-toggle:hover {
+        background: var(--secondary-color);
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .mobile-menu-toggle:active {
+        transform: scale(0.95);
     }
     
     .mobile-menu-toggle.hidden {
@@ -503,7 +519,7 @@ section a:hover {
         z-index: 150;
         opacity: 0;
         pointer-events: none;
-        transition: var(--transition);
+        transition: opacity 0.3s ease;
     }
     
     .overlay.open {
@@ -525,6 +541,33 @@ section a:hover {
     #author_img {
         width: 170px;
         height: 170px;
+    }
+    
+    /* Mobile-specific sidebar improvements */
+    #sidebar {
+        width: 100%;
+        max-width: 320px;
+        padding: 1.5rem;
+    }
+    
+    #sidebar ul li a {
+        padding: 1rem;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+    
+    #sidebar ul li a:hover {
+        transform: translateX(3px);
+    }
+    
+    .mobile-menu-toggle {
+        top: 0.75rem;
+        left: 0.75rem;
+        padding: 0.8rem;
+        font-size: 1.3rem;
     }
 }
 

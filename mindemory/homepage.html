@@ -27,54 +27,22 @@
         <main class="blog-main">
             <div class="main-content" id="mainContent">
                 <div class="main-content-section" data-content="about">
-Mindemory is a space I created to slow down and reflect on some of the deeper questions that often go unspoken. 
-It's an attempt at understanding what makes us who we are by looking through the lenses of philosophy, science, and history. 
-At its core, this blog / my braingasm is driven by a quiet but persistent curiosity about the mind, memory, and identity. 
-My first attempt at this began in 2017 via <a href="https://mindemory.blogspot.com/" target="_blank">ThoughtPost</a> but never really took off. 
-But I have found myself coming back to these thoughts time and again, either impromptu or via discussions with friends. Mindemory feels like a natural 
-space to channel and explore these thoughts more systematically.
-<br><br>
-
-Through my research in neuroscience and my own lived experiences, I have often found myself circling around the same questions. 
-What defines a person? How do memories shape us over time? Can science explain who we are, or do we also need to turn to philosophy, art, 
-and the past to get closer to the truth? These aren't questions I expect to fully answer, but I believe they're worth asking, again and again.<br><br>
-
-The blog will be loosely organized around three themes:<br>
-<ul>
-  <li><b>Philosophical Musings</b>: questions about consciousness, ethics, meaning, and identity</li>
-  <li><b>Scientific Curiosities</b>: topics in neuroscience, cognition, and how the brain processes the world</li>
-  <li><b>Historical Insights</b>: stories from the past that help us understand how people have thought about themselves and others over time</li>
-</ul>
-
-This isn't a space for hot takes (maybe!). It's more like a quiet notebook where I can explore ideas at my own pace and hopefully offer something thoughtful for anyone reading. 
-I am just hoping to connect with others who enjoy thinking deeply, slowly, and with care.<br><br>
-
-If that sounds like you, I am glad you are here.<br><br>
-Welcome to Mindemory.
-                </div>
-                <div class="main-content-section" data-content="philosophy" style="display:none;">
-                    Coming up soon, buckle up, as I churn my neurons.
-                </div>
-                <div class="main-content-section" data-content="science" style="display:none;">
-                    Coming up soon, buckle up, as I churn my neurons.
-                </div>
-                <div class="main-content-section" data-content="history" style="display:none;">
-                    Coming up soon, buckle up, as I churn my neurons.
+                    <div class="welcome-content">
+                        <h2>Welcome to Mindemory</h2>
+                        <p>A space for deep reflection on the mind, memory, and identity.</p>
+                        <div class="welcome-links">
+                            <a href="about.html" class="welcome-link">Read About</a>
+                            <a href="philosophy/" class="welcome-link">Philosophical Musings</a>
+                            <a href="science/" class="welcome-link">Scientific Curiosities</a>
+                            <a href="history/" class="welcome-link">Historical Insights</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
         <script>
-        // Tab-like behavior: show main content below grid
-        document.querySelectorAll('.blog-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.blog-tab').forEach(t => t.classList.remove('open'));
-                tab.classList.add('open');
-                var cardType = tab.getAttribute('data-card');
-                document.querySelectorAll('.main-content-section').forEach(sec => {
-                    sec.style.display = (sec.getAttribute('data-content') === cardType) ? '' : 'none';
-                });
-            });
-        });
+        // Redirect to About page by default
+        window.location.href = 'about.html';
         </script>
     </div>
     <script src="script.js"></script>

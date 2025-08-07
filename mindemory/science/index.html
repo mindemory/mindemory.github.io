@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Curiosities - Mindemory</title>
+    <link rel="icon" href="../../img/Logo.png">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css?family=Charter:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="blog-container">
+        <header class="blog-header">
+            <div class="blog-header-row">
+                <div class="logo-and-message">
+                    <span class="fancy-title">Mindemory</span>
+                    <div class="header-message"><em>where mind meets memory: reflections on who we are</em></div>
+                </div>
+                <nav class="blog-nav">
+                    <div class="blog-tab" data-card="about">About</div>
+                    <div class="blog-tab" data-card="philosophy">Philosophical Musings</div>
+                    <div class="blog-tab open" data-card="science">Scientific Curiosities</div>
+                    <div class="blog-tab" data-card="history">Historical Insights</div>
+                </nav>
+            </div>
+        </header>
+        <main class="blog-main">
+            <div class="main-content" id="mainContent">
+                <div class="main-content-section" data-content="science">
+                    Coming up soon, buckle up, as I churn my neurons.
+                </div>
+            </div>
+        </main>
+        <script>
+        // Tab-like behavior: show main content below grid
+        document.querySelectorAll('.blog-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.blog-tab').forEach(t => t.classList.remove('open'));
+                tab.classList.add('open');
+                var cardType = tab.getAttribute('data-card');
+                
+                // Navigate to appropriate page
+                if (cardType === 'about') {
+                    window.location.href = '../about.html';
+                } else if (cardType === 'science') {
+                    window.location.href = 'index.html';
+                } else {
+                    window.location.href = '../' + cardType + '/index.html';
+                }
+            });
+        });
+        </script>
+    </div>
+    <script src="../script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTypingEffect();
+        // ... any other DOM-ready code ...
+    });
+    </script>
+</body>
+</html> 
