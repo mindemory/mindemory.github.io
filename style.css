@@ -675,6 +675,40 @@ section a:hover {
     color: #fff;
 }
 
+.award-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+    color: white !important;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-left: 0.5rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+}
+
+.award-badge:hover {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    color: #fff;
+}
+
+.status-upcoming {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-upcoming i {
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
 /* Highlight for Mindemory link in sidebar */
 .mindemory-highlight {
     background: linear-gradient(90deg, #6ec1e4 0%, #b388ff 100%);
