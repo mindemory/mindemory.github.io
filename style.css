@@ -27,6 +27,44 @@ body {
     color: var(--text-primary);
     background: var(--bg-primary);
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Animated bifurcation diagram background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('img/logistic_bifurcation.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: -1;
+    animation: bifurcation-reveal 20s linear infinite;
+    clip-path: inset(0 100% 0 0);
+}
+
+@keyframes bifurcation-reveal {
+    0% { 
+        clip-path: inset(0 100% 0 0);
+        opacity: 0.08;
+    }
+    40% { 
+        clip-path: inset(0 0% 0 0);
+        opacity: 0.15;
+    }
+    60% { 
+        clip-path: inset(0 0% 0 0);
+        opacity: 0.15;
+    }
+    100% { 
+        clip-path: inset(0 100% 0 0);
+        opacity: 0.08;
+    }
 }
 
 /* Smooth scrolling */
