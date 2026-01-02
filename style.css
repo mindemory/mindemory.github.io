@@ -46,6 +46,11 @@ body::before {
     z-index: -1;
     animation: bifurcation-reveal 20s linear infinite;
     clip-path: inset(0 100% 0 0);
+    filter: invert(1);
+}
+
+[data-theme="dark"] body::before {
+    filter: none;
 }
 
 @keyframes bifurcation-reveal {
