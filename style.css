@@ -54,19 +54,22 @@ body::before {
 }
 
 @keyframes bifurcation-reveal {
-    0% { 
+    0% {
         clip-path: inset(0 100% 0 0);
         opacity: 0.08;
     }
-    40% { 
+
+    40% {
         clip-path: inset(0 0% 0 0);
         opacity: 0.15;
     }
-    60% { 
+
+    60% {
         clip-path: inset(0 0% 0 0);
         opacity: 0.15;
     }
-    100% { 
+
+    100% {
         clip-path: inset(0 100% 0 0);
         opacity: 0.08;
     }
@@ -107,8 +110,13 @@ html {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Sidebar */
@@ -212,8 +220,16 @@ html {
 
 #social-links {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
+    align-items: center;
     animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.social-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }
 
 #social-links a {
@@ -467,6 +483,7 @@ section a:hover {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -477,6 +494,7 @@ section a:hover {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -488,6 +506,7 @@ section a:hover {
         opacity: 0;
         transform: translateX(-50px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -510,7 +529,7 @@ section a:hover {
         width: 250px;
         padding: 1.5rem;
     }
-    
+
     #content {
         margin-left: 250px;
         padding: 1.5rem 2rem;
@@ -523,28 +542,28 @@ section a:hover {
         width: 280px;
         transition: transform 0.3s ease-in-out;
     }
-    
+
     #sidebar.open {
         transform: translateX(0);
     }
-    
+
     #sidebar ul li a {
         pointer-events: auto;
         cursor: pointer;
         -webkit-tap-highlight-color: rgba(37, 99, 235, 0.2);
     }
-    
+
     #sidebar #social-links a {
         pointer-events: auto;
         cursor: pointer;
         -webkit-tap-highlight-color: rgba(37, 99, 235, 0.2);
     }
-    
+
     #content {
         margin-left: 0;
         padding: 1rem;
     }
-    
+
     .mobile-menu-toggle {
         position: fixed;
         top: 1rem;
@@ -563,21 +582,21 @@ section a:hover {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
     }
-    
+
     .mobile-menu-toggle:hover {
         background: var(--secondary-color);
         transform: scale(1.05);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
-    
+
     .mobile-menu-toggle:active {
         transform: scale(0.95);
     }
-    
+
     .mobile-menu-toggle.hidden {
         display: none;
     }
-    
+
     .overlay {
         position: fixed;
         top: 0;
@@ -590,7 +609,7 @@ section a:hover {
         pointer-events: none;
         transition: opacity 0.3s ease;
     }
-    
+
     .overlay.open {
         opacity: 1;
         pointer-events: all;
@@ -600,7 +619,7 @@ section a:hover {
         flex-direction: column;
         gap: 0.5rem;
     }
-    
+
     .poster-links .link {
         min-width: auto;
         width: 100%;
@@ -612,24 +631,24 @@ section a:hover {
     section h2 {
         font-size: 2rem;
     }
-    
+
     .publication-card,
     .research-item {
         padding: 1rem;
     }
-    
+
     #author_img {
         width: 170px;
         height: 170px;
     }
-    
+
     /* Mobile-specific sidebar improvements */
     #sidebar {
         width: 100%;
         max-width: 320px;
         padding: 1.5rem;
     }
-    
+
     #sidebar ul li a {
         padding: 1rem;
         font-size: 1.1rem;
@@ -638,11 +657,11 @@ section a:hover {
         display: flex;
         align-items: center;
     }
-    
+
     #sidebar ul li a:hover {
         transform: translateX(3px);
     }
-    
+
     .mobile-menu-toggle {
         top: 0.75rem;
         left: 0.75rem;
@@ -707,6 +726,7 @@ section a:hover {
     text-decoration: none;
     transition: background 0.2s;
 }
+
 .journal-badge:hover {
     background: var(--secondary-color);
     color: #fff;
@@ -725,6 +745,7 @@ section a:hover {
     text-decoration: none;
     transition: background 0.2s;
 }
+
 .press-badge:hover {
     background: var(--secondary-color);
     color: #fff;
@@ -772,9 +793,10 @@ section a:hover {
     border-radius: 1.2em;
     padding: 0.3em 1em;
     margin-top: 0.5em;
-    box-shadow: 0 2px 8px rgba(110,193,228,0.15);
+    box-shadow: 0 2px 8px rgba(110, 193, 228, 0.15);
     transition: background 0.2s, color 0.2s;
 }
+
 .mindemory-highlight:hover {
     background: linear-gradient(90deg, #b388ff 0%, #6ec1e4 100%);
     color: #fff !important;
