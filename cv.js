@@ -111,8 +111,8 @@ function renderPublications() {
         return `
             <div class="pub-item">
                 <div class="pub-meta">
-                    <span class="pub-year">${pub.year}</span>
                     <span class="badge ${badgeClass}">${badgeText}</span>
+                    <span class="pub-year">${pub.year}</span>
                 </div>
                 <p class="pub-citation">
                     <strong>${pub.authors}</strong> (${pub.year}). ${pub.title}. <em>${pub.journal}</em>.
@@ -142,8 +142,8 @@ function renderPostersTalks() {
         return `
             <div class="event-item">
                 <div class="event-meta">
-                    <span class="event-date">${event.date}</span>
                     <span class="badge ${badgeClass}">${badgeText}</span>
+                    <span class="event-date">${event.date}</span>
                 </div>
                 <h4>${event.title}</h4>
                 <p class="event-venue"><em>${event.venue}</em></p>
@@ -232,10 +232,10 @@ function renderAwards() {
     container.innerHTML = CV_DATA.awards.map(award => {
         return `
             <li>
-                <span class="award-date">${award.date}</span>
                 <div class="award-info">
                     <strong>${award.title}</strong>
                 </div>
+                <span class="award-date">${award.date}</span>
             </li>
         `;
     }).join('');

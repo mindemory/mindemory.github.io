@@ -377,7 +377,8 @@ body::before {
     background: var(--primary-color);
 }
 
-.timeline-header {
+.timeline-header,
+.timeline-subheader {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -729,6 +730,8 @@ body::before {
 
 .awards-list li {
     display: flex;
+    justify-content: space-between;
+    align-items: baseline;
     gap: 1.5rem;
     margin-bottom: 1rem;
     border-bottom: 1px dashed var(--border-color);
@@ -744,7 +747,7 @@ body::before {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--primary-color);
-    width: 90px;
+    text-align: right;
     flex-shrink: 0;
 }
 
@@ -860,7 +863,8 @@ mark {
         font-size: 2rem;
     }
     
-    .timeline-header {
+    .timeline-header,
+    .timeline-subheader {
         flex-direction: column;
     }
     
@@ -885,6 +889,7 @@ mark {
     
     .award-date {
         width: auto;
+        text-align: left;
     }
 }
 
@@ -1103,7 +1108,8 @@ mark {
     }
     
     .award-date {
-        width: 80px !important;
+        width: auto !important;
+        text-align: right !important;
         color: black !important;
         font-size: 9.5pt !important;
     }
