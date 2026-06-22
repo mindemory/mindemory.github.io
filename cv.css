@@ -221,55 +221,6 @@ body::before {
     font-family: 'Nunito', sans-serif;
 }
 
-/* Search Box */
-.search-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.search-wrapper input {
-    width: 100%;
-    padding: 0.6rem 2.2rem 0.6rem 0.8rem;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    font-family: inherit;
-    font-size: 0.9rem;
-    transition: var(--transition);
-}
-
-.search-wrapper input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-}
-
-#clearSearch {
-    position: absolute;
-    right: 0.6rem;
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    font-size: 0.9rem;
-    padding: 0.2rem;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-#clearSearch:hover {
-    color: var(--text-primary);
-}
-
-.search-count {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-top: 0.5rem;
-    font-style: italic;
-}
 
 /* Nav Links inside Sidebar */
 .cv-nav {

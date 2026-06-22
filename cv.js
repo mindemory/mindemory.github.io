@@ -123,26 +123,6 @@ function renderPublications() {
     }).join('');
 }
 
-// Custom split to help isolate authors and title for event citation formatting
-function splitPosterAuthorsTitle(text) {
-    const starters = [
-        "Working memory synchronizes",
-        "Do perturbations to visual",
-        "Perturbing human V1",
-        "Li-Koff:",
-        "CoCa coli:",
-        "A tale of two cortices"
-    ]
-    for (const starter of starters) {
-        const idx = text.indexOf(starter);
-        if (idx > -1) {
-            const authors = text.substring(0, idx).trim().replace(/,\s*$/, "");
-            const title = text.substring(idx).trim();
-            return { authors, title };
-        }
-    }
-    return { authors: "Dake M.", title: text };
-}
 
 function renderPostersTalks() {
     const container = document.getElementById('eventList');
