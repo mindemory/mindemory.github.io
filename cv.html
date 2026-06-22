@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Mrugank Dake - Interactive HTML Curriculum Vitae">
+	<meta name="keywords" content="Mrugank Dake, CV, Resume, Neuroscience, Dynamical Systems, Postdoc, Dartmouth">
+	<title>Mrugank Dake - Interactive CV</title>
+
+	<!-- Google Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap" rel="stylesheet">
+	<!-- FontAwesome Icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<!-- Academicons Icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="cv.css">
+</head>
+
+<body>
+	<!-- Theme Switcher & Nav Header -->
+	<header class="cv-header no-print">
+		<div class="header-container">
+			<a href="index.html" class="back-home-btn">
+				<i class="fas fa-arrow-left"></i> Back to Portfolio
+			</a>
+			<div class="header-actions">
+				<button onclick="window.print()" class="action-btn print-btn" title="Save as PDF / Print">
+					<i class="fas fa-print"></i> Print CV / Save PDF
+				</button>
+				<a href="docs/MrugankDakeCV.pdf" target="_blank" class="action-btn pdf-btn" title="Download Original PDF">
+					<i class="fas fa-file-pdf"></i> Download PDF
+				</a>
+				<button class="theme-toggle-cv" id="themeToggleCv" aria-label="Toggle Theme">
+					<i class="fas fa-moon"></i>
+				</button>
+			</div>
+		</div>
+	</header>
+
+	<main class="cv-layout">
+		<!-- Sidebar for Interactive Filters (hidden when printing) -->
+		<aside class="cv-sidebar no-print">
+			<div class="sidebar-sticky">
+
+				<div class="sidebar-section filter-section">
+					<h3>Quick Sections</h3>
+					<nav class="cv-nav">
+						<a href="#academic-history" class="cv-nav-link active"><i class="fas fa-graduation-cap"></i> Academic History</a>
+						<a href="#specialized-training" class="cv-nav-link"><i class="fas fa-certificate"></i> Specialized Training</a>
+						<a href="#publications" class="cv-nav-link"><i class="fas fa-book"></i> Publications</a>
+						<a href="#posters-talks" class="cv-nav-link"><i class="fas fa-comments"></i> Posters & Talks</a>
+						<a href="#pre-doc-exp" class="cv-nav-link"><i class="fas fa-microscope"></i> Research Experience</a>
+						<a href="#professional-experience" class="cv-nav-link"><i class="fas fa-briefcase"></i> Experience</a>
+						<a href="#professional-service" class="cv-nav-link"><i class="fas fa-hands-helping"></i> Professional Service</a>
+						<a href="#awards" class="cv-nav-link"><i class="fas fa-trophy"></i> Awards</a>
+						<a href="#skills-section" class="cv-nav-link"><i class="fas fa-tools"></i> Skills</a>
+					</nav>
+				</div>
+
+			</div>
+		</aside>
+
+		<!-- CV Main Content Area -->
+		<article class="cv-content" id="cvContent">
+			<!-- Print Header (Visible only when printing) -->
+			<header class="print-header">
+				<h1>Mrugank Dake</h1>
+				<div class="print-contact">
+					<span><i class="fas fa-globe"></i> mindemory.io</span>
+					<span><i class="fas fa-envelope"></i> mrugank.dake@dartmouth.edu</span>
+					<span><i class="fab fa-github"></i> github.com/mindemory</span>
+					<span><i class="fas fa-map-marker-alt"></i> Hanover, NH</span>
+				</div>
+			</header>
+
+			<!-- Interactive Header (Visible in browser, hidden when printing) -->
+			<header class="cv-main-header no-print">
+				<div class="header-main-info">
+					<h1>Mrugank Dake</h1>
+					<p class="subtitle">Postdoctoral Researcher in Psychological and Brain Sciences</p>
+					<p class="affiliation">Dartmouth College | Hanover, NH</p>
+				</div>
+				<div class="contact-grid">
+					<a href="https://mindemory.io" target="_blank"><i class="fas fa-globe"></i> mindemory.io</a>
+					<a href="mailto:mrugank.dake@dartmouth.edu"><i class="fas fa-envelope"></i> mrugank.dake@dartmouth.edu</a>
+					<a href="https://github.com/mindemory" target="_blank"><i class="fab fa-github"></i> github.com/mindemory</a>
+					<span><i class="fas fa-map-marker-alt"></i> Hanover, NH</span>
+				</div>
+			</header>
+
+			<!-- ACADEMIC HISTORY -->
+			<section id="academic-history" class="cv-section">
+				<h2 class="section-title"><i class="fas fa-graduation-cap"></i> Academic History</h2>
+				<div class="cv-timeline" id="academicTimeline">
+					<!-- Dynamic Content -->
+				</div>
+			</section>
+
+			<!-- SPECIALIZED TRAINING -->
+			<section id="specialized-training" class="cv-section">
+				<h2 class="section-title"><i class="fas fa-certificate"></i> Specialized Training</h2>
+				<div class="experience-list" id="specializedTrainingList">
+					<!-- Dynamic Content -->
+				</div>
+			</section>
+
+			<!-- PUBLICATIONS -->
+			<section id="publications" class="cv-section">
+				<h2 class="section-title"><i class="fas fa-book"></i> Publications</h2>
+				<div class="publication-list" id="publicationList">
+					<!-- Dynamic Content -->
+				</div>
+			</section>
+
+			<!-- POSTERS & TALKS -->
+			<section id="posters-talks" class="cv-section">
+				<h2 class="section-title"><i class="fas fa-comments"></i> Posters & Talks</h2>
+				<div class="event-list" id="eventList">
+					<!-- Dynamic Content -->
+				</div>
+			</section>
+
+			<!-- PRE-DOCTORAL RESEARCH EXPERIENCE -->
+			<section id="pre-doc-exp" class="cv-section">
+				<h2 class="section-title"><i class="fas fa-microscope"></i> Pre-Doctoral Research Experience</h2>
+				<div class="experience-list" id="preDocList">
+					<!-- Dynamic Content -->
+				</div>
+			</section>
+
+			<!-- PROFESSIONAL EXPERIENCE -->
+			<section id="professional-experience" class="cv-section">
+				<h2 class="section-title"><i class="fas fa-briefcase"></i> Professional & Teaching Experience</h2>
+				<div class="cv-timeline" id="professionalTimeline">
+					<!-- Dynamic Content -->
+				</div>
+			</section>
+
+			<!-- PROFESSIONAL SERVICE -->
+			<section id="professional-service" class="cv-section">
+				<h2 class="section-title"><i class="fas fa-hands-helping"></i> Professional Service</h2>
+				<ul class="service-list" id="serviceList">
+					<!-- Dynamic Content -->
+				</ul>
+			</section>
+
+			<!-- AWARDS -->
+			<section id="awards" class="cv-section">
+				<h2 class="section-title"><i class="fas fa-trophy"></i> Awards & Fellowships</h2>
+				<ul class="awards-list" id="awardsList">
+					<!-- Dynamic Content -->
+				</ul>
+			</section>
+
+			<!-- SKILLS -->
+			<section id="skills-section" class="cv-section">
+				<h2 class="section-title"><i class="fas fa-tools"></i> Technical Skills</h2>
+				<div class="skills-grid" id="skillsGrid">
+					<!-- Dynamic Content -->
+				</div>
+			</section>
+		</article>
+	</main>
+
+	<!-- Footer (Hidden when printing) -->
+	<footer class="cv-footer no-print">
+		<p>&copy; 2026 Mrugank Dake. Interactive Portfolio CV.</p>
+	</footer>
+
+	<!-- CV Data (Auto-generated from PDF) -->
+	<script src="cv_data.js"></script>
+	<!-- Custom Script -->
+	<script src="cv.js"></script>
+</body>
+
+</html>
