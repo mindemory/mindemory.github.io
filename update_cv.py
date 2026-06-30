@@ -31,7 +31,8 @@ def split_poster_authors_title(text):
         "Perturbing human V1",
         "Li-Koff:",
         "CoCa coli:",
-        "A tale of two cortices"
+        "A tale of two cortices",
+        "Neural synchrony between"
     ]
     for starter in starters:
         idx = text.find(starter)

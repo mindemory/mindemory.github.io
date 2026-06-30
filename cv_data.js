@@ -95,6 +95,14 @@ const CV_DATA = {
   "posters_talks": [
     {
       "authors": "Dake M. , Dandekar S., Curtis C. E",
+      "title": "Neural synchrony between prefrontal and visual cortices supports visual working memory",
+      "venue": "Working Memory Symposium (Virtual)",
+      "date": "July 2026",
+      "url": "",
+      "award": ""
+    },
+    {
+      "authors": "Dake M. , Dandekar S., Curtis C. E",
       "title": "Working memory synchronizes oscillations within and across cortical areas",
       "venue": "Society for Neuroscience (SfN), San Diego CA, USA",
       "date": "Nov 2025",
@@ -112,7 +120,7 @@ const CV_DATA = {
     {
       "authors": "Dake M. , Curtis C. E",
       "title": "Perturbing human V1 degrades the fidelity of visual working memory",
-      "venue": "In Working Memory Symposium (Virtual)",
+      "venue": "Working Memory Symposium (Virtual)",
       "date": "July 2024",
       "url": "",
       "award": ""
