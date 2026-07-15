@@ -45,10 +45,10 @@ function initThemeToggle() {
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme);
         
-        // Add transition effect
-        html.style.transition = 'all 0.3s ease';
+        // Add transition class to animate theme change smoothly
+        html.classList.add('theme-transition');
         setTimeout(() => {
-            html.style.transition = '';
+            html.classList.remove('theme-transition');
         }, 300);
     });
 }
