@@ -102,6 +102,22 @@ const CV_DATA = {
       "award": ""
     },
     {
+      "authors": "Dake M. , Curtis C. E",
+      "title": "A tale of two cortices",
+      "venue": "NYU TELL GSAS competition",
+      "date": "April 2025",
+      "url": "",
+      "award": "NYU Dean's Award"
+    },
+    {
+      "authors": "Dake M. , Curtis C. E",
+      "title": "Perturbing human V1 degrades the fidelity of visual working memory",
+      "venue": "Working Memory Symposium (Virtual)",
+      "date": "July 2024",
+      "url": "",
+      "award": ""
+    },
+    {
       "authors": "Dake M. , Dandekar S., Curtis C. E",
       "title": "Working memory synchronizes oscillations within and across cortical areas",
       "venue": "Society for Neuroscience (SfN), San Diego CA, USA",
@@ -116,14 +132,6 @@ const CV_DATA = {
       "date": "May 2025",
       "url": "docs/CCN2025Poster_MrugankDake.pdf",
       "award": "NYU Dean's Conference Fund"
-    },
-    {
-      "authors": "Dake M. , Curtis C. E",
-      "title": "Perturbing human V1 degrades the fidelity of visual working memory",
-      "venue": "Working Memory Symposium (Virtual)",
-      "date": "July 2024",
-      "url": "",
-      "award": ""
     },
     {
       "authors": "Dake M. , Curtis C. E",

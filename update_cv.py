@@ -15,6 +15,8 @@ def clean_text(text):
     text = text.replace("/cer◎ifica◎e", "")
     text = text.replace("♂pen-nib", "")
     text = text.replace("/chalkboard-◎eacher", "")
+    text = text.replace("♂podcast", "")
+    text = text.replace("ὍC", "")
     text = text.replace("ὒC", "")
     text = text.replace("ὋC", "")
     text = text.replace("/handshake", "")
@@ -55,9 +57,14 @@ def main():
     for page in reader.pages:
         full_raw_text += page.extract_text() + "\n"
 
-    # 2. Extract coordinates on page 2 ONLY for the SKILLS section
+    # 2. Extract coordinates on the page containing the SKILLS section
     skills_elements = []
-    page2 = reader.pages[1]
+    skills_page_idx = 1 # default fallback
+    for i, page in enumerate(reader.pages):
+        if "SKILLS" in page.extract_text():
+            skills_page_idx = i
+            break
+    page_skills = reader.pages[skills_page_idx]
     
     def skills_visitor(text, cm, tm, fontDict, fontSize):
         x = tm[4]
@@ -72,14 +79,13 @@ def main():
                     "y": y - (fontSize * i * 1.2)
                 })
                 
-    page2.extract_text(visitor_text=skills_visitor)
+    page_skills.extract_text(visitor_text=skills_visitor)
 
     # Clean the full raw text to identify section splits
     headers = [
         ("academic", "ACADEMIC HISTORY"),
         ("specialized", "SPECIALIZED TRAINING"),
         ("publications", "PUBLICATIONS"),
-        ("posters", "POSTERS & TALKS"),
         ("predoc", "PRE-DOCTORAL RESEARCH EXPERIENCE"),
         ("professional", "PROFESSIONAL & TEACHING EXPERIENCE"),
         ("service", "PROFESSIONAL SERVICE"),
@@ -87,11 +93,23 @@ def main():
         ("skills", "SKILLS")
     ]
 
+    # Support both combined "POSTERS & TALKS" and separate "TALKS", "POSTERS"
+    if "POSTERS & TALKS" in full_raw_text:
+        headers.append(("posters", "POSTERS & TALKS"))
+    else:
+        headers.append(("talks", "TALKS"))
+        headers.append(("posters", "POSTERS"))
+
     indices = []
     for key, title in headers:
-        match = re.search(re.escape(title), full_raw_text)
+        # Match header line, potentially with leading weird characters
+        pattern = r'(?:^|\n)([^\n]*' + re.escape(title) + r')\s*(?:\n|$)'
+        match = re.search(pattern, full_raw_text)
         if match:
-            indices.append((key, match.start(), match.end()))
+            start = match.start()
+            if full_raw_text[start] == '\n':
+                start += 1
+            indices.append((key, start, match.end()))
     
     indices.sort(key=lambda x: x[1])
 
@@ -303,52 +321,53 @@ def main():
 
     # 4. Parse Posters & Talks
     posters_talks = []
-    if "posters" in section_blocks:
-        bullet_texts = parse_bullet_items(section_blocks["posters"])
-        for entry in bullet_texts:
-            parts = entry.split(";")
-            if len(parts) >= 2:
-                left_part = parts[0].strip()
-                right_part = ";".join(parts[1:]).strip()
-                
-                # Sift authors from title
-                authors, title = split_poster_authors_title(left_part)
-                
-                # Split venue and date
-                date_match = re.search(r'([A-Za-z]+ \d{4}|\d{4})$', right_part)
-                date_str = ""
-                venue_str = right_part
-                if date_match:
-                    date_str = date_match.group(1)
-                    venue_str = right_part[:date_match.start()].strip().rstrip(",")
-                
-                url = ""
-                award = ""
-                if "SfN" in venue_str and "2025" in date_str:
-                    url = "docs/Dake_SfN2025_poster.pdf"
-                    award = "SfN Trainee Professional Development Award (TPDA)"
-                elif "CCN" in venue_str and "2025" in date_str:
-                    url = "docs/CCN2025Poster_MrugankDake.pdf"
-                    award = "NYU Dean's Conference Fund"
-                elif "SfN" in venue_str and "2023" in date_str:
-                    url = "docs/Dake_SfN2023_poster.pdf"
-                elif "Li-Koff" in title:
-                    url = "https://2020.igem.org/Team:MRIIRS_FARIDABAD/Poster"
-                    award = "DBT India iBEC Award 2020"
-                elif "CoCa coli" in title:
-                    url = "docs/igem_poster.pdf"
-                    award = "DBT India iBEC Award 2019"
-                elif "two cortices" in title:
-                    award = "NYU Dean's Award"
-                
-                posters_talks.append({
-                    "authors": authors,
-                    "title": title,
-                    "venue": venue_str,
-                    "date": date_str,
-                    "url": url,
-                    "award": award
-                })
+    for sec_key in ["talks", "posters"]:
+        if sec_key in section_blocks:
+            bullet_texts = parse_bullet_items(section_blocks[sec_key])
+            for entry in bullet_texts:
+                parts = entry.split(";")
+                if len(parts) >= 2:
+                    left_part = parts[0].strip()
+                    right_part = ";".join(parts[1:]).strip()
+                    
+                    # Sift authors from title
+                    authors, title = split_poster_authors_title(left_part)
+                    
+                    # Split venue and date
+                    date_match = re.search(r'([A-Za-z]+ \d{4}|\d{4})$', right_part)
+                    date_str = ""
+                    venue_str = right_part
+                    if date_match:
+                        date_str = date_match.group(1)
+                        venue_str = right_part[:date_match.start()].strip().rstrip(",")
+                    
+                    url = ""
+                    award = ""
+                    if "SfN" in venue_str and "2025" in date_str:
+                        url = "docs/Dake_SfN2025_poster.pdf"
+                        award = "SfN Trainee Professional Development Award (TPDA)"
+                    elif "CCN" in venue_str and "2025" in date_str:
+                        url = "docs/CCN2025Poster_MrugankDake.pdf"
+                        award = "NYU Dean's Conference Fund"
+                    elif "SfN" in venue_str and "2023" in date_str:
+                        url = "docs/Dake_SfN2023_poster.pdf"
+                    elif "Li-Koff" in title:
+                        url = "https://2020.igem.org/Team:MRIIRS_FARIDABAD/Poster"
+                        award = "DBT India iBEC Award 2020"
+                    elif "CoCa coli" in title:
+                        url = "docs/igem_poster.pdf"
+                        award = "DBT India iBEC Award 2019"
+                    elif "two cortices" in title:
+                        award = "NYU Dean's Award"
+                    
+                    posters_talks.append({
+                        "authors": authors,
+                        "title": title,
+                        "venue": venue_str,
+                        "date": date_str,
+                        "url": url,
+                        "award": award
+                    })
     cv_data["posters_talks"] = posters_talks
 
     # 5. Parse Pre-doctoral Research Experience
@@ -512,9 +531,14 @@ def main():
             })
     cv_data["awards"] = awards_items
 
-    # 9. Parse Skills (Using exact Page 2 column groupings)
-    # Filter elements on page 2 (index 1) with Y < 130
-    skills_lines_elements = [el for el in skills_elements if el["y"] < 130]
+    # 9. Parse Skills (Using exact Page column groupings)
+    skills_header_y = 1000  # default fallback
+    for el in skills_elements:
+        if "SKILLS" in el["text"]:
+            skills_header_y = el["y"]
+            break
+    # Filter elements on the skills page with Y below the "SKILLS" header
+    skills_lines_elements = [el for el in skills_elements if el["y"] < skills_header_y]
     
     # Group elements into lines by Y coordinate (tolerance of 5 points)
     lines = []
