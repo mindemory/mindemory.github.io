@@ -319,58 +319,91 @@ def main():
                 })
     cv_data["publications"] = publications
 
-    # 4. Parse Posters & Talks
-    posters_talks = []
-    for sec_key in ["talks", "posters"]:
-        if sec_key in section_blocks:
-            bullet_texts = parse_bullet_items(section_blocks[sec_key])
-            for entry in bullet_texts:
-                parts = entry.split(";")
-                if len(parts) >= 2:
-                    left_part = parts[0].strip()
-                    right_part = ";".join(parts[1:]).strip()
-                    
-                    # Sift authors from title
-                    authors, title = split_poster_authors_title(left_part)
-                    
-                    # Split venue and date
-                    date_match = re.search(r'([A-Za-z]+ \d{4}|\d{4})$', right_part)
-                    date_str = ""
-                    venue_str = right_part
-                    if date_match:
-                        date_str = date_match.group(1)
-                        venue_str = right_part[:date_match.start()].strip().rstrip(",")
-                    
-                    url = ""
-                    award = ""
-                    if "SfN" in venue_str and "2025" in date_str:
-                        url = "docs/Dake_SfN2025_poster.pdf"
-                        award = "SfN Trainee Professional Development Award (TPDA)"
-                    elif "CCN" in venue_str and "2025" in date_str:
-                        url = "docs/CCN2025Poster_MrugankDake.pdf"
-                        award = "NYU Dean's Conference Fund"
-                    elif "SfN" in venue_str and "2023" in date_str:
-                        url = "docs/Dake_SfN2023_poster.pdf"
-                    elif "Li-Koff" in title:
-                        url = "https://2020.igem.org/Team:MRIIRS_FARIDABAD/Poster"
-                        award = "DBT India iBEC Award 2020"
-                    elif "CoCa coli" in title:
-                        url = "docs/igem_poster.pdf"
-                        award = "DBT India iBEC Award 2019"
-                    elif "two cortices" in title:
-                        award = "NYU Dean's Award"
-                    
-                    posters_talks.append({
-                        "authors": authors,
-                        "title": title,
-                        "venue": venue_str,
-                        "date": date_str,
-                        "url": url,
-                        "award": award
-                    })
-    cv_data["posters_talks"] = posters_talks
+    # 4. Parse Talks
+    talks_items = []
+    if "talks" in section_blocks:
+        bullet_texts = parse_bullet_items(section_blocks["talks"])
+        for entry in bullet_texts:
+            parts = entry.split(";")
+            if len(parts) >= 2:
+                left_part = parts[0].strip()
+                right_part = ";".join(parts[1:]).strip()
+                
+                # Sift authors from title
+                authors, title = split_poster_authors_title(left_part)
+                
+                # Split venue and date
+                date_match = re.search(r'([A-Za-z]+ \d{4}|\d{4})$', right_part)
+                date_str = ""
+                venue_str = right_part
+                if date_match:
+                    date_str = date_match.group(1)
+                    venue_str = right_part[:date_match.start()].strip().rstrip(",")
+                
+                url = ""
+                award = ""
+                if "two cortices" in title:
+                    award = "NYU Dean's Award"
+                
+                talks_items.append({
+                    "authors": authors,
+                    "title": title,
+                    "venue": venue_str,
+                    "date": date_str,
+                    "url": url,
+                    "award": award
+                })
+    cv_data["talks"] = talks_items
 
-    # 5. Parse Pre-doctoral Research Experience
+    # 5. Parse Posters
+    posters_items = []
+    if "posters" in section_blocks:
+        bullet_texts = parse_bullet_items(section_blocks["posters"])
+        for entry in bullet_texts:
+            parts = entry.split(";")
+            if len(parts) >= 2:
+                left_part = parts[0].strip()
+                right_part = ";".join(parts[1:]).strip()
+                
+                # Sift authors from title
+                authors, title = split_poster_authors_title(left_part)
+                
+                # Split venue and date
+                date_match = re.search(r'([A-Za-z]+ \d{4}|\d{4})$', right_part)
+                date_str = ""
+                venue_str = right_part
+                if date_match:
+                    date_str = date_match.group(1)
+                    venue_str = right_part[:date_match.start()].strip().rstrip(",")
+                
+                url = ""
+                award = ""
+                if "SfN" in venue_str and "2025" in date_str:
+                    url = "docs/Dake_SfN2025_poster.pdf"
+                    award = "SfN Trainee Professional Development Award (TPDA)"
+                elif "CCN" in venue_str and "2025" in date_str:
+                    url = "docs/CCN2025Poster_MrugankDake.pdf"
+                    award = "NYU Dean's Conference Fund"
+                elif "SfN" in venue_str and "2023" in date_str:
+                    url = "docs/Dake_SfN2023_poster.pdf"
+                elif "Li-Koff" in title:
+                    url = "https://2020.igem.org/Team:MRIIRS_FARIDABAD/Poster"
+                    award = "DBT India iBEC Award 2020"
+                elif "CoCa coli" in title:
+                    url = "docs/igem_poster.pdf"
+                    award = "DBT India iBEC Award 2019"
+                
+                posters_items.append({
+                    "authors": authors,
+                    "title": title,
+                    "venue": venue_str,
+                    "date": date_str,
+                    "url": url,
+                    "award": award
+                })
+    cv_data["posters"] = posters_items
+
+    # 6. Parse Pre-doctoral Research Experience
     predoc_items = []
     if "predoc" in section_blocks:
         bullet_texts = parse_bullet_items(section_blocks["predoc"])
@@ -398,7 +431,7 @@ def main():
             })
     cv_data["pre_doctoral"] = predoc_items
 
-    # 6. Parse Professional Experience
+    # 7. Parse Professional Experience
     prof_items = []
     if "professional" in section_blocks:
         lines = [l.strip() for l in section_blocks["professional"].split("\n") if l.strip()]
@@ -473,7 +506,7 @@ def main():
             prof_items.append(current_item)
     cv_data["professional_experience"] = prof_items
 
-    # 7. Parse Professional Service
+    # 8. Parse Professional Service
     service_items = []
     if "service" in section_blocks:
         lines = [l.strip() for l in section_blocks["service"].split("\n") if l.strip()]
@@ -511,7 +544,7 @@ def main():
             service_items.append(current_item)
     cv_data["service"] = service_items
 
-    # 8. Parse Awards
+    # 9. Parse Awards
     awards_items = []
     if "awards" in section_blocks:
         lines = [l.strip() for l in section_blocks["awards"].split("\n") if l.strip()]
@@ -531,7 +564,7 @@ def main():
             })
     cv_data["awards"] = awards_items
 
-    # 9. Parse Skills (Using exact Page column groupings)
+    # 10. Parse Skills (Using exact Page column groupings)
     skills_header_y = 1000  # default fallback
     for el in skills_elements:
         if "SKILLS" in el["text"]:

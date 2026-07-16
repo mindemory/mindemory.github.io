@@ -20,7 +20,8 @@ function renderCV() {
     renderAcademicHistory();
     renderSpecializedTraining();
     renderPublications();
-    renderPostersTalks();
+    renderTalks();
+    renderPosters();
     renderPreDoctoral();
     renderProfessionalExperience();
     renderService();
@@ -124,15 +125,23 @@ function renderPublications() {
 }
 
 
-function renderPostersTalks() {
-    const container = document.getElementById('eventList');
-    if (!container || !CV_DATA.posters_talks) return;
-    
-    container.innerHTML = CV_DATA.posters_talks.map(event => {
+function renderTalks() {
+    const container = document.getElementById('talksList');
+    if (!container || !CV_DATA.talks) return;
+    container.innerHTML = renderEventList(CV_DATA.talks, 'Talk');
+}
+
+function renderPosters() {
+    const container = document.getElementById('postersList');
+    if (!container || !CV_DATA.posters) return;
+    container.innerHTML = renderEventList(CV_DATA.posters, 'Poster');
+}
+
+function renderEventList(events, defaultType) {
+    return events.map(event => {
         const badgeClass = event.award ? 'badge-award' : 
-                           (event.venue.includes('Symposium') || event.venue.includes('Award') ? 'badge-talk' : 'badge-poster');
-        const badgeText = event.award ? event.award : 
-                           (event.venue.includes('Symposium') || event.venue.includes('Award') ? 'Talk' : 'Poster');
+                           (defaultType === 'Talk' ? 'badge-talk' : 'badge-poster');
+        const badgeText = event.award ? event.award : defaultType;
         
         let linksHtml = '';
         if (event.url) {

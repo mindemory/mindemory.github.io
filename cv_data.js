@@ -92,7 +92,7 @@ const CV_DATA = {
       "url": ""
     }
   ],
-  "posters_talks": [
+  "talks": [
     {
       "authors": "Dake M. , Dandekar S., Curtis C. E",
       "title": "Neural synchrony between prefrontal and visual cortices supports visual working memory",
@@ -116,7 +116,9 @@ const CV_DATA = {
       "date": "July 2024",
       "url": "",
       "award": ""
-    },
+    }
+  ],
+  "posters": [
     {
       "authors": "Dake M. , Dandekar S., Curtis C. E",
       "title": "Working memory synchronizes oscillations within and across cortical areas",
