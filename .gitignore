@@ -1,0 +1,8 @@
+.DS*
+.*
+__pycache__
+
+# Claude Code
+.claude/
+.claude.json
+CLAUDE.md
