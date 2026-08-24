@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords"
+		content="mrugank dake, projects, mcn alumni network, mbl woods hole, methods in computational neuroscience, network visualization">
+	<title> Projects · Mrugank Dake </title>
+	<link rel="icon" href="img/Logo.png">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap">
+	<!-- Add icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0HX17JJJ2"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+
+	gtag('config', 'G-Y0HX17JJJ2');
+</script>
+
+<body>
+	<!-- Loading Screen -->
+	<div class="loading" id="loading">
+		<div class="spinner"></div>
+	</div>
+
+	<!-- Scroll Indicator -->
+	<div class="scroll-indicator" id="scrollIndicator"></div>
+
+	<!-- Mobile Menu Toggle -->
+	<button class="mobile-menu-toggle hidden" id="mobileMenuToggle">
+		<i class="fas fa-bars"></i>
+	</button>
+
+	<!-- Overlay for mobile -->
+	<div class="overlay" id="overlay"></div>
+
+	<div id="sidebar">
+		<button class="theme-toggle" id="themeToggle">
+			<i class="fas fa-moon"></i>
+		</button>
+
+		<img id="author_img" src="img/headshot.jpg" alt="Mrugank Dake display picture">
+		<h1>Mrugank Dake</h1>
+		<p>Postdoctoral Researcher<br>Dartmouth College</p>
+
+		<ul>
+			<li><a href="index.html#about-me" class="nav-link">About Me</a></li>
+			<li><a href="index.html#news" class="nav-link">News</a></li>
+			<li><a href="index.html#research" class="nav-link">Research</a></li>
+			<li><a href="projects.html" class="nav-link active">Projects</a></li>
+			<li><a href="cv.html" class="nav-link" target="_blank"><i class="far fa-file-alt"
+						style="margin-right: 8px;"></i>CV</a></li>
+			<li><a href="docs/MrugankDakeResume.pdf" class="nav-link" target="_blank"><i class="far fa-file-pdf"
+						style="margin-right: 8px;"></i>Resume</a></li>
+		</ul>
+
+		<div id="social-links">
+			<div class="social-row">
+				<a href="https://www.linkedin.com/in/mrugankdake/" class="fa-brands fa-linkedin" target="_blank"
+					aria-label="LinkedIn"></a>
+				<a href="https://twitter.com/the_memory_guy" class="fa-brands fa-twitter" target="_blank"
+					aria-label="Twitter"></a>
+				<a href="https://github.com/mindemory" class="fa-brands fa-github" target="_blank"
+					aria-label="GitHub"></a>
+			</div>
+			<div class="social-row">
+				<a href="mailto:mrugank.dake@dartmouth.edu" class="fa-solid fa-envelope" target="_blank"
+					aria-label="Email"></a>
+				<a href="https://scholar.google.com/citations?user=N_zOV7cAAAAJ&hl=en" class="ai ai-google-scholar"
+					target="_blank" aria-label="Google Scholar"></a>
+				<a href="https://orcid.org/0000-0002-4050-6861" class="ai ai-orcid" target="_blank"
+					aria-label="ORCID"></a>
+			</div>
+		</div>
+	</div>
+
+	<div id="content">
+		<section id="projects">
+			<h2>Projects</h2>
+			<p>A collection of things I build outside of papers, mostly tools and visualizations that make science more
+				accessible, social, and transparent.</p>
+
+			<h3>Interactive Tools</h3>
+
+			<div class="research-item">
+				<h4>MCN Alumni Network <span class="pub-year">2026</span></h4>
+				<p class="venue"><i>Methods in Computational Neuroscience (MCN) · MBL, Woods Hole, MA</i></p>
+				<p>An interactive connectivity graph of everyone who has passed through the MCN course at the Marine
+					Biological Laboratory, students, faculty, directors, lecturers, and TAs. Nodes are people, edges are
+					co-attendance (same cohort) and co-authorship (shared papers, via OpenAlex). Filter by cohort year,
+					role, or research domain, switch between force, radial, and domain layouts, and click any person to
+					see their trajectory.</p>
+				<div class="toolkit-tags">
+					<span class="toolkit-tag">D3.js</span>
+					<span class="toolkit-tag">JavaScript</span>
+					<span class="toolkit-tag">Network Analysis</span>
+					<span class="toolkit-tag">OpenAlex</span>
+					<span class="toolkit-tag">MBL History Archives</span>
+				</div>
+				<a href="projects/mcn-network/index.html" target="_blank" class="link">
+					<i class="fas fa-diagram-project"></i> Explore the Network
+				</a>
+			</div>
+		</section>
+	</div>
+
+	<!-- Back to Top Button -->
+	<button class="back-to-top" id="backToTop" aria-label="Back to top">
+		<i class="fas fa-arrow-up"></i>
+	</button>
+
+	<script src="script.js"></script>
+</body>
+
+</html>
