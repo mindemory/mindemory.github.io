@@ -191,7 +191,7 @@ const CV_DATA = {
     {
       "title": "Statistical and Machine learning approaches to Squirrel Acoustics (Masters’ Thesis)",
       "date": "Aug 2020 - Aug 2021",
-      "advisor": "Dr. Nandani Rajamani, IISER Tirupati, India"
+      "advisor": "Dr. Nandini Rajamani, IISER Tirupati, India"
     },
     {
       "title": "EEG and MRS Analysis for underpinning neural correlates of attentional blink",
@@ -292,7 +292,7 @@ const CV_DATA = {
     },
     {
       "role": "Project Mentor",
-      "details": "iGEM, Manav Rachna International Institue of Research",
+      "details": "iGEM, Manav Rachna International Institute of Research and Studies",
       "year": "2020"
     },
     {
