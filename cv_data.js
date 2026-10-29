@@ -17,6 +17,7 @@ const CV_DATA = {
           "date": "June 2026 – Present",
           "advisor": "Dr. John Murray",
           "dissertation": "",
+          "thesis": "",
           "coursework": ""
         }
       ]
@@ -30,6 +31,7 @@ const CV_DATA = {
           "date": "May 2026",
           "advisor": "Dr. Clayton Curtis",
           "dissertation": "The nature and role of distributed representation in Working Memory",
+          "thesis": "",
           "coursework": ""
         },
         {
@@ -37,6 +39,7 @@ const CV_DATA = {
           "date": "May 2025",
           "advisor": "",
           "dissertation": "",
+          "thesis": "",
           "coursework": "Linear Algebra for Neural & Cognitive Science, fMRI Analysis Methods, Computational Neuroscience"
         }
       ]
@@ -48,8 +51,9 @@ const CV_DATA = {
         {
           "degree": "BS-MS Dual Degree (Biology & Physics)",
           "date": "August 2021",
-          "advisor": "",
+          "advisor": "Dr. Nandini Rajamani",
           "dissertation": "",
+          "thesis": "Statistical and Machine learning approaches to Squirrel Acoustics",
           "coursework": "Nonlinear Dynamics & Chaos, Statistical Thermodynamics, Linear Algebra, Multivariable Calculus"
         }
       ]
@@ -57,7 +61,7 @@ const CV_DATA = {
   ],
   "specialized_training": [
     {
-      "institution": "Marine Biology Laboratory (MBL)",
+      "institution": "Marine Biological Laboratory (MBL)",
       "location": "Woods Hole, MA",
       "course": "Methods in Computational Neuroscience (MCN) Course",
       "date": "2026"
@@ -83,13 +87,36 @@ const CV_DATA = {
       "title": "Perturbing human V1 degrades the fidelity of visual working memory",
       "journal": "Nature Communications",
       "url": "https://www.nature.com/articles/s41467-025-57882-8"
+    }
+  ],
+  "software": [
+    {
+      "name": "pRF fitting toolbox",
+      "description": "JAX-based toolbox for population receptive field (pRF) modeling of fMRI data using the compressive spatial summation (CSS) model; fits a full volumetric dataset in ∼5 min on a single GPU.",
+      "status": "In development",
+      "url": "",
+      "url_text": ""
     },
     {
-      "authors": "Dake M. , Muni R., Murugesan N., Gokhale K., Rithika S, Kanniyan D., CP Harikrishnan, PS Aravind, Udayraj S., Kanthika L., Kumar H., D’Souza S., Garg E., Paul A., Rajamani N.",
-      "year": "in prep",
-      "title": "More Than a Squeak: Complex Repertoires and Acoustic Adaptation in Funambulus Squirrels",
-      "journal": "In Preparation",
-      "url": ""
+      "name": "Alexαndria",
+      "description": "Platform integrating shared bibliographies with a collaborative activity space for research teams.",
+      "status": "In development",
+      "url": "https://www.alexandriasocial.net/",
+      "url_text": "alexandriasocial.net"
+    },
+    {
+      "name": "MCN Network Graph",
+      "description": "Interactive visualization of the research network of the MBL Methods in Computational Neuroscience cohorts.",
+      "status": "",
+      "url": "https://www.mindemory.io/projects/mcn-network.html",
+      "url_text": "mindemory.io/projects/mcn-network"
+    },
+    {
+      "name": "EEG/MEG Methods course materials",
+      "description": "Open tutorials and analysis notebooks for the NYU iEEG/EEG/MEG Methods PhD course (2024).",
+      "status": "",
+      "url": "https://github.com/mindemory/EEG_MEG_Methods",
+      "url_text": "github.com/mindemory/EEG_MEG_Methods"
     }
   ],
   "talks": [
@@ -168,7 +195,7 @@ const CV_DATA = {
     },
     {
       "title": "EEG and MRS Analysis for underpinning neural correlates of attentional blink",
-      "date": "May - Dec 2019",
+      "date": "June - Aug 2019",
       "advisor": "Dr. Sridharan Devarajan, IISc Bangalore, India"
     },
     {
@@ -183,8 +210,8 @@ const CV_DATA = {
     },
     {
       "title": "Identifying differentially expressing tumor suppressor genes in Drosophila melanogaster wing and haltere imaginal discs",
-      "date": "May - Aug 2018",
-      "advisor": "Prof. L S Shashidara, IISER Pune, India"
+      "date": "May - July 2018",
+      "advisor": "Prof. L S Shashidhara, IISER Pune, India"
     },
     {
       "title": "RNA Origami (Square) using in-vitro replication and transcription",
@@ -193,7 +220,7 @@ const CV_DATA = {
     },
     {
       "title": "Head direction cell model for rodents with internal updating mechanism",
-      "date": "May - Aug 2017",
+      "date": "May - July 2017",
       "advisor": "Dr. Collins Assisi, IISER Pune, India"
     }
   ],
@@ -249,18 +276,23 @@ const CV_DATA = {
   ],
   "service": [
     {
+      "role": "Ambassador",
+      "details": "Thinking About Thinking",
+      "year": "Oct 2026 - Present"
+    },
+    {
       "role": "Ad-hoc Reviewer",
-      "details": "eLife, ICLR (2026), Cognitive Science Society (2025), Computational Cognitive Neuroscience (CCN 2025, 2026)",
+      "details": "Brain Structure & Function (2026), eLife, ICLR (2026), Cognitive Science Society (2025), Computational Cognitive Neuroscience (CCN 2025, 2026)",
       "year": ""
     },
     {
       "role": "Website Design Coordinator",
       "details": "Climatematch Academy",
-      "year": "May – Nov 2023"
+      "year": "Aug – Dec 2023"
     },
     {
       "role": "Project Mentor",
-      "details": "iGEM, Manav Rachna Institute",
+      "details": "iGEM, Manav Rachna International Institue of Research",
       "year": "2020"
     },
     {
@@ -299,7 +331,7 @@ const CV_DATA = {
       "date": "2016 – 2021"
     },
     {
-      "title": "5th Place, Indian National Brain Bee (INBB)",
+      "title": "Regional Winner, 5th Place, Indian National Brain Bee (INBB)",
       "date": "2015"
     }
   ],
@@ -332,6 +364,8 @@ const CV_DATA = {
       "Psychtoolbox"
     ],
     "Data Science & ML": [
+      "JAX",
+      "Jit",
       "PyTorch",
       "TensorFlow",
       "Keras",

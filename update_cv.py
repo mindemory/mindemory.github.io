@@ -22,6 +22,7 @@ def clean_text(text):
     text = text.replace("/handshake", "")
     text = text.replace("Ἴ6", "")
     text = text.replace("/cogs", "")
+    text = text.replace("♂laptop-code", "")
     text = text.replace("˜", "~")
     text = re.sub(r'[ \t]+', ' ', text)
     return text.strip()
@@ -43,6 +44,16 @@ def split_poster_authors_title(text):
             title = text[idx:].strip()
             return authors, title
     return "Dake M.", text
+
+def extract_link_uris(reader):
+    # Hyperlinks embedded in the PDF keep characters (like "_") that text extraction drops
+    uris = []
+    for page in reader.pages:
+        for annot in page.get("/Annots") or []:
+            action = annot.get_object().get("/A")
+            if action and "/URI" in action:
+                uris.append(action["/URI"])
+    return uris
 
 def main():
     if not os.path.exists(PDF_PATH):
@@ -86,6 +97,7 @@ def main():
         ("academic", "ACADEMIC HISTORY"),
         ("specialized", "SPECIALIZED TRAINING"),
         ("publications", "PUBLICATIONS"),
+        ("software", "SOFTWARE & TOOLS"),
         ("predoc", "PRE-DOCTORAL RESEARCH EXPERIENCE"),
         ("professional", "PROFESSIONAL & TEACHING EXPERIENCE"),
         ("service", "PROFESSIONAL SERVICE"),
@@ -214,19 +226,25 @@ def main():
                         "date": date_str,
                         "advisor": "",
                         "dissertation": "",
+                        "thesis": "",
                         "coursework": ""
                     }
                 elif current_degree:
+                    thesis_match = re.match(r"Master[’']s Thesis:", line_cleaned)
                     if line_cleaned.startswith("Advisor:") or line_cleaned.startswith("Advisors:"):
                         current_degree["advisor"] = line_cleaned.replace("Advisors:", "").replace("Advisor:", "").strip()
                     elif line_cleaned.startswith("Dissertation:"):
                         current_degree["dissertation"] = line_cleaned.replace("Dissertation:", "").strip()
+                    elif thesis_match:
+                        current_degree["thesis"] = line_cleaned[thesis_match.end():].strip()
                     elif line_cleaned.startswith("Coursework:"):
                         current_degree["coursework"] = line_cleaned.replace("Coursework:", "").strip()
                     else:
                         # Append to coursework or dissertation or degree
                         if current_degree["coursework"]:
                             current_degree["coursework"] += " " + line_cleaned
+                        elif current_degree["thesis"]:
+                            current_degree["thesis"] += " " + line_cleaned
                         elif current_degree["dissertation"]:
                             current_degree["dissertation"] += " " + line_cleaned
                         elif current_degree["advisor"]:
@@ -318,6 +336,44 @@ def main():
                     "url": ""
                 })
     cv_data["publications"] = publications
+
+    # 3b. Parse Software & Tools ("Name — description. [In development.] [link]")
+    software_items = []
+    if "software" in section_blocks:
+        link_uris = extract_link_uris(reader)
+        bullet_texts = parse_bullet_items(section_blocks["software"])
+        for entry in bullet_texts:
+            name, _, description = entry.partition(" — ")
+            description = description.strip()
+
+            url = ""
+            url_text = ""
+            for uri in link_uris:
+                display = re.sub(r'^https?://(www\.)?', '', uri).rstrip("/")
+                display = re.sub(r'\.html$', '', display)
+                # Text extraction turns "_" into spaces, so match both forms
+                for candidate in [display, display.replace("_", " ")]:
+                    if description.endswith(candidate):
+                        url = uri
+                        url_text = display
+                        description = description[:-len(candidate)].strip()
+                        break
+                if url:
+                    break
+
+            status = ""
+            if "In development." in description:
+                status = "In development"
+                description = description.replace("In development.", "").strip()
+
+            software_items.append({
+                "name": name.strip(),
+                "description": description,
+                "status": status,
+                "url": url,
+                "url_text": url_text
+            })
+    cv_data["software"] = software_items
 
     # 4. Parse Talks
     talks_items = []
@@ -523,7 +579,7 @@ def main():
                 role = parts[0].strip()
                 details = parts[1].strip()
                 
-                year_match = re.search(r'(May – Nov \d{4}|\d{4})$', details)
+                year_match = re.search(r'([A-Za-z]+ \d{4} [–-] Present|[A-Za-z]+ [–-] [A-Za-z]+ \d{4}|\d{4})$', details)
                 year_str = ""
                 details_str = details
                 if year_match:

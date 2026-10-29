@@ -20,6 +20,7 @@ function renderCV() {
     renderAcademicHistory();
     renderSpecializedTraining();
     renderPublications();
+    renderSoftware();
     renderTalks();
     renderPosters();
     renderPreDoctoral();
@@ -39,6 +40,9 @@ function renderAcademicHistory() {
             let detailsHtml = '';
             if (deg.dissertation) {
                 detailsHtml += `<p class="details"><strong>Dissertation:</strong> ${deg.dissertation}</p>`;
+            }
+            if (deg.thesis) {
+                detailsHtml += `<p class="details"><strong>Master's Thesis:</strong> ${deg.thesis}</p>`;
             }
             if (deg.coursework) {
                 detailsHtml += `<p class="coursework"><strong>Coursework:</strong> ${deg.coursework}</p>`;
@@ -124,6 +128,33 @@ function renderPublications() {
     }).join('');
 }
 
+
+function renderSoftware() {
+    const container = document.getElementById('softwareList');
+    if (!container || !CV_DATA.software) return;
+
+    container.innerHTML = CV_DATA.software.map(item => {
+        const badgeClass = item.status ? 'badge-prep' : 'badge-grant';
+        const badgeText = item.status || 'Available';
+
+        let linksHtml = '';
+        if (item.url) {
+            const icon = item.url.includes('github.com') ? 'fab fa-github' : 'fas fa-external-link-alt';
+            linksHtml += `<a href="${item.url}" target="_blank" class="pub-link-btn"><i class="${icon}"></i> ${item.url_text}</a>`;
+        }
+
+        return `
+            <div class="event-item">
+                <div class="event-meta">
+                    <span class="badge ${badgeClass}">${badgeText}</span>
+                </div>
+                <h4>${item.name}</h4>
+                <p class="event-venue">${item.description}</p>
+                ${linksHtml ? `<div class="pub-links no-print">${linksHtml}</div>` : ''}
+            </div>
+        `;
+    }).join('');
+}
 
 function renderTalks() {
     const container = document.getElementById('talksList');

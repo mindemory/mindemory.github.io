@@ -522,6 +522,8 @@ body::before {
     border: 1px solid rgba(37, 99, 235, 0.1);
     transition: var(--transition);
     font-weight: 500;
+    max-width: 100%;
+    overflow-wrap: anywhere;
 }
 
 .pub-link-btn:hover {
