@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="Proxenos: a free, open-source agent that keeps your own records private on your computer and drafts the next step for you to approve. Built first for people getting through the healthcare system.">
+	<meta name="keywords" content="proxenos, mrugank dake, patient advocacy, healthcare, ai agent, open source, privacy">
+	<title> Proxenos · Mrugank Dake </title>
+	<link rel="icon" href="../img/Logo.png">
+	<link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+	<style>
+		.lede { font-size: 1.3rem; color: var(--text-primary); }
+		.shots { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0 0.5rem; max-width: 900px; }
+		.shots img { width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
+		.shots .wide { grid-column: 1 / -1; }
+		.shots-note { font-size: 0.95rem !important; font-style: italic; }
+		.ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; max-width: 900px; }
+		.way { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem 1.5rem; }
+		.way h4 { margin: 0 0 0.5rem; font-size: 1.15rem; color: var(--text-primary); }
+		.way p { font-size: 1rem; margin-bottom: 0.75rem; }
+		.way .soon { display: inline-block; font-size: 0.8rem; font-weight: 600; padding: 0.15rem 0.6rem; border-radius: 999px;
+			border: 1px solid var(--primary-color); color: var(--primary-color); margin-left: 0.4rem; vertical-align: middle; }
+		section ul.plain { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; padding-left: 1.2rem; max-width: 900px; }
+		section ul.plain li { margin-bottom: 0.4rem; }
+		@media (max-width: 640px) { .shots { grid-template-columns: 1fr 1fr; } .lede { font-size: 1.15rem; } }
+	</style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0HX17JJJ2"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+
+	gtag('config', 'G-Y0HX17JJJ2');
+</script>
+
+<body>
+	<!-- Loading Screen -->
+	<div class="loading" id="loading">
+		<div class="spinner"></div>
+	</div>
+
+	<!-- Scroll Indicator -->
+	<div class="scroll-indicator" id="scrollIndicator"></div>
+
+	<!-- Mobile Menu Toggle -->
+	<button class="mobile-menu-toggle hidden" id="mobileMenuToggle">
+		<i class="fas fa-bars"></i>
+	</button>
+
+	<!-- Overlay for mobile -->
+	<div class="overlay" id="overlay"></div>
+
+	<div id="sidebar">
+		<button class="theme-toggle" id="themeToggle">
+			<i class="fas fa-moon"></i>
+		</button>
+
+		<img id="author_img" src="../img/headshot.jpg" alt="Mrugank Dake display picture">
+		<h1>Mrugank Dake</h1>
+		<p>Postdoctoral Researcher<br>Dartmouth College</p>
+
+		<ul>
+			<li><a href="../index.html#about-me" class="nav-link">About Me</a></li>
+			<li><a href="../index.html#news" class="nav-link">News</a></li>
+			<li><a href="../index.html#research" class="nav-link">Research</a></li>
+			<li><a href="../projects.html" class="nav-link active">Projects</a></li>
+			<li><a href="../cv.html" class="nav-link" target="_blank"><i class="far fa-file-alt"
+						style="margin-right: 8px;"></i>CV</a></li>
+			<li><a href="../docs/MrugankDakeResume.pdf" class="nav-link" target="_blank"><i class="far fa-file-pdf"
+						style="margin-right: 8px;"></i>Resume</a></li>
+		</ul>
+
+		<div id="social-links">
+			<div class="social-row">
+				<a href="https://www.linkedin.com/in/mrugankdake/" class="fa-brands fa-linkedin" target="_blank"
+					aria-label="LinkedIn"></a>
+				<a href="https://twitter.com/the_memory_guy" class="fa-brands fa-twitter" target="_blank"
+					aria-label="Twitter"></a>
+				<a href="https://github.com/mindemory" class="fa-brands fa-github" target="_blank"
+					aria-label="GitHub"></a>
+			</div>
+			<div class="social-row">
+				<a href="mailto:mrugank.dake@dartmouth.edu" class="fa-solid fa-envelope" target="_blank"
+					aria-label="Email"></a>
+				<a href="https://scholar.google.com/citations?user=N_zOV7cAAAAJ&hl=en" class="ai ai-google-scholar"
+					target="_blank" aria-label="Google Scholar"></a>
+				<a href="https://orcid.org/0000-0002-4050-6861" class="ai ai-orcid" target="_blank"
+					aria-label="ORCID"></a>
+			</div>
+		</div>
+	</div>
+
+	<div id="content">
+		<section id="proxenos">
+			<h2>Proxenos</h2>
+			<p class="lede">An agent that keeps your own records in one private place on your computer and drafts the
+				next step for you to approve. Free and open source.</p>
+			<p>In the Greek city-states, a <i>proxenos</i> was the citizen who formally acted on someone else's behalf.</p>
+
+			<h3>Why I built it</h3>
+			<p>This fall, a health problem put me on the patient side of the system: wait lists, a referral lost in
+				paperwork, and a lot of phone calls, voicemails and fax machines. What helped most was AI that could draft
+				the emails, fill out the forms, keep a medical logbook, track the referrals and bills, and explain my
+				insurance. Proxenos is that help, built so that anyone can have it, not only people who can build their
+				own.</p>
+
+			<h3>Who it's for</h3>
+			<ul class="plain">
+				<li><b>People getting through the healthcare system</b>, first of all those whose health makes it hardest:
+					who can't think clearly for long, can't look at a screen, or can't make a phone call.</li>
+				<li><b>Anyone with a backlog.</b> With a memory of everything you've written, it carries unfinished
+					projects forward in your voice and your words, so you can spend yourself on the people, the sport and
+					the work that matter to you right now.</li>
+			</ul>
+
+			<h3>What it does</h3>
+			<ul class="plain">
+				<li><b>Care:</b> where your care stands, from your own mail, calendar, chats and notes: a timeline, what's
+					still open, what to say on the phone, and a one-page brief for your next appointment.</li>
+				<li><b>Errands:</b> give it something to get done and it goes as far as it can, then stops one tap short
+					of sending, with every step it took written down.</li>
+				<li><b>Drafts:</b> replies, emails and plans in your voice, ready for you to approve.</li>
+				<li><b>Tasks and memory:</b> what you've promised people, and a search across everything you've ever
+					written.</li>
+			</ul>
+			<div class="shots">
+				<img class="wide" src="../img/proxenos/home-desktop.png"
+					alt="Proxenos's home page for a made-up person: today's agenda, open tasks and drafts waiting for approval"
+					loading="lazy">
+				<img src="../img/proxenos/care-phone.png"
+					alt="The Care view on a phone: where a made-up dental treatment stands and what's waiting on him"
+					loading="lazy">
+				<img src="../img/proxenos/errands-phone.png"
+					alt="The Errands view on a phone: an email to a recruiter, ready to send with a CV attached"
+					loading="lazy">
+			</div>
+			<p class="shots-note">The person in these pictures, Joe Bloggs, is made up, and so is everything he has.</p>
+
+			<h3>Your privacy</h3>
+			<ul class="plain">
+				<li>Everything it gathers stays in a private folder on your own computer, never on a server of mine.</li>
+				<li>With a model that runs on your computer, nothing leaves it. With Claude, only what each step needs is
+					sent, under your own key.</li>
+				<li>By default it never sends, posts or buys anything. You approve what goes out.</li>
+			</ul>
+
+			<h3>Get Proxenos</h3>
+			<div class="ways">
+				<div class="way">
+					<h4>Mac app <span class="soon">Coming soon</span></h4>
+					<p>One download you open and sign in to, with no setup and no code. This is what I'm building next.</p>
+					<a href="mailto:mrugank.dake@dartmouth.edu?subject=Proxenos%3A%20tell%20me%20when%20it%27s%20ready"
+						class="link"><i class="fas fa-envelope"></i> Tell me when it's ready</a>
+				</div>
+				<div class="way">
+					<h4>From the code</h4>
+					<p>It runs today on a Mac (Apple Silicon) for anyone comfortable with a terminal. Try it first on a
+						made-up person, with no data of your own.</p>
+					<a href="https://github.com/mindemory/proxenos" target="_blank" class="link"><i
+							class="fab fa-github"></i> Proxenos on GitHub</a>
+				</div>
+			</div>
+
+			<h3>Help wanted</h3>
+			<p>If you have medical training (a doctor, nurse, pharmacist, medical student or patient advocate), you know
+				what's worth tracking and what to ask. That knowledge is what would make Proxenos preventive, not just a
+				way through the system. Code, ideas and a quick call are all welcome:
+				<a href="mailto:mrugank.dake@dartmouth.edu?subject=Proxenos">write to me</a>.</p>
+
+			<div class="toolkit-tags">
+				<span class="toolkit-tag">Python</span>
+				<span class="toolkit-tag">Next.js</span>
+				<span class="toolkit-tag">Local models (Ollama)</span>
+				<span class="toolkit-tag">Claude</span>
+				<span class="toolkit-tag">Privacy first</span>
+				<span class="toolkit-tag">Open source (MIT)</span>
+			</div>
+		</section>
+	</div>
+
+	<!-- Back to Top Button -->
+	<button class="back-to-top" id="backToTop" aria-label="Back to top">
+		<i class="fas fa-arrow-up"></i>
+	</button>
+
+	<script src="../script.js"></script>
+</body>
+
+</html>
