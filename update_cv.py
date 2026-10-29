@@ -24,6 +24,8 @@ def clean_text(text):
     text = text.replace("/cogs", "")
     text = text.replace("♂laptop-code", "")
     text = text.replace("˜", "~")
+    text = text.replace("∼", "~")
+    text = text.replace("( ~", "(~")
     text = re.sub(r'[ \t]+', ' ', text)
     return text.strip()
 
@@ -75,11 +77,13 @@ def main():
         if "SKILLS" in page.extract_text():
             skills_page_idx = i
             break
-    page_skills = reader.pages[skills_page_idx]
-    
+    # Offset applied to pages after the SKILLS header page, so content that
+    # spills onto the next page still sorts below the header
+    page_offset = 0
+
     def skills_visitor(text, cm, tm, fontDict, fontSize):
         x = tm[4]
-        y = tm[5]
+        y = tm[5] - page_offset
         # Split by newline inside text block to get accurate coords
         lines = text.split("\n")
         for i, line in enumerate(lines):
@@ -89,8 +93,10 @@ def main():
                     "x": x,
                     "y": y - (fontSize * i * 1.2)
                 })
-                
-    page_skills.extract_text(visitor_text=skills_visitor)
+
+    for page_skills in reader.pages[skills_page_idx:]:
+        page_skills.extract_text(visitor_text=skills_visitor)
+        page_offset += float(page_skills.mediabox.height)
 
     # Clean the full raw text to identify section splits
     headers = [
@@ -337,7 +343,7 @@ def main():
                 })
     cv_data["publications"] = publications
 
-    # 3b. Parse Software & Tools ("Name — description. [In development.] [link]")
+    # 3b. Parse Software & Tools ("Name — description. [In development. | Prototype.] [link]")
     software_items = []
     if "software" in section_blocks:
         link_uris = extract_link_uris(reader)
@@ -362,9 +368,11 @@ def main():
                     break
 
             status = ""
-            if "In development." in description:
-                status = "In development"
-                description = description.replace("In development.", "").strip()
+            for label in ["In development", "Prototype"]:
+                if label + "." in description:
+                    status = label
+                    description = description.replace(label + ".", "").strip()
+                    break
 
             software_items.append({
                 "name": name.strip(),

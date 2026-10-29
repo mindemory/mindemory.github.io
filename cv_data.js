@@ -40,7 +40,7 @@ const CV_DATA = {
           "advisor": "",
           "dissertation": "",
           "thesis": "",
-          "coursework": "Linear Algebra for Neural & Cognitive Science, fMRI Analysis Methods, Computational Neuroscience"
+          "coursework": ""
         }
       ]
     },
@@ -54,12 +54,18 @@ const CV_DATA = {
           "advisor": "Dr. Nandini Rajamani",
           "dissertation": "",
           "thesis": "Statistical and Machine learning approaches to Squirrel Acoustics",
-          "coursework": "Nonlinear Dynamics & Chaos, Statistical Thermodynamics, Linear Algebra, Multivariable Calculus"
+          "coursework": ""
         }
       ]
     }
   ],
   "specialized_training": [
+    {
+      "institution": "Radical Ventures",
+      "location": "Virtual",
+      "course": "Radical AI Founders Masterclass",
+      "date": "2026"
+    },
     {
       "institution": "Marine Biological Laboratory (MBL)",
       "location": "Woods Hole, MA",
@@ -92,17 +98,17 @@ const CV_DATA = {
   "software": [
     {
       "name": "pRF fitting toolbox",
-      "description": "JAX-based toolbox for population receptive field (pRF) modeling of fMRI data using the compressive spatial summation (CSS) model; fits a full volumetric dataset in ∼5 min on a single GPU.",
+      "description": "JAX-based toolbox for population receptive field (pRF) modeling of fMRI data using the compressive spatial summation (CSS) model; fits a full volumetric dataset in ~5 min on a single GPU.",
       "status": "In development",
       "url": "",
       "url_text": ""
     },
     {
-      "name": "Alexαndria",
-      "description": "Platform integrating shared bibliographies with a collaborative activity space for research teams.",
-      "status": "In development",
-      "url": "https://www.alexandriasocial.net/",
-      "url_text": "alexandriasocial.net"
+      "name": "Proxenos",
+      "description": "Open-source, privacy-first agent that keeps a person’s own records on their computer and drafts the next step (emails, forms, follow-ups) for them to approve; built first for patients navigating the healthcare system.",
+      "status": "",
+      "url": "https://www.mindemory.io/proxenos",
+      "url_text": "mindemory.io/proxenos"
     },
     {
       "name": "MCN Network Graph",
@@ -110,6 +116,13 @@ const CV_DATA = {
       "status": "",
       "url": "https://www.mindemory.io/projects/mcn-network.html",
       "url_text": "mindemory.io/projects/mcn-network"
+    },
+    {
+      "name": "Alexαndria",
+      "description": "Platform integrating shared bibliographies with a collaborative activity space for research teams.",
+      "status": "Prototype",
+      "url": "https://www.alexandriasocial.net/",
+      "url_text": "alexandriasocial.net"
     },
     {
       "name": "EEG/MEG Methods course materials",
@@ -165,58 +178,17 @@ const CV_DATA = {
     {
       "authors": "Dake M. , Curtis C. E",
       "title": "Do perturbations to visual cortex impact working memory?",
-      "venue": "In Society for Neuroscience (SfN), Washington D.C., USA",
+      "venue": "Society for Neuroscience (SfN), Washington D.C., USA",
       "date": "Nov 2023",
       "url": "docs/Dake_SfN2023_poster.pdf",
       "award": ""
-    },
-    {
-      "authors": "Khare S., Chopra S., Grover H., V ohra T., Mahmood U., Jatwani K., Kaushik D., Pandey A., Bhardwaj S., Tanwar A., Singh J., Shekhar C., Dake M. , Krishnamoorthy K., Kumar K",
-      "title": "Li-Koff: To Detect and Degrade N-Nitrosamines",
-      "venue": "Giant Jamboree (iGEM), Boston, USA",
-      "date": "Nov 2020",
-      "url": "https://2020.igem.org/Team:MRIIRS_FARIDABAD/Poster",
-      "award": "DBT India iBEC Award 2020"
-    },
-    {
-      "authors": "Amar I., Avadhani K., Bajaj M., Balasubramanian D., Bhagat S., Chutani N., Dake M. , Khatri U., Krishna N., Jacob M., Mal S., Mohapatra O., Pal A., Saha D., Tripathy B., Mukherjee R., Rao B.J",
-      "title": "CoCa coli: probiotic immunotherapy against colon cancer",
-      "venue": "Giant Jamboree (iGEM), Boston, USA",
-      "date": "Nov 2019",
-      "url": "docs/igem_poster.pdf",
-      "award": "DBT India iBEC Award 2019"
     }
   ],
   "pre_doctoral": [
     {
-      "title": "Statistical and Machine learning approaches to Squirrel Acoustics (Masters’ Thesis)",
-      "date": "Aug 2020 - Aug 2021",
-      "advisor": "Dr. Nandini Rajamani, IISER Tirupati, India"
-    },
-    {
       "title": "EEG and MRS Analysis for underpinning neural correlates of attentional blink",
       "date": "June - Aug 2019",
       "advisor": "Dr. Sridharan Devarajan, IISc Bangalore, India"
-    },
-    {
-      "title": "CoCa coli: probiotic immunotherapy against colon cancer",
-      "date": "Jan 2018 - Nov 2019",
-      "advisor": "Dr. Raju Mukherjee; Dr B J Rao, IISER Tirupati, India"
-    },
-    {
-      "title": "Isolation and characterization of neurons and glia from goat hippocampal culture",
-      "date": "Sep 2018 - May 2019",
-      "advisor": "Dr. Vasudharani Devanathan, IISER Tirupati, India"
-    },
-    {
-      "title": "Identifying differentially expressing tumor suppressor genes in Drosophila melanogaster wing and haltere imaginal discs",
-      "date": "May - July 2018",
-      "advisor": "Prof. L S Shashidhara, IISER Pune, India"
-    },
-    {
-      "title": "RNA Origami (Square) using in-vitro replication and transcription",
-      "date": "Jan - March 2018",
-      "advisor": "Dr. Ashwani Sharma, IISER Tirupati, India"
     },
     {
       "title": "Head direction cell model for rodents with internal updating mechanism",
@@ -225,16 +197,6 @@ const CV_DATA = {
     }
   ],
   "professional_experience": [
-    {
-      "institution": "NYU Leslie Entrepreneurial Institute",
-      "location": "New York, NY",
-      "roles": [
-        {
-          "role": "Leslie Founder",
-          "date": "Feb 2026 – Present"
-        }
-      ]
-    },
     {
       "institution": "Meta Reality Labs",
       "location": "Burlingame, CA",
@@ -276,11 +238,6 @@ const CV_DATA = {
   ],
   "service": [
     {
-      "role": "Ambassador",
-      "details": "Thinking About Thinking",
-      "year": "Oct 2026 - Present"
-    },
-    {
       "role": "Ad-hoc Reviewer",
       "details": "Brain Structure & Function (2026), eLife, ICLR (2026), Cognitive Science Society (2025), Computational Cognitive Neuroscience (CCN 2025, 2026)",
       "year": ""
@@ -319,12 +276,8 @@ const CV_DATA = {
       "date": "2021 – 2026"
     },
     {
-      "title": "Indian Biological Engineering Competition (iBEC) Grant (~$12,000)",
-      "date": "2020"
-    },
-    {
-      "title": "Indian Biological Engineering Competition (iBEC) Grant (~$12,000)",
-      "date": "2019"
+      "title": "Indian Biological Engineering Competition (iBEC) Grant (~$12,000 each)",
+      "date": "2019 – 2020"
     },
     {
       "title": "INSPIRE Fellowship, Department of Science and Technology India",
@@ -348,9 +301,7 @@ const CV_DATA = {
       "React",
       "NodeJS",
       "Supabase",
-      "Vercel",
-      "Antigravity",
-      "VSCode"
+      "Vercel"
     ],
     "Neuroscience Tools": [
       "EEG",
@@ -365,7 +316,6 @@ const CV_DATA = {
     ],
     "Data Science & ML": [
       "JAX",
-      "Jit",
       "PyTorch",
       "TensorFlow",
       "Keras",
