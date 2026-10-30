@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all features
     initLoadingScreen();
     initThemeToggle();
-    initMobileMenu();
     initSmoothScrolling();
     initScrollIndicator();
     initBackToTop();
@@ -62,51 +61,6 @@ function updateThemeIcon(theme) {
     }
 }
 
-// Mobile Menu
-function initMobileMenu() {
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    // Show mobile menu toggle on small screens
-    function checkScreenSize() {
-        if (window.innerWidth <= 768) {
-            mobileMenuToggle.classList.remove('hidden');
-        } else {
-            mobileMenuToggle.classList.add('hidden');
-            sidebar.classList.remove('open');
-            overlay.classList.remove('open');
-        }
-    }
-    
-    // Check on load and resize
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    
-    // Toggle mobile menu
-    mobileMenuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
-        overlay.classList.toggle('open');
-    });
-    
-    // Close menu when clicking overlay
-    overlay.addEventListener('click', () => {
-        sidebar.classList.remove('open');
-        overlay.classList.remove('open');
-    });
-    
-    // Close menu when clicking nav links
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('open');
-                overlay.classList.remove('open');
-            }
-        });
-    });
-}
-
 // Smooth Scrolling
 function initSmoothScrolling() {
     const navLinks = document.querySelectorAll('.nav-link');
@@ -132,11 +86,14 @@ function initSmoothScrolling() {
         });
     });
     
-    // Update active link on scroll
+    // Update active link on scroll. Only in-page links (#...) follow the scroll,
+    // so a link to another page (e.g. Projects on its own page) stays highlighted.
     window.addEventListener('scroll', () => {
         const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
+        const navLinks = [...document.querySelectorAll('.nav-link')]
+            .filter(link => (link.getAttribute('href') || '').startsWith('#'));
+        if (navLinks.length === 0) return;
+
         let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
@@ -293,14 +250,6 @@ document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         document.getElementById('themeToggle').click();
-    }
-    
-    // Escape to close mobile menu
-    if (e.key === 'Escape') {
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        sidebar.classList.remove('open');
-        overlay.classList.remove('open');
     }
 });
 

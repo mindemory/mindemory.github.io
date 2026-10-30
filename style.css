@@ -537,83 +537,148 @@ section a:hover {
 }
 
 @media (max-width: 768px) {
+    /* Phones: the sidebar's profile becomes a header at the top of the page,
+       and its links become a tab bar fixed to the bottom of the screen. */
     #sidebar {
-        transform: translateX(-100%);
-        width: 280px;
-        transition: transform 0.3s ease-in-out;
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 1.5rem 1rem 1.25rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        overflow: visible;
+        z-index: auto;
     }
 
-    #sidebar.open {
-        transform: translateX(0);
+    #author_img {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 0.75rem;
+        border-width: 3px;
+    }
+
+    #sidebar h1 {
+        font-size: 1.4rem;
+        margin-bottom: 0.25rem;
+    }
+
+    #sidebar p {
+        margin-bottom: 1rem;
+    }
+
+    #social-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.6rem;
+    }
+
+    .social-row {
+        gap: 0.6rem;
+    }
+
+    #social-links a {
+        width: 40px;
+        height: 40px;
+        font-size: 1.05rem;
+    }
+
+    #sidebar ul {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 300;
+        display: flex;
+        margin: 0;
+        padding: 0.25rem 0.25rem calc(0.25rem + env(safe-area-inset-bottom));
+        background: var(--bg-secondary);
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.12);
+        animation: none;
+    }
+
+    #sidebar ul li {
+        flex: 1 1 0;
+        min-width: 0;
+        margin: 0;
     }
 
     #sidebar ul li a {
-        pointer-events: auto;
-        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.2rem;
+        min-height: 54px;
+        padding: 0.35rem 0.1rem;
+        font-size: 0.7rem;
+        line-height: 1.1;
+        text-align: center;
+        white-space: nowrap;
+        color: var(--text-secondary);
+        border-radius: 10px;
         -webkit-tap-highlight-color: rgba(37, 99, 235, 0.2);
     }
 
-    #sidebar #social-links a {
-        pointer-events: auto;
-        cursor: pointer;
-        -webkit-tap-highlight-color: rgba(37, 99, 235, 0.2);
+    #sidebar ul li a:hover {
+        background: none;
+        color: var(--primary-color);
+        transform: none;
+    }
+
+    #sidebar ul li a.active {
+        background: rgba(37, 99, 235, 0.12);
+        color: var(--secondary-color);
+    }
+
+    /* Lighter blue so the small labels stay readable on the dark bar */
+    [data-theme="dark"] #sidebar ul li a.active,
+    [data-theme="dark"] #sidebar ul li a:hover {
+        color: #60a5fa;
+    }
+
+    /* Tab icons. CV and Resume already carry an <i> icon in the markup. */
+    #sidebar ul li a::before {
+        display: none;
+        position: static;
+        width: auto;
+        height: auto;
+        background: none;
+        transition: none;
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 1.15rem;
+        line-height: 1;
+    }
+
+    #sidebar ul li a[href$="#about-me"]::before,
+    #sidebar ul li a[href$="#news"]::before,
+    #sidebar ul li a[href$="#research"]::before,
+    #sidebar ul li a[href$="projects.html"]::before {
+        display: block;
+    }
+
+    #sidebar ul li a[href$="#about-me"]::before { content: "\f007"; }
+    #sidebar ul li a[href$="#news"]::before { content: "\f1ea"; }
+    #sidebar ul li a[href$="#research"]::before { content: "\f0c3"; }
+    #sidebar ul li a[href$="projects.html"]::before { content: "\f542"; }
+
+    #sidebar ul li a i {
+        margin: 0 !important;
+        font-size: 1.15rem;
+        line-height: 1;
     }
 
     #content {
         margin-left: 0;
-        /* Clear the fixed menu button, so it never sits on a page's heading. */
-        padding: 4.5rem 1rem 1rem;
+        /* Clear the bottom tab bar. */
+        padding: 1.5rem 1rem calc(5rem + env(safe-area-inset-bottom));
     }
 
-    .mobile-menu-toggle {
-        position: fixed;
-        top: 1rem;
-        left: 1rem;
-        z-index: 200;
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        padding: 0.75rem;
-        border-radius: 8px;
-        cursor: pointer;
-        display: block;
-        font-size: 1.2rem;
-        min-width: 44px;
-        min-height: 44px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
-    }
-
-    .mobile-menu-toggle:hover {
-        background: var(--secondary-color);
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .mobile-menu-toggle:active {
-        transform: scale(0.95);
-    }
-
-    .mobile-menu-toggle.hidden {
-        display: none;
-    }
-
+    .mobile-menu-toggle,
     .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 150;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-    }
-
-    .overlay.open {
-        opacity: 1;
-        pointer-events: all;
+        display: none !important;
     }
 
     .poster-links {
@@ -636,38 +701,6 @@ section a:hover {
     .publication-card,
     .research-item {
         padding: 1rem;
-    }
-
-    #author_img {
-        width: 170px;
-        height: 170px;
-    }
-
-    /* Mobile-specific sidebar improvements */
-    #sidebar {
-        width: 100%;
-        max-width: 320px;
-        padding: 1.5rem;
-    }
-
-    #sidebar ul li a {
-        padding: 1rem;
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        min-height: 48px;
-        display: flex;
-        align-items: center;
-    }
-
-    #sidebar ul li a:hover {
-        transform: translateX(3px);
-    }
-
-    .mobile-menu-toggle {
-        top: 0.75rem;
-        left: 0.75rem;
-        padding: 0.8rem;
-        font-size: 1.3rem;
     }
 }
 
@@ -713,6 +746,16 @@ section a:hover {
 .back-to-top:hover {
     background: var(--secondary-color);
     transform: translateY(-3px);
+}
+
+/* Phones: sit above the bottom tab bar */
+@media (max-width: 768px) {
+    .back-to-top {
+        right: 1rem;
+        bottom: calc(5rem + env(safe-area-inset-bottom));
+        width: 44px;
+        height: 44px;
+    }
 }
 
 .journal-badge {

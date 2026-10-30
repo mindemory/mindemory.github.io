@@ -334,8 +334,31 @@ function updateThemeIcon(theme) {
     }
 }
 
+// Height of whatever is pinned to the top: the header, plus the
+// Quick Sections chip row on small screens (where it's sticky)
+function stickyOffset() {
+    const header = document.querySelector('.cv-header');
+    const sidebar = document.querySelector('.cv-sidebar');
+    let offset = header ? header.offsetHeight : 0;
+    if (sidebar && getComputedStyle(sidebar).position === 'sticky') {
+        offset += sidebar.offsetHeight;
+    }
+    return offset + 16;
+}
+
+// Tell the CSS how tall the header is, so the chip row pins right under it
+function syncHeaderHeight() {
+    const header = document.querySelector('.cv-header');
+    if (header) {
+        document.documentElement.style.setProperty('--cv-header-h', header.offsetHeight + 'px');
+    }
+}
+
 // 3. SMOOTH SCROLLING
 function initSmoothScroll() {
+    syncHeaderHeight();
+    window.addEventListener('resize', syncHeaderHeight);
+
     const links = document.querySelectorAll('.cv-nav-link');
     links.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -344,7 +367,7 @@ function initSmoothScroll() {
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) {
-                    const offset = target.offsetTop - 90;
+                    const offset = target.getBoundingClientRect().top + window.pageYOffset - stickyOffset();
                     window.scrollTo({
                         top: offset,
                         behavior: 'smooth'
@@ -359,13 +382,15 @@ function initSmoothScroll() {
 function initActiveNavHighlight() {
     const sections = document.querySelectorAll('.cv-section');
     const navLinks = document.querySelectorAll('.cv-nav-link');
+    const nav = document.querySelector('.cv-nav');
+    let lastSectionId = '';
 
     window.addEventListener('scroll', () => {
         let currentSectionId = '';
-        const scrollPosition = window.pageYOffset + 120;
+        const scrollPosition = window.pageYOffset + stickyOffset() + 10;
 
         sections.forEach(section => {
-            const sectionTop = section.offsetTop;
+            const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
             if (scrollPosition >= sectionTop) {
                 currentSectionId = section.getAttribute('id');
             }
@@ -375,8 +400,16 @@ function initActiveNavHighlight() {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${currentSectionId}`) {
                 link.classList.add('active');
+                // On small screens the chips scroll sideways; keep the active one in view
+                if (currentSectionId !== lastSectionId && nav && nav.scrollWidth > nav.clientWidth) {
+                    nav.scrollTo({
+                        left: link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2,
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
+        lastSectionId = currentSectionId;
     });
 }
 
