@@ -147,8 +147,10 @@ function initBackToTop() {
 
 // Scroll Animations
 function initScrollAnimations() {
+    // Reveal as soon as any part is on screen: a long section on a phone can
+    // never have 10% of itself in view, and would otherwise stay invisible
     const observerOptions = {
-        threshold: 0.1,
+        threshold: 0,
         rootMargin: '0px 0px -50px 0px'
     };
     
