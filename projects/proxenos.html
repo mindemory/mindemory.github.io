@@ -29,7 +29,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
 	<style>
 		.lede { font-size: 1.3rem; color: var(--text-primary); }
-		.shots { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0 0.5rem; max-width: 900px; }
+		.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 0.5rem; max-width: 900px; }
 		.shots img { width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
 		.shots .wide { grid-column: 1 / -1; }
 		.shots-note { font-size: 0.95rem !important; font-style: italic; }
@@ -44,7 +44,7 @@
 			border: 1px solid var(--primary-color); color: var(--primary-color); margin-left: 0.4rem; vertical-align: middle; }
 		section ul.plain { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; padding-left: 1.2rem; max-width: 900px; }
 		section ul.plain li { margin-bottom: 0.4rem; }
-		@media (max-width: 640px) { .shots { grid-template-columns: 1fr 1fr; } .lede { font-size: 1.15rem; } }
+		@media (max-width: 640px) { .shots { gap: 0.5rem; } .lede { font-size: 1.15rem; } }
 	</style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -145,9 +145,19 @@
 					the phone, and a one-page brief for your next appointment.</li>
 				<li><b>Errands:</b> give it something to get done and it goes as far as it can, then stops one tap short
 					of sending, with every step it took written down.</li>
-				<li><b>Drafts:</b> replies, emails and plans in your voice, ready for you to send.</li>
-				<li><b>Tasks and memory:</b> what you've promised people, and a search across everything you've ever
-					written.</li>
+				<li><b>Drafts:</b> replies, emails and plans in your voice, ready for you to send. It learns from what
+					you actually sent and from drafts you rewrite, and follows what you tell it ("I'm not going on
+					Tuesday", or a rule for every draft).</li>
+				<li><b>Forms:</b> a PDF form filled from your records. ID numbers, account numbers and the signature
+					stay yours to write.</li>
+				<li><b>Calls:</b> it waits on hold for you and rings you when a person picks up, saying it's an
+					automated assistant. Only when you press Call, through your own phone account.</li>
+				<li><b>Tasks and plans:</b> what you've promised people, kept up through the day, with the lunch and
+					the call put on your calendar.</li>
+				<li><b>Journal:</b> each day written down for you: what got done, what's waiting, what's next.</li>
+				<li><b>Projects:</b> where each long project stands, from your messages and its code, with the next
+					step done on a branch for you to accept.</li>
+				<li><b>Memory:</b> a search across everything you've ever written.</li>
 			</ul>
 			<div class="shots">
 				<img class="wide" src="../img/proxenos/home-desktop.png"
@@ -158,6 +168,9 @@
 					loading="lazy">
 				<img src="../img/proxenos/errands-phone.png"
 					alt="The Errands view on a phone: an email to a recruiter, ready to send with a CV attached"
+					loading="lazy">
+				<img src="../img/proxenos/journal-phone.png"
+					alt="The Journal view on a phone: a made-up day's brief, the next three things to do, and the replies sent"
 					loading="lazy">
 			</div>
 			<p class="shots-note">The person in these pictures, Joe Bloggs, is made up, and so is everything he has.</p>
@@ -171,6 +184,8 @@
 				<li>With a model that runs on your computer, nothing leaves it. With Claude, only what each step needs is
 					sent, under your own key.</li>
 				<li>By default it never sends, posts or buys anything by itself. You press send.</li>
+				<li>It never fills an ID number, an account number or a signature, and never agrees to pay on a
+					call.</li>
 			</ul>
 
 			<h3>Get Proxenos</h3>
