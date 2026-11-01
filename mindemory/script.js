@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Loading Screen
 function initLoadingScreen() {
     const loading = document.getElementById('loading');
-    
+    if (!loading) return;
+
     // Hide loading screen after page loads
     window.addEventListener('load', () => {
         setTimeout(() => {
@@ -30,6 +31,7 @@ function initLoadingScreen() {
 // Theme Toggle
 function initThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
     const html = document.documentElement;
     const icon = themeToggle.querySelector('i');
     
@@ -69,7 +71,8 @@ function initMobileMenu() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+    if (!mobileMenuToggle || !sidebar || !overlay) return;
+
     // Show mobile menu toggle on small screens
     function checkScreenSize() {
         if (window.innerWidth <= 768) {
@@ -159,7 +162,8 @@ function initSmoothScrolling() {
 // Scroll Indicator
 function initScrollIndicator() {
     const scrollIndicator = document.getElementById('scrollIndicator');
-    
+    if (!scrollIndicator) return;
+
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -172,7 +176,8 @@ function initScrollIndicator() {
 // Back to Top Button
 function initBackToTop() {
     const backToTop = document.getElementById('backToTop');
-    
+    if (!backToTop) return;
+
     window.addEventListener('scroll', () => {
         if (window.pageYOffset > 300) {
             backToTop.classList.add('visible');
@@ -221,7 +226,6 @@ function initScrollAnimations() {
 // Typing Effect for Mindemory Title
 function initTypingEffect() {
     const titleElement = document.querySelector('.fancy-title');
-    console.log('initTypingEffect called, titleElement:', titleElement);
     if (!titleElement) return;
     const text = 'Mindemory';
     titleElement.textContent = '';
@@ -313,15 +317,13 @@ document.addEventListener('keydown', (e) => {
     // Ctrl/Cmd + K to toggle theme
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        document.getElementById('themeToggle').click();
+        document.getElementById('themeToggle')?.click();
     }
-    
+
     // Escape to close mobile menu
     if (e.key === 'Escape') {
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        sidebar.classList.remove('open');
-        overlay.classList.remove('open');
+        document.getElementById('sidebar')?.classList.remove('open');
+        document.getElementById('overlay')?.classList.remove('open');
     }
 });
 
