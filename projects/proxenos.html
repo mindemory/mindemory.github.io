@@ -44,7 +44,19 @@
 			border: 1px solid var(--primary-color); color: var(--primary-color); margin-left: 0.4rem; vertical-align: middle; }
 		section ul.plain { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; padding-left: 1.2rem; max-width: 900px; }
 		section ul.plain li { margin-bottom: 0.4rem; }
-		@media (max-width: 640px) { .shots { gap: 0.5rem; } .lede { font-size: 1.15rem; } }
+		.deck { position: relative; max-width: 900px; aspect-ratio: 16 / 9; margin: 1.25rem 0 0.6rem; background: #000;
+			border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); overflow: hidden; }
+		.deck img { display: block; width: 100%; height: 100%; object-fit: contain; cursor: pointer; }
+		.deck button { position: absolute; top: 50%; transform: translateY(-50%); width: 2.6rem; height: 2.6rem;
+			border-radius: 50%; border: 1px solid rgb(255 255 255 / 0.25); background: rgb(0 0 0 / 0.55); color: #fff;
+			font-size: 1rem; cursor: pointer; }
+		.deck button:disabled { opacity: 0.25; cursor: default; }
+		.deck .prev { left: 0.6rem; }
+		.deck .next { right: 0.6rem; }
+		.deck-bar { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center; max-width: 900px;
+			font-size: 0.95rem !important; }
+		@media (max-width: 640px) { .shots { gap: 0.5rem; } .lede { font-size: 1.15rem; }
+			.deck button { width: 2.1rem; height: 2.1rem; font-size: 0.85rem; } }
 	</style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -120,6 +132,18 @@
 			<p class="lede">An agent that keeps your own records in one private place on your computer and drafts the
 				next step for you to send. Free and open source.</p>
 			<p>In the Greek city-states, a <i>proxenos</i> was the citizen who formally acted on someone else's behalf.</p>
+
+			<h3>The slide deck</h3>
+			<div class="deck" id="deck" tabindex="0" role="region" aria-roledescription="carousel"
+				aria-label="Proxenos slide deck. Use the arrow keys to move between slides.">
+				<img src="../img/proxenos/deck/slide-01.jpg" width="1600" height="900"
+					alt="Slide 1 of 29: Proxenos, a private twin that drafts your next step">
+				<button class="prev" type="button" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+				<button class="next" type="button" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+			</div>
+			<p class="deck-bar"><span id="deckCount" aria-live="polite">1 / 29</span>
+				<a href="../docs/Proxenos-deck.pdf" target="_blank" class="link"><i class="far fa-file-pdf"></i> The deck as
+					a PDF</a></p>
 
 			<h3>Why I built it</h3>
 			<p>This fall, a health problem put me on the patient side of the system: wait lists, a referral lost in
@@ -233,6 +257,55 @@
 	</button>
 
 	<script src="../script.js"></script>
+	<script>
+		// The slide deck: one slide at a time, by the buttons, a click on the slide, the arrow keys or a swipe.
+		(function () {
+			const deck = document.getElementById('deck');
+			if (!deck) return;
+			const titles = ["Proxenos, a private twin that drafts your next step", "You get sick. The care is the easy part.",
+				"Then come the calls, bills, forms and referrals.", "Sick or not, too many threads, and one of you.",
+				"Meet Proxenos", "On your phone, too", "It starts with what you already have", "What it reads",
+				"Joe's bill says $420. His plan says $95.", "So it makes the call", "It fills the form from his records",
+				"Every chat gets a reply in his voice", "He tells it what messages don't show",
+				"Plans land on his calendar", "It runs his errands, and weighs his week",
+				"His projects move while he sleeps", "Each day, written down", "One model of him, many clones",
+				"How it works", "How it remembers", "Trust is earned, one level at a time",
+				"It drafts. You press send.", "What reaches a model", "What it never does without you",
+				"For patients, and for everyone", "Why now", "Where it stands", "Who's building it",
+				"Proxenos. It drafts. You press send."];
+			const img = deck.querySelector('img');
+			const prev = deck.querySelector('.prev');
+			const next = deck.querySelector('.next');
+			const count = document.getElementById('deckCount');
+			const src = (i) => '../img/proxenos/deck/slide-' + String(i + 1).padStart(2, '0') + '.jpg';
+			let at = 0;
+			function show(i) {
+				at = Math.max(0, Math.min(titles.length - 1, i));
+				img.src = src(at);
+				img.alt = 'Slide ' + (at + 1) + ' of ' + titles.length + ': ' + titles[at];
+				count.textContent = (at + 1) + ' / ' + titles.length;
+				prev.disabled = at === 0;
+				next.disabled = at === titles.length - 1;
+				[at - 1, at + 1].forEach((j) => { if (j >= 0 && j < titles.length) new Image().src = src(j); });
+			}
+			prev.addEventListener('click', () => show(at - 1));
+			next.addEventListener('click', () => show(at + 1));
+			img.addEventListener('click', () => show(at + 1));
+			deck.addEventListener('keydown', (e) => {
+				if (e.key === 'ArrowLeft') { show(at - 1); e.preventDefault(); }
+				if (e.key === 'ArrowRight') { show(at + 1); e.preventDefault(); }
+			});
+			let x0 = null;
+			deck.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+			deck.addEventListener('touchend', (e) => {
+				if (x0 === null) return;
+				const dx = e.changedTouches[0].clientX - x0;
+				x0 = null;
+				if (Math.abs(dx) > 40) show(at + (dx < 0 ? 1 : -1));
+			});
+			show(0);
+		})();
+	</script>
 </body>
 
 </html>
