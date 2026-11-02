@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="Thanos: a lab's memory. What a lab has worked out, from chart strings to who holds the lab card, kept in one place to search, and still there after the people who knew have moved on.">
+	<meta name="keywords" content="thanos, mrugank dake, lab memory, research labs, lab onboarding, alumni, knowledge base">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Thanos">
+	<meta property="og:description"
+		content="A lab's memory. What a lab has worked out, from chart strings to who holds the lab card, kept in one place to search, and still there after the people who knew have moved on.">
+	<meta property="og:url" content="https://www.mindemory.io/projects/thanos.html">
+	<meta name="twitter:card" content="summary">
+	<title> Thanos · Mrugank Dake </title>
+	<link rel="canonical" href="https://www.mindemory.io/projects/thanos.html">
+	<link rel="icon" href="../img/Logo.png">
+	<link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&display=swap">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+	<style>
+		.lede { font-size: 1.3rem; color: var(--text-primary); }
+		.ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; max-width: 900px;
+			margin-bottom: 1rem; }
+		.way { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem 1.5rem; }
+		.way h4 { margin: 0 0 0.5rem; font-size: 1.15rem; color: var(--text-primary); }
+		.way p { font-size: 1rem; margin-bottom: 0.75rem; }
+		.way pre { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6rem 0.8rem;
+			margin: 0 0 0.75rem; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--text-primary); }
+		.way code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.85rem; }
+		section ul.plain { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; padding-left: 1.2rem; max-width: 900px;
+			margin-bottom: 1rem; }
+		section ul.plain li { margin-bottom: 0.4rem; }
+		@media (max-width: 640px) { .lede { font-size: 1.15rem; } }
+	</style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0HX17JJJ2"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+
+	gtag('config', 'G-Y0HX17JJJ2');
+</script>
+
+<body>
+	<!-- Loading Screen -->
+	<div class="loading" id="loading">
+		<div class="spinner"></div>
+	</div>
+
+	<!-- Scroll Indicator -->
+	<div class="scroll-indicator" id="scrollIndicator"></div>
+
+	<div id="sidebar">
+		<button class="theme-toggle" id="themeToggle">
+			<i class="fas fa-moon"></i>
+		</button>
+
+		<img id="author_img" src="../img/headshot.jpg" alt="Mrugank Dake display picture">
+		<h1>Mrugank Dake</h1>
+		<p>Postdoctoral Researcher<br>Dartmouth College</p>
+
+		<ul>
+			<li><a href="../index.html#about-me" class="nav-link">About Me</a></li>
+			<li><a href="../index.html#news" class="nav-link">News</a></li>
+			<li><a href="../index.html#research" class="nav-link">Research</a></li>
+			<li><a href="../projects.html" class="nav-link active">Projects</a></li>
+			<li><a href="../cv.html" class="nav-link" target="_blank"><i class="far fa-file-alt"
+						style="margin-right: 8px;"></i>CV</a></li>
+			<li><a href="../docs/MrugankDakeResume.pdf" class="nav-link" target="_blank"><i class="far fa-file-pdf"
+						style="margin-right: 8px;"></i>Resume</a></li>
+		</ul>
+
+		<div id="social-links">
+			<div class="social-row">
+				<a href="https://www.linkedin.com/in/mrugankdake/" class="fa-brands fa-linkedin" target="_blank"
+					aria-label="LinkedIn"></a>
+				<a href="https://twitter.com/the_memory_guy" class="fa-brands fa-twitter" target="_blank"
+					aria-label="Twitter"></a>
+				<a href="https://github.com/mindemory" class="fa-brands fa-github" target="_blank"
+					aria-label="GitHub"></a>
+			</div>
+			<div class="social-row">
+				<a href="mailto:mrugank.dake@dartmouth.edu" class="fa-solid fa-envelope" target="_blank"
+					aria-label="Email"></a>
+				<a href="https://scholar.google.com/citations?user=N_zOV7cAAAAJ&hl=en" class="ai ai-google-scholar"
+					target="_blank" aria-label="Google Scholar"></a>
+				<a href="https://orcid.org/0000-0002-4050-6861" class="ai ai-orcid" target="_blank"
+					aria-label="ORCID"></a>
+			</div>
+		</div>
+	</div>
+
+	<div id="content">
+		<section id="thanos">
+			<h2>Thanos</h2>
+			<p class="lede">A lab's memory: what the lab has worked out over the years, kept in one place to search, and
+				still there after the people who knew have moved on.</p>
+			<p>Every lab relearns the same things: which grant pays for scans, what the chart string is, who holds the
+				lab card, which toolboxes to install, where the code lives. Most of it lives with the advisor, or with the
+				postdoc who left. Thanos keeps it where the whole lab can search it, so nobody has to ask the same question
+				every year.</p>
+
+			<h3>What it does</h3>
+			<ul class="plain">
+				<li><b>Search before you ask:</b> every question, every answer and the lab's GitHub repositories, searched
+					as you type. Forms of a word meet (scans, scanning, scanned), and so do the words labs use for the
+					same thing (MRI, scan, fMRI).</li>
+				<li><b>Ask once:</b> while you type a question, it shows the answers that may already be there. If none
+					fits, the question goes on the lab's Open list for whoever knows.</li>
+				<li><b>Anyone can answer or improve anything:</b> every version is kept, with who wrote it, so an edit
+					never loses anything.</li>
+				<li><b>Still right?</b> Anyone can mark an answer as still right. One that nobody has checked in a year is
+					marked as possibly out of date.</li>
+				<li><b>Alumni keep their place:</b> people join by an invite link, and those who move on become alumni.
+					They can still read and answer, and what anyone wrote stays under their name.</li>
+				<li><b>Secrets stay out:</b> saving something that looks like a card number, a password or a key asks
+					first, because everyone in the lab can read it, including people who join years from now.</li>
+				<li><b>Keep a copy:</b> any member can download the whole lab as Markdown, or as JSON with every
+					version.</li>
+			</ul>
+			<p>A new lab starts with the questions nearly every lab gets asked, left open for the people who know. Thanos
+				makes nothing up about a lab.</p>
+
+			<h3>Where it stands</h3>
+			<p>It's early. It started for the Murray Lab at Dartmouth, where I'm a postdoc, and the Clay Space Lab at NYU,
+				where I did my PhD, and it's meant for any lab or group that keeps relearning the same things. It hasn't
+				yet been tried by other labs.</p>
+
+			<h3>Try Thanos</h3>
+			<div class="ways">
+				<div class="way">
+					<h4>On your computer</h4>
+					<p>With <a href="https://nodejs.org" target="_blank">Node.js</a> 20.9 or later installed:</p>
+					<pre><code>git clone https://github.com/mindemory/thanos &amp;&amp; cd thanos &amp;&amp; npm install &amp;&amp; npm run dev</code></pre>
+					<p>Then open <code>http://127.0.0.1:4848</code>. A local copy needs nothing else: its database stays in
+						the folder, and the sign-in link shows on the page instead of in an email.</p>
+					<a href="https://github.com/mindemory/thanos" target="_blank" class="link"><i
+							class="fab fa-github"></i> Thanos on GitHub</a>
+				</div>
+				<div class="way">
+					<h4>For your lab</h4>
+					<p>A lab's own copy needs a Postgres database (a free Neon project works), Resend for sign-in emails, and
+						a host such as Vercel. Put the accounts in the lab's name, not one person's: Thanos is for when
+						people leave, and that includes whoever set it up.</p>
+					<a href="https://github.com/mindemory/thanos#host-it-for-a-lab" target="_blank" class="link"><i
+							class="fas fa-server"></i> How to host it</a>
+				</div>
+			</div>
+			<p>If your lab would like to try it, <a href="mailto:mrugank.dake@dartmouth.edu?subject=Thanos">write to
+					me</a>.</p>
+
+			<div class="toolkit-tags">
+				<span class="toolkit-tag">Next.js</span>
+				<span class="toolkit-tag">React</span>
+				<span class="toolkit-tag">TypeScript</span>
+				<span class="toolkit-tag">Postgres (or PGlite)</span>
+				<span class="toolkit-tag">MiniSearch</span>
+			</div>
+		</section>
+	</div>
+
+	<!-- Back to Top Button -->
+	<button class="back-to-top" id="backToTop" aria-label="Back to top">
+		<i class="fas fa-arrow-up"></i>
+	</button>
+
+	<script src="../script.js"></script>
+</body>
+
+</html>
