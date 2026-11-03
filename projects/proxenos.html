@@ -55,6 +55,25 @@
 		.deck .next { right: 0.6rem; }
 		.deck-bar { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center; max-width: 900px;
 			font-size: 0.95rem !important; }
+		.jump { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; max-width: 900px; font-size: 0.95rem !important; }
+		.compare-wrap { max-width: 900px; overflow-x: auto; border: 1px solid var(--border-color); border-radius: 12px;
+			margin: 0.5rem 0 1rem; -webkit-overflow-scrolling: touch; }
+		.compare { border-collapse: collapse; width: 100%; min-width: 820px; font-size: 0.9rem; color: var(--text-secondary); }
+		.compare th, .compare td { text-align: left; vertical-align: top; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border-color); line-height: 1.45; }
+		.compare thead th { color: var(--text-primary); background: var(--bg-secondary); font-weight: 600; }
+		.compare tbody th { color: var(--text-primary); font-weight: 600; }
+		.compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: 0; }
+		.compare tr.ours th, .compare tr.ours td { background: color-mix(in srgb, var(--primary-color) 9%, transparent); }
+		.compare .yes { color: var(--primary-color); font-weight: 600; }
+		.compare-note { font-size: 0.95rem !important; }
+		.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; max-width: 900px; margin-bottom: 1rem; }
+		.tier { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.15rem; }
+		.tier h4 { margin: 0 0 0.35rem; font-size: 1.1rem; color: var(--text-primary); }
+		.tier p { font-size: 0.95rem !important; margin: 0; }
+		.faq { max-width: 900px; }
+		.faq details { border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-card); padding: 0.85rem 1.15rem; margin-bottom: 0.6rem; }
+		.faq summary { cursor: pointer; font-weight: 600; color: var(--text-primary); font-size: 1.05rem; }
+		.faq details p { margin: 0.6rem 0 0; font-size: 1rem; }
 		@media (max-width: 640px) { .shots { gap: 0.5rem; } .lede { font-size: 1.15rem; }
 			.deck button { width: 2.1rem; height: 2.1rem; font-size: 0.85rem; } }
 	</style>
@@ -138,6 +157,9 @@
 						class="fas fa-download"></i> Releases for Mac and Windows</a>
 			</p>
 			<p>In the Greek city-states, a <i>proxenos</i> was the citizen who formally acted on someone else's behalf.</p>
+			<p class="jump"><a href="#what-it-does">What it does</a><a href="#how-it-compares">How it compares</a>
+				<a href="#can-your-computer-run-it">Can your computer run it?</a><a href="#get-proxenos">Get Proxenos</a>
+				<a href="#questions">Questions</a></p>
 
 			<h3>The slide deck</h3>
 			<div class="deck" id="deck" tabindex="0" role="region" aria-roledescription="carousel"
@@ -170,16 +192,7 @@
 					call.</li>
 			</ul>
 
-			<h3>How it compares</h3>
-			<p>Self-hosted workspaces such as Odysseus and Open WebUI give you a private chat that you drive; memory tools
-				such as Mem0, Letta and Screenpipe remember facts or record your screen; and hosted assistants and digital
-				twins keep what they know about you on their own servers. Proxenos reads your own mail, chats, calendar,
-				notes and health records on your computer, keeps a model of you that you can read and correct, drafts the
-				next step in your voice for you to send, and measures how close its drafts come to what you actually
-				sent. The README has the <a href="https://github.com/mindemory/proxenos#how-proxenos-compares"
-					target="_blank">full comparison</a>, with what the others do better.</p>
-
-			<h3>What it does</h3>
+			<h3 id="what-it-does">What it does</h3>
 			<ul class="plain">
 				<li><b>Care:</b> where your care stands, from your own mail, calendar, chats, notes and health records
 					(downloaded from Apple Health or your patient portal): a timeline, what's still open, what to say on
@@ -198,6 +211,20 @@
 				<li><b>Journal:</b> each day written down for you: what got done, what's waiting, what's next.</li>
 				<li><b>Projects:</b> where each long project stands, from your messages and its code, with the next
 					step done on a branch for you to accept.</li>
+				<li><b>Ask:</b> any question about your own life and work, from the page or your phone, with photos or
+					screenshots attached: a job post, a letter, a form.</li>
+				<li><b>Jobs:</b> leads from LinkedIn, Work at a Startup, recruiters and job boards in your mail, each
+					with whether to apply and why, the CV that fits, whom to contact and the first message drafted.</li>
+				<li><b>Life:</b> each month of your life told as a short essay you can edit and correct, with its
+					milestones.</li>
+				<li><b>Rhythms:</b> your weeks over the years: listening, rides, messages and calendar, and a card for
+					each month on how it felt in your own writing beside the music you played.</li>
+				<li><b>Listen:</b> any view read aloud in a natural voice made on your Mac, or in your own voice from
+					a short recording. Nothing is sent anywhere.</li>
+				<li><b>Notices:</b> a nudge on your phone when more waits on you, with counts only, never what it
+					is about.</li>
+				<li><b>Compare models:</b> which model writes replies most like you, judged by you without knowing
+					which wrote which.</li>
 				<li><b>Memory:</b> a search across everything you've ever written.</li>
 			</ul>
 			<div class="shots">
@@ -219,6 +246,158 @@
 				recommend treatment: the Care view restates what your records say, and anything that matters belongs with
 				your care team.</p>
 
+			<h3 id="how-it-compares">How it compares</h3>
+			<p>Many tools keep a memory for you or act for you. They differ in where your data lives, what they read,
+				whether they act or draft, whether they keep a model of you, and whether anything checks how close they
+				come to you. Checked against each project's own pages on November 3, 2026.</p>
+			<div class="compare-wrap" role="region" aria-label="How Proxenos compares, a table that scrolls sideways"
+				tabindex="0">
+				<table class="compare">
+					<thead>
+						<tr>
+							<th scope="col">Tool</th>
+							<th scope="col">Your data lives</th>
+							<th scope="col">It reads</th>
+							<th scope="col">Acts or drafts</th>
+							<th scope="col">A model of you</th>
+							<th scope="col">Checks how close it comes to you</th>
+							<th scope="col">Licence</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="ours">
+							<th scope="row">Proxenos</th>
+							<td>Your computer, in plain files</td>
+							<td>Your mail, chats, calendars, notes, documents, health records and exports: about 30 sources</td>
+							<td>Drafts; you press send</td>
+							<td>A written self-model you read and correct</td>
+							<td class="yes">Yes: how much of each draft you sent, and blind picks between models</td>
+							<td>MIT</td>
+						</tr>
+						<tr>
+							<th scope="row"><a href="https://github.com/odysseus-dev/odysseus" target="_blank">Odysseus</a></th>
+							<td>Your machine</td>
+							<td>Files you add, the web, an IMAP inbox, CalDAV calendars, notes</td>
+							<td>Acts: agents with a shell and MCP; drafts email replies</td>
+							<td>A memory built from your chats</td>
+							<td>No</td>
+							<td>AGPL-3.0</td>
+						</tr>
+						<tr>
+							<th scope="row"><a href="https://github.com/open-webui/open-webui" target="_blank">Open WebUI</a>,
+								<a href="https://github.com/Mintplex-Labs/anything-llm" target="_blank">AnythingLLM</a></th>
+							<td>Your server or desktop</td>
+							<td>Documents you upload, the web</td>
+							<td>Acts through tools, agents and MCP</td>
+							<td>Facts about you, where memory is on</td>
+							<td>No</td>
+							<td>Open WebUI License; MIT</td>
+						</tr>
+						<tr>
+							<th scope="row"><a href="https://github.com/khoj-ai/khoj" target="_blank">Khoj</a></th>
+							<td>Your server, or Khoj's cloud</td>
+							<td>Your notes and documents, the web</td>
+							<td>Answers, and research on a schedule</td>
+							<td>Long-term memories</td>
+							<td>No</td>
+							<td>AGPL-3.0</td>
+						</tr>
+						<tr>
+							<th scope="row"><a href="https://github.com/mediar-ai/screenpipe" target="_blank">Screenpipe</a>,
+								Microsoft Recall</th>
+							<td>Your computer</td>
+							<td>Your screen (Screenpipe: audio and input too)</td>
+							<td>Screenpipe: scheduled pipes; Recall: search</td>
+							<td>No</td>
+							<td>No</td>
+							<td>Screenpipe's own licence; proprietary</td>
+						</tr>
+						<tr>
+							<th scope="row"><a href="https://github.com/mem0ai/mem0" target="_blank">Mem0</a>,
+								<a href="https://github.com/letta-ai/letta-code" target="_blank">Letta</a>,
+								<a href="https://github.com/getzep/graphiti" target="_blank">Zep</a></th>
+							<td>Wherever a developer runs it, or the vendor's cloud</td>
+							<td>What an app passes it</td>
+							<td>No: memory for other agents</td>
+							<td>Facts about a user</td>
+							<td>Recall on benchmarks, not likeness to a person</td>
+							<td>Apache-2.0</td>
+						</tr>
+						<tr>
+							<th scope="row"><a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw</a></th>
+							<td>Your computer</td>
+							<td>Your chats on WhatsApp, Telegram, Slack, iMessage and more</td>
+							<td>Acts on a schedule, with tools</td>
+							<td>MEMORY.md and USER.md</td>
+							<td>No</td>
+							<td>MIT</td>
+						</tr>
+						<tr>
+							<th scope="row">ChatGPT, Claude, Gemini</th>
+							<td>The vendor's cloud</td>
+							<td>Your chats, and Gmail, Calendar or Drive once connected</td>
+							<td>Acts: tasks and agents, mostly asking first</td>
+							<td>Saved memories you can see and edit</td>
+							<td>No</td>
+							<td>Proprietary</td>
+						</tr>
+						<tr>
+							<th scope="row"><a href="https://github.com/mindverse/Second-Me" target="_blank">Second Me</a></th>
+							<td>Your computer</td>
+							<td>Notes and files you give it</td>
+							<td>Answers as you</td>
+							<td>A model trained on you</td>
+							<td>Partly: a model judged its answers</td>
+							<td>Apache-2.0</td>
+						</tr>
+						<tr>
+							<th scope="row">Personal.ai, Delphi</th>
+							<td>The vendor's cloud</td>
+							<td>What you upload or post</td>
+							<td>Answers others as you</td>
+							<td>A persona from your content</td>
+							<td>Personal.ai scores replies; its method isn't published</td>
+							<td>Proprietary</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="compare-note"><b>What others do better:</b> Odysseus and Open WebUI are fuller workspaces, for
+				more people and more models. OpenClaw reaches you on every chat app, and the hosted assistants know you
+				with no setup and keep going while your computer is off. Screenpipe and Recall capture everything on your
+				screen. The memory frameworks are built for developers at scale, with published benchmarks. Second Me
+				trains a model of you on your own machine. Proxenos is young: its measures come from one person so far,
+				and the desktop app isn't signed yet. The <a href="https://github.com/mindemory/proxenos#how-proxenos-compares"
+					target="_blank">README</a> has 15 kinds of tool, with links.</p>
+
+			<h3 id="can-your-computer-run-it">Can your computer run it?</h3>
+			<p>Proxenos itself is light. What needs memory is a model that runs on your computer, so nothing leaves it.
+				The Setup page reads your computer's memory and says which models fit: a model fits when its size plus
+				4 GB for what it's reading stays under 70% of the memory.</p>
+			<div class="tiers">
+				<div class="tier">
+					<h4>8 GB</h4>
+					<p>Room for a model of about 1.5 GB, too small to write well. Use Claude under your own key, and
+						Proxenos sends only what each step needs.</p>
+				</div>
+				<div class="tier">
+					<h4>16 GB</h4>
+					<p>Models of up to about 7 GB, for short drafts and sorting. Claude for the long work, if you
+						like.</p>
+				</div>
+				<div class="tier">
+					<h4>32 GB</h4>
+					<p>gemma4:26b, about 17 GB, the model Proxenos is tuned on: everything stays on your computer. On an
+						M1 Pro it writes about 23 tokens, a short sentence, a second.</p>
+				</div>
+				<div class="tier">
+					<h4>64 GB or more</h4>
+					<p>Models of up to about 40 GB, and room beside them for everything else.</p>
+				</div>
+			</div>
+			<p>The natural voice and your own voice in Listen need a Mac with Apple silicon; anywhere else, Listen
+				reads with your computer's own voice.</p>
+
 			<h3>Your privacy</h3>
 			<ul class="plain">
 				<li>Everything it gathers stays in a private folder on your own computer, never on a server of mine.</li>
@@ -232,17 +411,22 @@
 					instructions.</li>
 			</ul>
 
-			<h3>Get Proxenos</h3>
+			<h3 id="get-proxenos">Get Proxenos</h3>
 			<div class="ways">
 				<div class="way">
-					<h4>Mac app <span class="soon">Coming soon</span></h4>
-					<p>One download you open and sign in to, with no setup and no code. This is what I'm building next.</p>
+					<h4>Desktop app <span class="soon">First release soon</span></h4>
+					<p>For a Mac with Apple silicon and for Windows: one download you open, with no terminal and no
+						code. It's built and tested, and the first release goes up on GitHub soon. It isn't signed yet, so
+						the first time a Mac asks you to allow it in System Settings, Privacy &amp; Security (Open Anyway),
+						and Windows warns about the installer.</p>
+					<a href="https://github.com/mindemory/proxenos/releases" target="_blank" class="link"><i
+							class="fas fa-download"></i> Releases</a>
 					<a href="mailto:mrugank.dake@dartmouth.edu?subject=Proxenos%3A%20tell%20me%20when%20it%27s%20ready"
 						class="link"><i class="fas fa-envelope"></i> Tell me when it's ready</a>
 				</div>
 				<div class="way">
 					<h4>From the code</h4>
-					<p>For now it runs only on a Mac (Apple Silicon), for anyone comfortable with a terminal. With
+					<p>On a Mac with Apple silicon, for anyone comfortable with a terminal. With
 						<a href="https://brew.sh" target="_blank">Homebrew</a> installed, one command sets it up:</p>
 					<pre><code>git clone https://github.com/mindemory/proxenos &amp;&amp; cd proxenos &amp;&amp; scripts/install.sh</code></pre>
 					<p>Then <code>conda activate proxenos &amp;&amp; proxenos demo</code> tries it on a made-up person, with
@@ -250,6 +434,63 @@
 					<a href="https://github.com/mindemory/proxenos" target="_blank" class="link"><i
 							class="fab fa-github"></i> Proxenos on GitHub</a>
 				</div>
+			</div>
+
+			<h3 id="questions">Questions</h3>
+			<div class="faq">
+				<details>
+					<summary>Is it free?</summary>
+					<p>Yes. Proxenos is open source under the MIT licence, with no account and no subscription. A model
+						on your computer costs nothing to run; Claude is billed to your own key by what you use.</p>
+				</details>
+				<details>
+					<summary>Does my data leave my computer?</summary>
+					<p>Your records stay in a private folder on your computer. With a model on your computer, nothing
+						about them leaves. With Claude, only what each step needs goes, and the Privacy page lists what
+						each part sends and every call to a model in the last 30 days. Artists' names go to MusicBrainz to
+						look up their genres, which you can turn off.</p>
+				</details>
+				<details>
+					<summary>Will it send things for me?</summary>
+					<p>No. It drafts, and you press send. The exceptions are an outbox you switch on yourself, app by
+						app, and a phone call you start, where it says it's an automated assistant and never agrees to
+						pay.</p>
+				</details>
+				<details>
+					<summary>Do I need a powerful computer?</summary>
+					<p>No. See <a href="#can-your-computer-run-it">Can your computer run it?</a>: with less memory,
+						Claude does the writing under your own key, and Proxenos still keeps everything on your
+						computer.</p>
+				</details>
+				<details>
+					<summary>How is it different from Odysseus or Open WebUI?</summary>
+					<p>Those are workspaces you drive: a private ChatGPT with agents and tools. Proxenos is a memory of
+						you. It reads your own records on its own, keeps a model of you that you can read, drafts what's
+						next in your voice, and measures how close its drafts come to what you sent.</p>
+				</details>
+				<details>
+					<summary>How is it different from ChatGPT's or Claude's memory?</summary>
+					<p>Their memory lives on their servers and holds what you've told them in chats. Proxenos's lives on
+						your computer, is built from all your own records, and you can read and correct what it thinks
+						about you.</p>
+				</details>
+				<details>
+					<summary>Does it work on Windows?</summary>
+					<p>The desktop app is built for Windows, and every change is tested on Windows too. A few readers are
+						Mac-only (Apple Mail, Calendar and the WhatsApp Mac app); on Windows you sign in to Gmail or
+						Microsoft 365, and Beeper brings your chats.</p>
+				</details>
+				<details>
+					<summary>Is it medical advice?</summary>
+					<p>No. It organizes your own records and drafts messages. The Care view restates what your records
+						say, and anything that matters belongs with your care team.</p>
+				</details>
+				<details>
+					<summary>How mature is it?</summary>
+					<p>Young. One person builds it and uses it every day, so its measures come from that one person so
+						far. Over a thousand tests run on a Mac and on Windows for every change. Ideas and bug reports are
+						welcome on <a href="https://github.com/mindemory/proxenos/issues" target="_blank">GitHub</a>.</p>
+				</details>
 			</div>
 
 			<h3>Help wanted</h3>
