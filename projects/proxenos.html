@@ -5,17 +5,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description"
-		content="Proxenos: a free, open-source personal memory toolbox, for anyone. It keeps your own records private on your computer and drafts the next step for you. Built first for people getting through the health care system.">
-	<meta name="keywords" content="proxenos, mrugank dake, patient advocacy, healthcare, ai agent, open source, privacy">
+		content="Proxenos reads your own mail, chats, calendar, notes and health records into a private folder on your computer and drafts what comes next for you to send: replies, errands, offers compared, the next step on a paper. Free and open source, for Mac and Windows.">
+	<meta name="keywords" content="proxenos, mrugank dake, personal memory, local ai, open source, privacy, patient advocacy, drafts">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Proxenos">
 	<meta property="og:description"
-		content="A free, open-source personal memory toolbox, for anyone: it keeps your own records private on your computer and drafts the next step for you. Built first for people getting through the health care system.">
+		content="Your records stay on your computer; Proxenos drafts what comes next for you to send: the reply, the email with your CV, the call script, the next step on your paper. Free and open source, for Mac and Windows.">
 	<meta property="og:url" content="https://www.mindemory.io/projects/proxenos.html">
 	<meta property="og:image" content="https://www.mindemory.io/img/proxenos/home-desktop.png">
 	<meta property="og:image:width" content="1280">
 	<meta property="og:image:height" content="800">
-	<meta property="og:image:alt" content="Proxenos's home page for a made-up person: today's agenda, open tasks and drafts to send">
+	<meta property="og:image:alt" content="Proxenos's home page for Joe Bloggs, a made-up person: the morning's agenda, open tasks and drafts to send">
 	<meta name="twitter:card" content="summary_large_image">
 	<title> Proxenos · Mrugank Dake </title>
 	<link rel="canonical" href="https://www.mindemory.io/projects/proxenos.html">
@@ -28,26 +28,15 @@
 	<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
 	<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
 	<style>
-		.lede { font-size: 1.3rem; color: var(--text-primary); }
-		.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 0.5rem; max-width: 900px; }
-		.shots img { width: 100%; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); }
-		.shots .wide { grid-column: 1 / -1; }
-		.shots-note { font-size: 0.95rem !important; font-style: italic; }
-		.ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; max-width: 900px; }
-		.way { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem 1.5rem; }
-		.way h4 { margin: 0 0 0.5rem; font-size: 1.15rem; color: var(--text-primary); }
-		.way p { font-size: 1rem; margin-bottom: 0.75rem; }
-		.way pre { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6rem 0.8rem;
-			margin: 0 0 0.75rem; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--text-primary); }
-		.way code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.85rem; }
-		.ways.steps { grid-template-columns: 1fr; margin-bottom: 1rem; }
-		.ways-head { margin: 1rem 0 0.6rem; font-size: 1.15rem; color: var(--text-primary); }
-		.way ul.plain { font-size: 1rem; margin: 0 0 0.75rem; }
-		.way > :last-child { margin-bottom: 0; }
-		.way .soon { display: inline-block; font-size: 0.8rem; font-weight: 600; padding: 0.15rem 0.6rem; border-radius: 999px;
-			border: 1px solid var(--primary-color); color: var(--primary-color); margin-left: 0.4rem; vertical-align: middle; }
+		.lede { font-size: 1.3rem; color: var(--text-primary); max-width: 900px; }
+		.news { max-width: 900px; font-size: 1rem !important; border: 1px solid var(--border-color); border-radius: 10px;
+			padding: 0.6rem 0.9rem; background: color-mix(in srgb, var(--primary-color) 8%, transparent); }
+		.news b { color: var(--text-primary); }
+		.jump { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; max-width: 900px; font-size: 0.95rem !important; }
 		section ul.plain { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; padding-left: 1.2rem; max-width: 900px; }
 		section ul.plain li { margin-bottom: 0.4rem; }
+		code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; }
+
 		.deck { position: relative; max-width: 900px; aspect-ratio: 16 / 9; margin: 1.25rem 0 0.6rem; background: #000;
 			border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-md); overflow: hidden; }
 		.deck img { display: block; width: 100%; height: 100%; object-fit: contain; cursor: pointer; }
@@ -59,27 +48,69 @@
 		.deck .next { right: 0.6rem; }
 		.deck-bar { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; align-items: center; max-width: 900px;
 			font-size: 0.95rem !important; }
-		.jump { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; max-width: 900px; font-size: 0.95rem !important; }
+
+		.intro { max-width: 900px; }
+		.feat { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.3fr); gap: 1rem 2rem; align-items: start;
+			max-width: 900px; padding: 1.75rem 0; border-top: 1px solid var(--border-color); }
+		.feat.flip > .shot { order: -1; }
+		.feat.wide { grid-template-columns: minmax(0, 1fr); }
+		.feat .kicker { font-size: 0.78rem !important; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+			color: var(--primary-color); margin: 0 0 0.3rem; }
+		.feat h4 { font-size: 1.3rem; line-height: 1.3; margin: 0 0 0.6rem; color: var(--text-primary); }
+		.feat p { font-size: 1.02rem; margin-bottom: 0.7rem; }
+		.feat .text > :last-child { margin-bottom: 0; }
+		.feat blockquote { margin: 0.2rem 0 0.8rem; padding: 0.65rem 0.95rem; border-left: 3px solid var(--primary-color);
+			background: var(--bg-secondary); border-radius: 0 8px 8px 0; color: var(--text-primary); font-size: 1rem; line-height: 1.55; }
+		.shot { display: grid; gap: 0.75rem; align-items: start; }
+		.shot.two { grid-template-columns: 1fr 1fr; }
+		.shot.three { grid-template-columns: repeat(3, 1fr); }
+		.shot a { display: block; border: 0; cursor: zoom-in; }
+		.shot img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--border-color);
+			box-shadow: var(--shadow-md); background: #111; }
+		.also { max-width: 900px; border-top: 1px solid var(--border-color); padding-top: 1.25rem; }
+		.made-up { font-size: 0.95rem !important; font-style: italic; }
+
 		.compare-wrap { max-width: 900px; overflow-x: auto; border: 1px solid var(--border-color); border-radius: 12px;
 			margin: 0.5rem 0 1rem; -webkit-overflow-scrolling: touch; }
-		.compare { border-collapse: collapse; width: 100%; min-width: 820px; font-size: 0.9rem; color: var(--text-secondary); }
+		.compare { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 0.9rem; color: var(--text-secondary); }
 		.compare th, .compare td { text-align: left; vertical-align: top; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border-color); line-height: 1.45; }
 		.compare thead th { color: var(--text-primary); background: var(--bg-secondary); font-weight: 600; }
 		.compare tbody th { color: var(--text-primary); font-weight: 600; }
 		.compare tbody tr:last-child th, .compare tbody tr:last-child td { border-bottom: 0; }
 		.compare tr.ours th, .compare tr.ours td { background: color-mix(in srgb, var(--primary-color) 9%, transparent); }
 		.compare .yes { color: var(--primary-color); font-weight: 600; }
-		.compare-note { font-size: 0.95rem !important; }
+		.compare-note { font-size: 0.95rem !important; max-width: 900px; }
 		.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; max-width: 900px; margin-bottom: 1rem; }
 		.tier { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.15rem; }
 		.tier h4 { margin: 0 0 0.35rem; font-size: 1.1rem; color: var(--text-primary); }
 		.tier p { font-size: 0.95rem !important; margin: 0; }
+
+		.ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; max-width: 900px; margin-bottom: 1rem; }
+		.ways.steps { grid-template-columns: 1fr; }
+		.way { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem 1.5rem; }
+		.way h4 { margin: 0 0 0.5rem; font-size: 1.15rem; color: var(--text-primary); }
+		.way p { font-size: 1rem; margin-bottom: 0.75rem; }
+		.way pre { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6rem 0.8rem;
+			margin: 0 0 0.75rem; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--text-primary); }
+		.way code { font-size: 0.85rem; }
+		.way ul.plain { font-size: 1rem; margin: 0 0 0.75rem; }
+		.way > :last-child { margin-bottom: 0; }
+		.way .soon { display: inline-block; font-size: 0.8rem; font-weight: 600; padding: 0.15rem 0.6rem; border-radius: 999px;
+			border: 1px solid var(--primary-color); color: var(--primary-color); margin-left: 0.4rem; vertical-align: middle; }
+		.ways-head { margin: 1rem 0 0.6rem; font-size: 1.15rem; color: var(--text-primary); }
 		.faq { max-width: 900px; }
 		.faq details { border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-card); padding: 0.85rem 1.15rem; margin-bottom: 0.6rem; }
 		.faq summary { cursor: pointer; font-weight: 600; color: var(--text-primary); font-size: 1.05rem; }
 		.faq details p { margin: 0.6rem 0 0; font-size: 1rem; }
-		@media (max-width: 640px) { .shots { gap: 0.5rem; } .lede { font-size: 1.15rem; }
-			.deck button { width: 2.1rem; height: 2.1rem; font-size: 0.85rem; } }
+		@media (max-width: 760px) {
+			.lede { font-size: 1.15rem; }
+			.feat { grid-template-columns: minmax(0, 1fr); padding: 1.4rem 0; }
+			.feat.flip > .shot { order: 0; }
+			.shot.two { grid-template-columns: 1fr; }
+			.shot.three { gap: 0.4rem; }
+			.shot.three img { border-radius: 8px; }
+			.deck button { width: 2.1rem; height: 2.1rem; font-size: 0.85rem; }
+		}
 	</style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -152,15 +183,18 @@
 	<div id="content">
 		<section id="proxenos">
 			<h2>Proxenos</h2>
-			<p class="lede">A personal memory toolbox that keeps your own records in one private place on your computer
-				and drafts the next step for you to send. Free and open source, for anyone.</p>
+			<p class="lede">Proxenos reads your own mail, chats, calendar, notes and health records into a private folder on
+				your computer, keeps track of where things stand, and drafts what comes next: the reply, the email with your
+				CV attached, the call script, the next step on your paper. You read it and press send. It's free and open
+				source.</p>
 			<p class="poster-links">
-				<a href="https://github.com/mindemory/proxenos" target="_blank" class="link"><i class="fab fa-github"></i>
-					Proxenos on GitHub</a>
 				<a href="https://github.com/mindemory/proxenos/releases/latest" target="_blank" class="link"><i
 						class="fas fa-download"></i> Download for Mac and Windows</a>
+				<a href="https://github.com/mindemory/proxenos" target="_blank" class="link"><i class="fab fa-github"></i>
+					Proxenos on GitHub</a>
 			</p>
-			<p>In the Greek city-states, a <i>proxenos</i> was the citizen who formally acted on someone else's behalf.</p>
+			<p class="news"><b>New:</b> the desktop app for Mac and Windows came out on 3 November 2026. A preprint on
+				Proxenos as a tool is coming soon.</p>
 			<p class="jump"><a href="#what-it-does">What it does</a><a href="#how-it-compares">How it compares</a>
 				<a href="#can-your-computer-run-it">Can your computer run it?</a><a href="#get-proxenos">Get Proxenos</a>
 				<a href="#questions">Questions</a></p>
@@ -169,113 +203,189 @@
 			<div class="deck" id="deck" tabindex="0" role="region" aria-roledescription="carousel"
 				aria-label="Proxenos slide deck. Use the arrow keys to move between slides.">
 				<img src="../img/proxenos/deck/slide-01.jpg" width="1600" height="900"
-					alt="Slide 1 of 37: Proxenos, a personal memory toolbox that drafts your next step">
+					alt="Slide 1: Proxenos">
 				<button class="prev" type="button" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
 				<button class="next" type="button" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
 			</div>
-			<p class="deck-bar"><span id="deckCount" aria-live="polite">1 / 37</span>
+			<p class="deck-bar"><span id="deckCount" aria-live="polite"></span>
 				<a href="../docs/Proxenos-deck.pdf" target="_blank" class="link"><i class="far fa-file-pdf"></i> The deck as
 					a PDF</a></p>
+
+			<h3 id="what-it-does">What it does</h3>
+			<p class="intro">Every picture here is Proxenos running on the made-up life of Joe Bloggs: an operations
+				manager at a furniture company, with a pottery class on Thursdays, a short paper about getting holiday orders
+				out on time, and a bill for new glasses that doesn't add up. None of it is real. <code>proxenos demo</code>
+				gives you Joe to try it on.</p>
+
+			<div class="feat">
+				<div class="text">
+					<p class="kicker">Drafts</p>
+					<h4>A reply for each chat that's waiting on you</h4>
+					<p>Cy asked on WhatsApp to borrow Joe's camping stove. Proxenos saw that the chat was waiting on Joe and
+						drafted the reply the way he writes to Cy, from the chat, what it remembers about Cy and what Joe told
+						it this week. Joe copies it, or opens WhatsApp with it filled in, and sends it himself.</p>
+					<p>Chats that need no answer get no draft. When Joe changes a draft before sending it, later drafts see
+						the change, and Proxenos proposes writing rules from his edits for him to accept.</p>
+				</div>
+				<div class="shot"><a href="../img/proxenos/drafts.webp" target="_blank"><img src="../img/proxenos/drafts.webp" width="1052" height="704" loading="lazy"
+						alt="Drafts: a WhatsApp reply to Cy about lending the stove, with Open the chat, Copy, I sent it, Write my own and Think it through"></a></div>
+			</div>
+
+			<div class="feat flip">
+				<div class="text">
+					<p class="kicker">Think</p>
+					<h4>Say what to change, and the draft is rewritten</h4>
+					<p>Joe opened that draft in Think and typed “Make it shorter, and say I'll bring the stove on Thursday
+						before class.” Think knew from his routines that pottery is on Thursday evenings, rewrote the draft and
+						saved it as his own edit:</p>
+					<blockquote>No problem, you can borrow the stove! I'll bring it over this Thursday before class. I'll let
+						Lia know the sale numbers after the next firing.</blockquote>
+					<p>Think is also where to turn over a decision, a project or a day. Each answer says what Joe's goals,
+						notes and records have to do with it, and where each point came from. It never decides for him.</p>
+				</div>
+				<div class="shot"><a href="../img/proxenos/think.webp" target="_blank"><img src="../img/proxenos/think.webp" width="1200" height="1058" loading="lazy"
+						alt="Think: Joe's request to shorten the draft, Proxenos's answer, what matters here with where each point came from, and a question to sit with"></a></div>
+			</div>
+
+			<div class="feat">
+				<div class="text">
+					<p class="kicker">Care</p>
+					<h4>The bill says $420. The plan says $95.</h4>
+					<p>Joe's new glasses came with a bill for $420, while his vision plan's statement says his share is $95.
+						Care reads the mail, calendar, chats and health records about it and writes where things stand, what's
+						his to do next, and a script for the call to the optician's billing office. Before an appointment it
+						writes a one-page brief, with each medical term in plain words.</p>
+					<p>It restates what his records say. It isn't medical advice.</p>
+				</div>
+				<div class="shot"><a href="../img/proxenos/care.webp" target="_blank"><img src="../img/proxenos/care.webp" width="1200" height="758" loading="lazy"
+						alt="Care: where Joe's eye exam, new glasses and their bill stand, and his next step, to get the optician to rebill through the vision plan"></a></div>
+			</div>
+
+			<div class="feat wide">
+				<div class="text">
+					<p class="kicker">Offers</p>
+					<h4>Three quotes side by side, and a reply to each</h4>
+					<p>Joe asked three contractors to rebuild his back porch steps. Offers read their emails and lined up
+						what each offered: the first step and its price, the whole job, what's credited, their terms, and who
+						owes whom a reply. Every figure is as they wrote it, and one their messages don't hold is dropped. Then
+						it drafted a reply to each, asking for what's missing, such as a cap on the hours. The replies wait in
+						Errands for Joe to send.</p>
+				</div>
+				<div class="shot"><a href="../img/proxenos/offers.webp" target="_blank"><picture><source media="(max-width: 760px)"
+							srcset="../img/proxenos/offers-phone.webp" width="600" height="1299"><img src="../img/proxenos/offers.webp" width="1800" height="1020" loading="lazy"
+						alt="Offers: Northfield Home Repair, Oakline Carpentry and Birch &amp; Sons Builders side by side, with first step, the whole job, what's credited, terms, last contact and what's still to ask"></picture></a></div>
+			</div>
+
+			<div class="feat wide">
+				<div class="text">
+					<p class="kicker">Errands</p>
+					<h4>Carried as far as it goes, one tap short of Send</h4>
+					<p>Joe typed “Reach Fay Moss at Beta Corp about the operations lead role, with my CV.” Proxenos found her
+						address in his mail, attached his newest CV, noticed the CV was out of date, wrote the email the way he
+						writes these, and stopped before Send, with each step it took listed. When an address isn't in your
+						records, it looks on the person's organization's own web pages, says which page it found it on, and
+						never guesses.</p>
+					<p>An errand can also be a WeChat message. Joe's oak supplier answers faster there, so the message is
+						written short, for him to paste into WeChat.</p>
+				</div>
+				<div class="shot two">
+					<a href="../img/proxenos/errands-cv.webp" target="_blank"><img src="../img/proxenos/errands-cv.webp" width="1100" height="1059" loading="lazy"
+						alt="Errands: an email to Fay Moss at Beta Corp, ready to send with Joe's CV attached, and where the address came from"></a>
+					<a href="../img/proxenos/errands-wechat.webp" target="_blank"><img src="../img/proxenos/errands-wechat.webp" width="1100" height="957" loading="lazy"
+						alt="Errands: a WeChat message to Wen Li at Lianhe Timber asking whether the oak tabletops can ship by the 20th, written to copy into WeChat"></a>
+				</div>
+			</div>
+
+			<div class="feat wide">
+				<div class="text">
+					<p class="kicker">Projects &amp; papers</p>
+					<h4>A paper's changes, its next step, and its folder in your Drive</h4>
+					<p>For each long project, Proxenos writes where it stands from the messages about it and the code on
+						every branch. Given the code, it does the next step on a branch of its own, for Joe to accept or
+						discard. The manuscript's versions are a click away, with the changes marked word by word.</p>
+					<p>Each night, each project also gets a folder in Google Drive (or Dropbox, OneDrive or iCloud Drive):
+						the manuscript as a Word file and a PDF made from the same commit, a supplement of the tables and
+						figures it names, and where things stand. Comments that co-authors leave in Word come back as a step.
+						Projects can sit in groups, such as “PhD” and “Postdoc”, and carry a brief: what's known, the
+						question, the first analyses.</p>
+				</div>
+				<div class="shot two">
+					<a href="../img/proxenos/manuscript.webp" target="_blank"><img src="../img/proxenos/manuscript.webp" width="1200" height="944" loading="lazy"
+						alt="Manuscript: the paper's old and new versions, with what came in highlighted and what went struck through, word by word"></a>
+					<a href="../img/proxenos/project-step.webp" target="_blank"><img src="../img/proxenos/project-step.webp" width="1200" height="799" loading="lazy"
+						alt="A project step waiting on Joe: a figure made on its own branch, what it shows, the files changed, and Accept or Discard"></a>
+				</div>
+				<div class="shot"><a href="../img/proxenos/drive-folder.webp" target="_blank"><img src="../img/proxenos/drive-folder.webp" width="1800" height="900" loading="lazy"
+						alt="The project's folder: the manuscript as Word and PDF, the supplementary information, the Supplement folder with a figure and a table, and notes, beside the first pages of the two PDFs"></a></div>
+			</div>
+
+			<div class="feat flip">
+				<div class="text">
+					<p class="kicker">Jobs</p>
+					<h4>Every job lead, with whether to apply</h4>
+					<p>Leads from LinkedIn's alerts, recruiters' emails, Work at a Startup and job boards, each job once,
+						however many places it came from: whether to apply and why, the CV that fits, whom to contact and a
+						first message drafted. It spots the applications already in Joe's sent mail and asks before marking
+						them applied.</p>
+				</div>
+				<div class="shot"><a href="../img/proxenos/jobs.webp" target="_blank"><img src="../img/proxenos/jobs.webp" width="1200" height="960" loading="lazy"
+						alt="Jobs: an operations lead role at Beta Corp to apply for, with a draft and an errand to start, and a role at Delta Freight he looks to have applied to"></a></div>
+			</div>
+
+			<div class="feat wide">
+				<div class="text">
+					<p class="kicker">Journal, Life and Rhythms</p>
+					<h4>Your days, months and weeks, written down</h4>
+					<p>Journal writes each day down: what got done, what's waiting on others, what's next. Life tells each
+						month of Joe's life in his own voice, years back, for him to edit or mark not true. Rhythms sets his
+						weeks side by side, with listening, rides and messages, and a card on how each month felt, now for
+						past months too.</p>
+				</div>
+				<div class="shot three">
+					<a href="../img/proxenos/journal-phone.webp" target="_blank"><img src="../img/proxenos/journal-phone.webp" width="600" height="1299" loading="lazy"
+						alt="Journal on a phone: yesterday written down, and the next three things to do"></a>
+					<a href="../img/proxenos/life-phone.webp" target="_blank"><img src="../img/proxenos/life-phone.webp" width="600" height="1299" loading="lazy"
+						alt="Life on a phone: October told in Joe's own voice"></a>
+					<a href="../img/proxenos/rhythms-phone.webp" target="_blank"><img src="../img/proxenos/rhythms-phone.webp" width="600" height="1299" loading="lazy"
+						alt="Rhythms on a phone: month cards, and October's mood and music"></a>
+				</div>
+			</div>
+
+			<div class="feat">
+				<div class="text">
+					<p class="kicker">Privacy</p>
+					<h4>Every model call, and where it ran</h4>
+					<p>The Privacy view counts the last 30 days of model calls by part: where each ran and how much went in,
+						never the words. Joe's model runs on his computer, so all of them stayed there.</p>
+					<p>If you'd rather not wait on a local model, Claude can answer what you're waiting on (Ask, Think,
+						errands and calls) under your own key, while the nightly work stays on your computer.</p>
+				</div>
+				<div class="shot"><a href="../img/proxenos/privacy.webp" target="_blank"><img src="../img/proxenos/privacy.webp" width="1200" height="1046" loading="lazy"
+						alt="Privacy: all 38 model calls in the last 30 days ran on this computer, listed by part"></a></div>
+			</div>
+
+			<div class="also">
+				<p><b>It also</b> keeps your tasks and puts the plans in them on your calendar; fills a PDF form from your
+					records, leaving ID numbers, account numbers and the signature to you; places a call you start, waits on
+					hold and rings you when a person answers, saying it's an automated assistant; reads drafts and Care aloud,
+					in a natural voice or your own; sets larger text and a typeface made for low vision; works on your phone
+					over your own Tailscale; and lets you pick, blind, which model writes most like you.</p>
+				<p class="made-up">Joe Bloggs, the people he knows and every record in these pictures are made up.</p>
+			</div>
 
 			<h3>Why I built it</h3>
 			<p>This fall, a health problem put me on the patient side of the system: wait lists, a referral lost in
 				paperwork, and a lot of phone calls, voicemails and fax machines. What helped most was AI that could draft
 				the emails, fill out the forms, keep a medical logbook, track the referrals and bills, and explain my
-				insurance. Proxenos is that help, built so that anyone can have it, not only people who can build their
-				own. The longer story is <a href="https://mrugankdake.substack.com/p/try-anything-but-dont-fall-sick"
+				insurance. Proxenos is that help, built so anyone can have it: people getting through the health care system
+				first, especially those who can't think clearly for long or make a phone call, and anyone with more to keep
+				up with than time. The longer story is <a href="https://mrugankdake.substack.com/p/try-anything-but-dont-fall-sick"
 					target="_blank">Try anything, but don't fall sick</a>.</p>
-
-			<h3>Who it's for</h3>
-			<ul class="plain">
-				<li><b>Anyone with more to keep up with than time.</b> With a memory of everything you've written, it
-					keeps track of where things stand and drafts the reply, the plan or the next step of a project in your
-					voice and your words, so you can spend yourself on the people, the sport and the work that matter to
-					you right now.</li>
-				<li><b>People getting through the healthcare system</b>, where it started, first of all those whose health
-					makes it hardest: who can't think clearly for long, can't look at a screen, or can't make a phone
-					call.</li>
-			</ul>
-
-			<h3 id="what-it-does">What it does</h3>
-			<ul class="plain">
-				<li><b>Care:</b> where your care stands, from your own mail, calendar, chats, notes and health records
-					(downloaded from Apple Health or your patient portal): a timeline, what's still open, what to say on
-					the phone, and a one-page brief for your next appointment, in plain words, with each medical term
-					explained.</li>
-				<li><b>Errands:</b> give it something to get done and it goes as far as it can, then stops one tap short
-					of sending, with every step it took written down.</li>
-				<li><b>Drafts:</b> replies, emails and plans in your voice, ready for you to send. It learns from what
-					you actually sent and from drafts you rewrite, and follows what you tell it ("I'm not going on
-					Tuesday", or a rule for every draft).</li>
-				<li><b>Forms:</b> a PDF form filled from your records. ID numbers, account numbers and the signature
-					stay yours to write.</li>
-				<li><b>Calls:</b> it waits on hold for you and rings you when a person picks up, saying it's an
-					automated assistant. Only when you press Call, through your own phone account.</li>
-				<li><b>Tasks and plans:</b> what you've promised people, kept up through the day, with the lunch and
-					the call put on your calendar.</li>
-				<li><b>Journal:</b> each day written down for you: what got done, what's waiting, what's next.</li>
-				<li><b>Projects:</b> where each long project stands, from your messages and its code, with the next
-					step done on a branch for you to accept.</li>
-				<li><b>Papers:</b> each version of a manuscript and what changed, word by word. Ask for a change in
-					your words, or open it in Google Docs to write with your co-authors as usual: what changed there
-					comes back as a step to accept, and the rest of your Markdown or LaTeX stays as it was.</li>
-				<li><b>Ask:</b> any question about your own life and work, from the page or your phone, with photos or
-					screenshots attached: a job post, a letter, a form.</li>
-				<li><b>Think:</b> talk anything through, a decision, a message, a project or a day, over as many turns
-					as it takes, with what your own goals, notes and records say about it. It never decides for
-					you.</li>
-				<li><b>Choices:</b> once a week, what's worth taking on (a call for papers, a talk, a fellowship), with
-					a first step drafted, and what's worth letting go of, with the decline drafted.</li>
-				<li><b>Jobs:</b> leads from LinkedIn, Work at a Startup, recruiters and job boards in your mail, each
-					with whether to apply and why, the CV that fits, whom to contact and the first message drafted.</li>
-				<li><b>Life:</b> each month of your life told as a short essay you can edit and correct, with its
-					milestones.</li>
-				<li><b>Rhythms:</b> your weeks over the years: listening, rides, messages and calendar, and a card for
-					each month on how it felt in your own writing beside the music you played.</li>
-				<li><b>Listen:</b> Home's day, Care and each draft read aloud, in a natural voice made on your Mac, or
-					in your own voice from a short recording. Nothing read aloud leaves your computer.</li>
-				<li><b>Easier to read:</b> Aa on every view sets larger text, a typeface made for low vision, more
-					space, a light theme, more contrast and less motion.</li>
-				<li><b>Notices:</b> a nudge on your phone when more waits on you, with counts only, never what it
-					is about.</li>
-				<li><b>Compare models:</b> which model writes replies most like you, judged by you without knowing
-					which wrote which.</li>
-				<li><b>Memory:</b> a search across all your own records, by their words and by their meaning.</li>
-				<li><b>And more:</b> a feed of papers and news ranked for you, advice from your own patterns, a map
-					of the people you know, and what to watch next.</li>
-			</ul>
-			<div class="shots">
-				<img class="wide" src="../img/proxenos/home-desktop.png"
-					alt="Home for a made-up person: the sidebar with every view by group, a morning greeting, and today's agenda beside the drafts to send"
-					loading="lazy">
-				<img src="../img/proxenos/care-phone.png"
-					alt="Care on a phone: where a made-up person's eye exam, new glasses and their bill stand"
-					loading="lazy">
-				<img src="../img/proxenos/errands-phone.png"
-					alt="Errands on a phone: a made-up person's message to a recruiter, ready to send"
-					loading="lazy">
-				<img src="../img/proxenos/jobs-phone.png"
-					alt="Jobs on a phone: a made-up person's job leads, each with whether to apply"
-					loading="lazy">
-				<img src="../img/proxenos/projects-phone.png"
-					alt="Projects and papers on a phone: a made-up person's three projects as cards"
-					loading="lazy">
-				<img src="../img/proxenos/life-phone.png"
-					alt="Life on a phone: a month's essay in a made-up person's voice"
-					loading="lazy">
-				<img src="../img/proxenos/rhythms-phone.png"
-					alt="Rhythms on a phone: a made-up person's month card, its mood and music"
-					loading="lazy">
-			</div>
-			<p class="shots-note">The person in these pictures, Joe Bloggs, is made up, and so is everything he has.</p>
-			<p><b>Not medical advice.</b> Proxenos organizes your own records and drafts messages. It doesn't diagnose or
-				recommend treatment: the Care view restates what your records say, and anything that matters belongs with
-				your care team.</p>
+			<p>In the Greek city-states, a <i>proxenos</i> was the citizen who formally acted on someone else's behalf.</p>
 
 			<h3 id="how-it-compares">How it compares</h3>
-			<p>Many tools keep a memory for you or act for you. They differ in where your data lives, what they read,
-				whether they act or draft, whether they keep a model of you, and whether anything checks how close they
-				come to you. Checked against each project's own pages on November 3, 2026.</p>
+			<p>Many tools keep a memory for you or act for you. Checked against each project's own pages on 3 November
+				2026:</p>
 			<div class="compare-wrap" role="region" aria-label="How Proxenos compares, a table that scrolls sideways"
 				tabindex="0">
 				<table class="compare">
@@ -287,37 +397,25 @@
 							<th scope="col">Acts or drafts</th>
 							<th scope="col">A model of you</th>
 							<th scope="col">Checks how close it comes to you</th>
-							<th scope="col">Licence</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="ours">
-							<th scope="row">Proxenos</th>
+							<th scope="row">Proxenos (MIT)</th>
 							<td>Your computer, in plain files</td>
 							<td>Your mail, chats, calendars, notes, documents, health records and exports: about 30 sources</td>
 							<td>Drafts; you press send</td>
 							<td>A written self-model you read and correct</td>
 							<td class="yes">Yes: how much of each draft you sent, and blind picks between models</td>
-							<td>MIT</td>
 						</tr>
 						<tr>
-							<th scope="row"><a href="https://github.com/odysseus-dev/odysseus" target="_blank">Odysseus</a></th>
-							<td>Your machine</td>
-							<td>Files you add, the web, an IMAP inbox, CalDAV calendars, notes</td>
-							<td>Acts: agents with a shell and MCP; drafts email replies</td>
-							<td>A memory built from your chats</td>
+							<th scope="row"><a href="https://github.com/odysseus-dev/odysseus" target="_blank">Odysseus</a>,
+								<a href="https://github.com/open-webui/open-webui" target="_blank">Open WebUI</a></th>
+							<td>Your machine or server</td>
+							<td>Files you add, the web; Odysseus also an IMAP inbox and CalDAV calendars</td>
+							<td>Acts: agents with tools and MCP</td>
+							<td>Memories from your chats</td>
 							<td>No</td>
-							<td>AGPL-3.0</td>
-						</tr>
-						<tr>
-							<th scope="row"><a href="https://github.com/open-webui/open-webui" target="_blank">Open WebUI</a>,
-								<a href="https://github.com/Mintplex-Labs/anything-llm" target="_blank">AnythingLLM</a></th>
-							<td>Your server or desktop</td>
-							<td>Documents you upload, the web</td>
-							<td>Acts through tools, agents and MCP</td>
-							<td>Facts about you, where memory is on</td>
-							<td>No</td>
-							<td>Open WebUI License; MIT</td>
 						</tr>
 						<tr>
 							<th scope="row"><a href="https://github.com/khoj-ai/khoj" target="_blank">Khoj</a></th>
@@ -326,7 +424,6 @@
 							<td>Answers, and research on a schedule</td>
 							<td>Long-term memories</td>
 							<td>No</td>
-							<td>AGPL-3.0</td>
 						</tr>
 						<tr>
 							<th scope="row"><a href="https://github.com/mediar-ai/screenpipe" target="_blank">Screenpipe</a>,
@@ -336,7 +433,14 @@
 							<td>Screenpipe: scheduled pipes; Recall: search</td>
 							<td>No</td>
 							<td>No</td>
-							<td>Screenpipe's own licence; proprietary</td>
+						</tr>
+						<tr>
+							<th scope="row"><a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw</a></th>
+							<td>Your computer</td>
+							<td>Your chats on WhatsApp, Telegram, Slack, iMessage and more</td>
+							<td>Acts on a schedule, with tools</td>
+							<td>MEMORY.md and USER.md</td>
+							<td>No</td>
 						</tr>
 						<tr>
 							<th scope="row"><a href="https://github.com/mem0ai/mem0" target="_blank">Mem0</a>,
@@ -347,16 +451,6 @@
 							<td>No: memory for other agents</td>
 							<td>Facts about a user</td>
 							<td>Recall on benchmarks, not likeness to a person</td>
-							<td>Apache-2.0</td>
-						</tr>
-						<tr>
-							<th scope="row"><a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw</a></th>
-							<td>Your computer</td>
-							<td>Your chats on WhatsApp, Telegram, Slack, iMessage and more</td>
-							<td>Acts on a schedule, with tools</td>
-							<td>MEMORY.md and USER.md</td>
-							<td>No</td>
-							<td>MIT</td>
 						</tr>
 						<tr>
 							<th scope="row">ChatGPT, Claude, Gemini</th>
@@ -365,206 +459,141 @@
 							<td>Acts: tasks and agents, mostly asking first</td>
 							<td>Saved memories you can see and edit</td>
 							<td>No</td>
-							<td>Proprietary</td>
 						</tr>
 						<tr>
-							<th scope="row"><a href="https://github.com/mindverse/Second-Me" target="_blank">Second Me</a></th>
-							<td>Your computer</td>
-							<td>Notes and files you give it</td>
+							<th scope="row"><a href="https://github.com/mindverse/Second-Me" target="_blank">Second Me</a>,
+								Personal.ai</th>
+							<td>Your computer; Personal.ai's cloud</td>
+							<td>Notes, files and posts you give it</td>
 							<td>Answers as you</td>
-							<td>A model trained on you</td>
-							<td>Partly: a model judged its answers</td>
-							<td>Apache-2.0</td>
-						</tr>
-						<tr>
-							<th scope="row">Personal.ai, Delphi</th>
-							<td>The vendor's cloud</td>
-							<td>What you upload or post</td>
-							<td>Answers others as you</td>
-							<td>A persona from your content</td>
-							<td>Personal.ai scores replies; its method isn't published</td>
-							<td>Proprietary</td>
+							<td>A model or persona of you</td>
+							<td>Partly: a model judges, or a score whose method isn't published</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<p class="compare-note"><b>What others do better:</b> Odysseus and Open WebUI are fuller workspaces, for
-				more people and more models. OpenClaw reaches you on every chat app, and the hosted assistants know you
-				with no setup and keep going while your computer is off. Screenpipe and Recall capture everything on your
-				screen. The memory frameworks are built for developers at scale, with published benchmarks. Second Me
-				trains a model of you on your own machine. Proxenos is young: its measures come from one person so far,
-				the desktop app isn't signed yet, and its readers assume particular export formats. The
-				<a href="https://github.com/mindemory/proxenos#how-proxenos-compares" target="_blank">README</a> compares
-				more tools, with links.</p>
+			<p class="compare-note"><b>What others do better:</b> Odysseus and Open WebUI are fuller workspaces, for more
+				people and more models. OpenClaw reaches you on every chat app, and the hosted assistants need no setup and
+				keep going while your computer is off. Screenpipe and Recall capture everything on your screen. The memory
+				frameworks are built for developers at scale, with published benchmarks. Proxenos is young: its measures
+				come from one person so far, the desktop app isn't signed yet, and some readers expect a particular export
+				format. The <a href="https://github.com/mindemory/proxenos/blob/main/docs/compare.md" target="_blank">full
+					table</a> has more tools, their licences and links.</p>
 
 			<h3 id="can-your-computer-run-it">Can your computer run it?</h3>
-			<p>Proxenos itself is light. What needs memory is a model that runs on your computer, so nothing leaves it.
-				The Setup page reads your computer's memory and says which models fit: a model fits when its size plus
-				4 GB for what it's reading stays under 70% of the memory.</p>
+			<p>Proxenos itself is light. What needs memory is a model on your computer. Setup reads how much memory you
+				have and says which models fit.</p>
 			<div class="tiers">
 				<div class="tier">
 					<h4>8 GB</h4>
-					<p>Room for a model of about 1.5 GB, too small to write well. Use Claude under your own key, and
-						Proxenos sends only what each step needs.</p>
+					<p>Too little for a model that writes well. Use Claude under your own key; each part sends only what it
+						needs.</p>
 				</div>
 				<div class="tier">
 					<h4>16 GB</h4>
-					<p>Models of up to about 7 GB, for short drafts and sorting. Claude for the long work, if you
+					<p>Models of up to about 7 GB, for short drafts and sorting, and Claude for the long work if you
 						like.</p>
 				</div>
 				<div class="tier">
 					<h4>32 GB</h4>
-					<p>gemma4:26b, about 17 GB, the model Proxenos is tuned on: everything stays on your computer. On an
-						M1 Pro it writes about 23 tokens, a short sentence, a second.</p>
+					<p>gemma4:26b, about 17 GB, the model Proxenos is tuned on. Everything stays on your computer. On an M1
+						Pro it writes about 23 tokens a second.</p>
 				</div>
 				<div class="tier">
 					<h4>64 GB or more</h4>
-					<p>Models of up to about 40 GB, and room beside them for everything else.</p>
+					<p>Models of up to about 40 GB, with room for everything else.</p>
 				</div>
 			</div>
-			<p>The natural voice and your own voice in Listen need a Mac with Apple silicon; anywhere else, Listen
-				reads with your computer's own voice.</p>
 
 			<h3>Your privacy</h3>
 			<ul class="plain">
-				<li>Everything it gathers stays in a private folder on your own computer, never on a server of mine.</li>
-				<li>With a model that runs on your computer, no prompt leaves it. With Claude, only what each step needs
-					is sent, under your own key, with card numbers, passwords and keys blanked first.</li>
-				<li>A few things go out by design, and the Privacy page says which: a call's audio through Twilio, on a
-					call you start; a notice's counts through ntfy, if you turn notices on; artists' names to MusicBrainz,
-					for their genres (one setting turns it off); pages linked in chats waiting on your reply; and a
-					manuscript to your own Google Drive when you open it in Google Docs, with a sign-in that sees only
-					the files Proxenos makes.</li>
-				<li>By default it never sends, posts or buys anything by itself. You press send.</li>
-				<li>It never fills an ID number, an account number or a signature, and never agrees to pay on a
-					call.</li>
-				<li>A Privacy page shows every call to a model in the last 30 days and where it ran, on your
-					computer or not, and other people's messages reach a model only marked as data, never as
-					instructions.</li>
+				<li>Your records stay in a folder on your computer that only you can open, never on a server of mine. Keys go
+					to your system's own secure store.</li>
+				<li>With a model on your computer, no prompt leaves it. With Claude, under your own key, each part sends
+					only what its job needs, with card numbers, passwords and keys blanked first.</li>
+				<li>A few things go out by design, and the Privacy view says which: a call's audio on a call you start,
+					counts for phone notices if you turn them on, artists' names to MusicBrainz, a person's name and
+					organization to a search engine when you need their public email address, and a manuscript to your own
+					Drive or cloud folder if you set one.</li>
+				<li>It never sends, posts or buys anything on its own, never fills an ID number, account number or
+					signature, and never agrees to pay on a call. You can switch on an outbox per app, only once that app's
+					drafts have gone out nearly unchanged many times.</li>
 			</ul>
 
 			<h3 id="get-proxenos">Get Proxenos</h3>
-			<p>Today you run Proxenos from its code: one command on a Mac, a few on Windows. The desktop app, with no
-				terminal at all, comes next.</p>
-			<h4 class="ways-head">On a Mac, step by step</h4>
+			<div class="ways">
+				<div class="way">
+					<h4>The desktop app <span class="soon">Out now</span></h4>
+					<p>For a Mac with Apple silicon (macOS 13 or newer) or a Windows PC. Download the <code>.dmg</code> or the
+						<code>.exe</code> from the latest release (about 200 MB) and open it: no terminal, no code. The page
+						opens in a window of its own, a menu-bar menu has Open, Sync now, Pause and Quit, and the sync and the
+						nightly run are built in.</p>
+					<p>It isn't signed yet. On a Mac, allow it once in System Settings, Privacy &amp; Security, Open Anyway;
+						on Windows, when SmartScreen warns, choose More info, Run anyway. It doesn't come with a model yet:
+						Setup lets you pick one on your computer through <a href="https://ollama.com" target="_blank">Ollama</a>,
+						or Claude with your own key.</p>
+					<a href="https://github.com/mindemory/proxenos/releases/latest" target="_blank" class="link"><i
+							class="fas fa-download"></i> Download the latest release</a>
+				</div>
+			</div>
+
+			<h4 class="ways-head">From the code, on a Mac</h4>
 			<div class="ways steps">
 				<div class="way">
-					<h4>1. What you need first</h4>
-					<p>A Mac with Apple silicon (an Intel Mac works, but local models are slow on it) and
-						<a href="https://brew.sh" target="_blank">Homebrew</a>, installed as brew.sh shows. Homebrew also
-						installs Apple's command line tools, which bring git. The install brings everything else.</p>
-				</div>
-				<div class="way">
-					<h4>2. Install it</h4>
-					<p>In Terminal, one command:</p>
+					<h4>1. Install it</h4>
+					<p>With <a href="https://brew.sh" target="_blank">Homebrew</a> installed, in Terminal:</p>
 					<pre><code>git clone https://github.com/mindemory/proxenos &amp;&amp; cd proxenos &amp;&amp; scripts/install.sh</code></pre>
 					<p>It installs what's missing (Node, Ollama's own app, and Miniforge if there's no conda), sets up the
-						<code>proxenos</code> environment and the page's packages, and pulls a local model that fits: with 32 GB
-						of memory or more, gemma4:26b, and on any Mac a small model for searching by meaning. With less memory
-						it says so, and you pick a smaller model or Claude in step 5. <code>--no-model</code> skips the models,
-						to use Claude instead. Running it again only adds what's missing.</p>
-					<p>If it installed Miniforge, run this once and open a new Terminal window, so that
-						<code>conda activate</code> works:</p>
-					<pre><code>conda init zsh</code></pre>
+						<code>proxenos</code> environment and pulls a local model that fits your memory: gemma4:26b with 32 GB
+						or more. <code>--no-model</code> skips the model, to use Claude. Running it again only adds what's
+						missing. If it installed Miniforge, run <code>conda init zsh</code> once and open a new window.</p>
 				</div>
 				<div class="way">
-					<h4>3. Try it on a made-up person</h4>
+					<h4>2. Try it on Joe</h4>
 					<pre><code>conda activate proxenos &amp;&amp; proxenos demo</code></pre>
-					<p>It writes made-up records for Joe Bloggs, the person in the pictures above, to a new temporary
-						folder, with no model and none of your data, and prints one command. Run that command, and the page
-						opens in your browser at <code>http://127.0.0.1:4848</code>. Nothing is ever sent from it. Ctrl-C
-						stops it; delete the folder when you're done.</p>
+					<p>It writes Joe's made-up records to a temporary folder and prints the command that opens his page, at
+						<code>http://127.0.0.1:4848</code>. No model, none of your data, and nothing is ever sent from it.</p>
 				</div>
 				<div class="way">
-					<h4>4. Open your own page</h4>
+					<h4>3. Open your own</h4>
 					<pre><code>proxenos web</code></pre>
-					<p>It opens <code>http://127.0.0.1:4747</code> in your browser; leave the Terminal window open. The
-						first time, Setup asks three things: your name, where to keep your records
-						(<code>~/proxenos_vault</code> unless you pick another folder; it warns about folders iCloud syncs),
-						and a model. Keys and tokens go to the Mac's Keychain, and Settings changes any of it later.</p>
+					<p>Setup asks your name, where to keep your records (<code>~/proxenos_vault</code> unless you pick
+						another folder) and a model: one on your computer, which it checks fits your memory, or an Anthropic
+						API key. Then Connect adds your sources in any order: WhatsApp from its Mac app, every account in the
+						Mac's Mail and Calendar once Proxenos has Full Disk Access, Gmail, Google Calendar or Microsoft 365 by
+						signing in, and downloads such as Google Takeout or your health records with
+						<code>proxenos import</code>. The <a
+							href="https://github.com/mindemory/proxenos/blob/main/docs/guide.md#adding-your-data"
+							target="_blank">guide</a> lists all about 30 sources.</p>
 				</div>
 				<div class="way">
-					<h4>5. Choose a model</h4>
-					<ul class="plain">
-						<li><b>On your computer, through Ollama:</b> nothing leaves it and nothing is billed. Setup lists
-							the models you have with their sizes, marks the ones too big for your computer's memory and
-							suggests the largest that fits; with none, it says what size to get, and
-							<code>ollama pull NAME</code> gets it. See <a href="#can-your-computer-run-it">Can your computer
-								run it?</a> LM Studio, llama.cpp, Jan, LocalAI and vLLM work too.</li>
-						<li><b>Claude, under your own key:</b> paste an Anthropic API key once, and Setup checks it with
-							one small call. Anthropic bills you for what you use, and only what each step needs is sent, with
-							card numbers, passwords and keys blanked first.</li>
-						<li><b>Later:</b> skip it, and your sources still sync and search still works, but nothing is
-							drafted.</li>
-					</ul>
-				</div>
-				<div class="way">
-					<h4>6. Connect your own sources</h4>
-					<p>Setup then opens Connect, which lists every source, whether it's connected and when it was last
-						read. Add them in any order; each works on its own.</p>
-					<ul class="plain">
-						<li><b>WhatsApp:</b> Read WhatsApp now, from the WhatsApp Mac app. If macOS blocks it, the page
-							links to Full Disk Access: allow Proxenos there and press again.</li>
-						<li><b>Mail and calendars:</b> every account in the Mac's Mail and Calendar apps, with no sign-in
-							of its own, once Proxenos's Python has Full Disk Access. Or sign in to Gmail, Google Calendar or
-							Microsoft 365, for now through a sign-in app of your own, made once in Google Cloud or Azure
-							(<a href="https://github.com/mindemory/proxenos/blob/main/docs/data_sources.md#email"
-								target="_blank">how</a>).</li>
-						<li><b>Downloads:</b> Google Takeout, health records from Apple Health or your patient portal,
-							LinkedIn, Instagram, Spotify and more:</li>
-					</ul>
-					<pre><code>proxenos import ~/Downloads/takeout-*.zip</code></pre>
-					<p>Then <code>proxenos night</code> runs the whole loop once: notes on you, month by month, your
-						self-model, then each view's work. The
-						<a href="https://github.com/mindemory/proxenos/blob/main/docs/guide.md#adding-your-data" target="_blank">guide</a> lists all
-						about 30 sources.</p>
-				</div>
-				<div class="way">
-					<h4>7. Keep it current</h4>
+					<h4>4. Keep it current</h4>
 					<pre><code>proxenos schedule</code></pre>
-					<p>Left running in a window of its own, it syncs every 15 minutes and runs the night at 01:30, and
-						catches up once on waking if the Mac slept through either. <code>scripts/install.sh
-							--start-at-login</code> starts the page and the sync at login instead, with no window. To reach it
-						from your phone, put <a href="https://tailscale.com/download" target="_blank">Tailscale</a> on both,
-						signed in to the same account, and run <code>proxenos phone</code>.</p>
+					<p>It syncs every 15 minutes and runs the night at 01:30, catching up on waking if the Mac slept.
+						<code>scripts/install.sh --start-at-login</code> does the same from login, with no window. To reach it
+						from your phone, put <a href="https://tailscale.com/download" target="_blank">Tailscale</a> on both
+						and run <code>proxenos phone</code>.</p>
 				</div>
 			</div>
 			<div class="ways">
 				<div class="way">
-					<h4>On Windows, from the code</h4>
-					<p>Every change is tested on Windows, but running it there day to day is new: expect rough edges, and
-						please <a href="https://github.com/mindemory/proxenos/issues" target="_blank">say what breaks</a>.
-						You need <a href="https://git-scm.com/download/win" target="_blank">Git</a>,
-						<a href="https://www.python.org/downloads/" target="_blank">Python 3.12</a> (tick "Add python.exe to
-						PATH"), <a href="https://nodejs.org" target="_blank">Node.js</a> 22 or newer, and a model:
-						<a href="https://ollama.com/download" target="_blank">Ollama</a> for Windows, or Claude under your own
-						key. In PowerShell, once, so Python reads files as UTF-8:</p>
-					<pre><code>setx PYTHONUTF8 1</code></pre>
-					<p>Then, in a new PowerShell window:</p>
-					<pre><code>git clone https://github.com/mindemory/proxenos
+					<h4>From the code, on Windows</h4>
+					<p>Every change is tested on Windows, but running it there from the code is new, so please
+						<a href="https://github.com/mindemory/proxenos/issues" target="_blank">say what breaks</a>. You need
+						<a href="https://git-scm.com/download/win" target="_blank">Git</a>,
+						<a href="https://www.python.org/downloads/" target="_blank">Python 3.12</a> (tick “Add python.exe to
+						PATH”), <a href="https://nodejs.org" target="_blank">Node.js</a> 22 or newer, and Ollama for Windows or
+						a Claude key. In PowerShell:</p>
+					<pre><code>setx PYTHONUTF8 1
+git clone https://github.com/mindemory/proxenos
 cd proxenos
 pip install -e .
 proxenos demo</code></pre>
-					<p>Run the command it prints to open the made-up person's page, then <code>proxenos web</code> for your
-						own, and Setup and Connect as on a Mac. On Windows, mail and calendars come in by signing in to
-						Gmail, Google Calendar or Microsoft 365, and chats through
-						<a href="https://www.beeper.com" target="_blank">Beeper Desktop</a>. <code>proxenos schedule</code>
-						keeps it current, and
-						<a href="https://github.com/mindemory/proxenos/blob/main/docs/apps.md#keeping-it-running-from-source"
-							target="_blank">docs/apps.md</a> starts it at log-on with Task Scheduler.</p>
-				</div>
-				<div class="way">
-					<h4>Desktop app <span class="soon">Out now</span></h4>
-					<p>For a Mac with Apple silicon and for Windows: one download you open, with no terminal and no
-						code. The page opens in a window of its own, a menu (Open, Sync now, Pause, Quit) sits in the menu
-						bar, and the sync and the nightly run are built in. Download it from the latest release: the
-						<code>.dmg</code> for a Mac, the <code>.exe</code> for Windows.</p>
-					<p>It isn't signed yet, so the first time, a Mac asks you to allow it in System Settings, Privacy
-						&amp; Security (Open Anyway), and Windows SmartScreen warns about the installer. It doesn't come with
-						a model yet: pick one on Setup, as in step 5. Comfortable with a terminal?
-						<code>desktop/build.sh</code> builds it on your own computer today.</p>
-					<a href="https://github.com/mindemory/proxenos/releases/latest" target="_blank" class="link"><i
-							class="fas fa-download"></i> Download the latest release</a>
+					<p>Run <code>setx</code> once, then the rest in a new window. Mail and calendars come in by signing in to
+						Gmail, Google Calendar or Microsoft 365, and chats through <a href="https://www.beeper.com"
+							target="_blank">Beeper Desktop</a>. <a
+							href="https://github.com/mindemory/proxenos/blob/main/docs/apps.md#keeping-it-running-from-source"
+							target="_blank">docs/apps.md</a> starts it at log-on.</p>
 				</div>
 			</div>
 
@@ -572,66 +601,58 @@ proxenos demo</code></pre>
 			<div class="faq">
 				<details>
 					<summary>Is it free?</summary>
-					<p>Yes. Proxenos is open source under the MIT licence, with no account and no subscription. A model
-						on your computer costs nothing to run; Claude is billed to your own key by what you use.</p>
-				</details>
-				<details>
-					<summary>Does my data leave my computer?</summary>
-					<p>Your records stay in a private folder on your computer. With a model on your computer, no prompt
-						leaves it. With Claude, only what each step needs goes, and the Privacy page lists what each part
-						sends and every call to a model in the last 30 days. A few things go out by design: artists' names
-						to MusicBrainz to look up their genres (which you can turn off), a notice's counts if you turn
-						notices on, a call's audio on a call you start, and a manuscript to your own Google Drive when you
-						open it in Google Docs.</p>
+					<p>Yes. Proxenos is open source under the MIT licence, with no account and no subscription. A model on
+						your computer costs nothing to run; Claude is billed to your own key by what you use.</p>
 				</details>
 				<details>
 					<summary>Will it send things for me?</summary>
-					<p>No. It drafts, and you press send. The exceptions are an outbox you switch on yourself, app by
-						app, and a phone call you start, where it says it's an automated assistant and never agrees to
+					<p>No. It drafts, and you press send. The exceptions are yours to start: an outbox you switch on app by
+						app, and a phone call you place, where it says it's an automated assistant and never agrees to
 						pay.</p>
 				</details>
 				<details>
+					<summary>Can it use Claude?</summary>
+					<p>Yes, with your own Anthropic key: for everything, or only for what you're waiting on (Ask, Think,
+						errands and calls) while the nightly work stays on a model on your computer. Before a prompt goes to
+						Claude, card numbers, passwords and keys are blanked.</p>
+				</details>
+				<details>
 					<summary>Do I need a powerful computer?</summary>
-					<p>No. See <a href="#can-your-computer-run-it">Can your computer run it?</a>: with less memory,
-						Claude does the writing under your own key, and Proxenos still keeps everything on your
-						computer.</p>
+					<p>No. See <a href="#can-your-computer-run-it">Can your computer run it?</a> With less memory, Claude
+						does the writing, and your records still stay on your computer.</p>
 				</details>
 				<details>
-					<summary>How is it different from Odysseus or Open WebUI?</summary>
-					<p>Those are workspaces you drive: a private ChatGPT with agents and tools. Proxenos is a memory of
-						you. It reads your own records on its own, keeps a model of you that you can read, drafts what's
-						next in your voice, and measures how close its drafts come to what you sent.</p>
-				</details>
-				<details>
-					<summary>How is it different from ChatGPT's or Claude's memory?</summary>
-					<p>Their memory lives on their servers and holds what you've told them in chats. Proxenos's lives on
-						your computer, is built from all your own records, and you can read and correct what it thinks
-						about you.</p>
+					<summary>How is it different from ChatGPT's memory, or Open WebUI?</summary>
+					<p>ChatGPT's and Claude's memories live on their servers and hold what you've told them in chats. Open
+						WebUI and Odysseus are workspaces you drive. Proxenos reads your own records on its own, keeps a model
+						of you that you can read and correct, drafts what's next in your voice, and measures how close its
+						drafts come to what you sent.</p>
 				</details>
 				<details>
 					<summary>Does it work on Windows?</summary>
-					<p>The desktop app is built for Windows, and every change is tested on Windows too; today you can run
-						it there from its code (see <a href="#get-proxenos">Get Proxenos</a>). A few readers are Mac-only
-						(Apple Mail, Calendar and the WhatsApp Mac app); on Windows you sign in to Gmail, Google Calendar
-						or Microsoft 365, and Beeper brings your chats.</p>
+					<p>Yes: the desktop app has a Windows installer, and every change is tested on Windows. A few readers
+						are Mac-only (Apple Mail, Calendar and the WhatsApp Mac app). On Windows you sign in to Gmail, Google
+						Calendar or Microsoft 365, and Beeper brings your chats.</p>
 				</details>
 				<details>
 					<summary>Is it medical advice?</summary>
-					<p>No. It organizes your own records and drafts messages. The Care view restates what your records
-						say, and anything that matters belongs with your care team.</p>
+					<p>No. It organizes your own records and drafts messages. The Care view restates what your records say,
+						and anything that matters belongs with your care team.</p>
 				</details>
 				<details>
 					<summary>How mature is it?</summary>
-					<p>Young. One person builds it and uses it every day, so its measures come from that one person so
-						far. Over a thousand tests run on a Mac and on Windows for every change. Ideas and bug reports are
-						welcome on <a href="https://github.com/mindemory/proxenos/issues" target="_blank">GitHub</a>.</p>
+					<p>Young. The desktop app's first release came out on 3 November 2026. One person builds Proxenos and
+						uses it every day, so its measures come from that one person so far. It's about 83,000 lines of code,
+						with 1,123 tests run on a Mac and on Windows for every change, and a preprint on it as a tool is coming
+						soon. Ideas and bug reports are welcome on
+						<a href="https://github.com/mindemory/proxenos/issues" target="_blank">GitHub</a>.</p>
 				</details>
 			</div>
 
 			<h3>Help wanted</h3>
 			<p>If you have medical training (a doctor, nurse, pharmacist, medical student or patient advocate), you know
-				what's worth tracking and what to ask. That knowledge is what would make Proxenos preventive, not just a
-				way through the system. Code, ideas and a quick call are all welcome: start with the
+				what's worth tracking and what to ask. That knowledge is what would make Proxenos preventive, not just a way
+				through the system. Code, ideas and a quick call are all welcome: start with the
 				<a href="https://github.com/mindemory/proxenos/blob/main/CONTRIBUTING.md#good-first-contributions"
 					target="_blank">good first contributions</a>, or
 				<a href="mailto:mrugank.dake@dartmouth.edu?subject=Proxenos">write to me</a>.</p>
@@ -639,9 +660,9 @@ proxenos demo</code></pre>
 			<div class="toolkit-tags">
 				<span class="toolkit-tag">Python</span>
 				<span class="toolkit-tag">Next.js</span>
+				<span class="toolkit-tag">Electron</span>
 				<span class="toolkit-tag">Local models (Ollama)</span>
 				<span class="toolkit-tag">Claude</span>
-				<span class="toolkit-tag">Privacy first</span>
 				<span class="toolkit-tag">Open source (MIT)</span>
 			</div>
 		</section>
@@ -658,21 +679,16 @@ proxenos demo</code></pre>
 		(function () {
 			const deck = document.getElementById('deck');
 			if (!deck) return;
-			const titles = ["Proxenos, a personal memory toolbox that drafts your next step",
-				"You get sick. The care is the easy part.", "Then come the calls, bills, forms and referrals.",
-				"Sick or not, too many threads, and one of you.",
-				"Meet Proxenos: Joe's home page, on a computer and a phone",
-				"On your phone, too: Care, Errands, Journal, Projects and Jobs", "It starts with what you already have",
-				"What it reads: about 30 sources", "Joe's bill says $420. His plan says $95.",
-				"On a bad day, it reads to him", "So it makes the call", "It fills the form from his records",
-				"Every chat waiting on him gets a reply in his voice", "Which model writes like him? He picks, blind.",
-				"He tells it what messages don't show", "Plans land on his calendar",
-				"It runs his errands, and weighs his week", "Every job lead, sorted", "His projects move while he sleeps",
-				"His projects and papers", "Each day, written down", "His life, a month at a time",
-				"His weeks, side by side", "One model of him, many clones", "How it works", "How it remembers",
-				"Trust is earned, one level at a time", "It drafts. You press send.", "What reaches a model",
-				"What it never does without you", "For patients, and for everyone", "Why now", "How Proxenos compares",
-				"New since November 1", "Where it stands: today, and what's next", "Who's building it",
+			const titles = ["Proxenos: your records stay on your computer, and it drafts what comes next",
+				"It started with getting sick", "Meet Joe Bloggs, who is made up",
+				"Drafts: Cy wants to borrow his camping stove", "Think: tell it what to change, and the draft is rewritten",
+				"Care: the bill says $420, the plan says $95", "Offers: three contractors, side by side",
+				"Errands: carried as far as they go, one tap short of Send",
+				"Projects and papers: his paper moves while he sleeps",
+				"Every night, a folder in his Drive: Word and PDF from one commit",
+				"Jobs: every lead, with whether to apply", "His days, months and weeks: Journal, Life and Rhythms",
+				"On his phone, too", "How it works", "What reaches a model", "It drafts. You press send.",
+				"How Proxenos compares", "Where it stands: today, and what's next", "Who's building it",
 				"Proxenos. It drafts. You press send."];
 			const img = deck.querySelector('img');
 			const prev = deck.querySelector('.prev');
