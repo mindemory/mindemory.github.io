@@ -357,8 +357,9 @@
 					<h4>Every model call, and where it ran</h4>
 					<p>The Privacy view counts the last 30 days of model calls by part: where each ran and how much went in,
 						never the words. Joe's model runs on his computer, so all of them stayed there.</p>
-					<p>If you'd rather not wait on a local model, Claude can answer what you're waiting on (Ask, Think,
-						errands and calls) under your own key, while the nightly work stays on your computer.</p>
+					<p>If you'd rather not wait on a local model, a hosted one (Claude, OpenAI's or Google's Gemini) can
+						answer what you're waiting on (Ask, Think, errands and calls) under your own key, while the nightly
+						work stays on your computer.</p>
 				</div>
 				<div class="shot"><a href="../img/proxenos/privacy.webp" target="_blank"><img src="../img/proxenos/privacy.webp" width="1200" height="1046" loading="lazy"
 						alt="Privacy: all 38 model calls in the last 30 days ran on this computer, listed by part"></a></div>
@@ -486,13 +487,13 @@
 			<div class="tiers">
 				<div class="tier">
 					<h4>8 GB</h4>
-					<p>Too little for a model that writes well. Use Claude under your own key; each part sends only what it
-						needs.</p>
+					<p>Too little for a model that writes well. Use a hosted one (Claude, OpenAI's or Gemini) under your
+						own key; each part sends only what it needs.</p>
 				</div>
 				<div class="tier">
 					<h4>16 GB</h4>
-					<p>Models of up to about 7 GB, for short drafts and sorting, and Claude for the long work if you
-						like.</p>
+					<p>Models of up to about 7 GB, for short drafts and sorting, and a hosted one for the long work if
+						you like.</p>
 				</div>
 				<div class="tier">
 					<h4>32 GB</h4>
@@ -509,8 +510,9 @@
 			<ul class="plain">
 				<li>Your records stay in a folder on your computer that only you can open, never on a server of mine. Keys go
 					to your system's own secure store.</li>
-				<li>With a model on your computer, no prompt leaves it. With Claude, under your own key, each part sends
-					only what its job needs, with card numbers, passwords and keys blanked first.</li>
+				<li>With a model on your computer, no prompt leaves it. With a hosted one (Claude, OpenAI's or Gemini),
+					under your own key, each part sends only what its job needs, with card numbers, passwords and keys
+					blanked first.</li>
 				<li>A few things go out by design, and the Privacy view says which: a call's audio on a call you start,
 					counts for phone notices if you turn them on, artists' names to MusicBrainz, a person's name and
 					organization to a search engine when you need their public email address, and a manuscript to your own
@@ -529,9 +531,10 @@
 						opens in a window of its own, a menu-bar menu has Open, Sync now, Pause and Quit, and the sync and the
 						nightly run are built in.</p>
 					<p>It isn't signed yet. On a Mac, allow it once in System Settings, Privacy &amp; Security, Open Anyway;
-						on Windows, when SmartScreen warns, choose More info, Run anyway. It doesn't come with a model yet:
-						Setup lets you pick one on your computer through <a href="https://ollama.com" target="_blank">Ollama</a>,
-						or Claude with your own key.</p>
+						on Windows, when SmartScreen warns, choose More info, Run anyway. Setup gets you a model with one
+						button: a small one on your computer first, ready in minutes, and a bigger one in the background if
+						your computer has the memory. Or use your own key from Anthropic, OpenAI or Google. Empty pages have
+						a Make it now button, so you never need a terminal.</p>
 					<a href="https://github.com/mindemory/proxenos/releases/latest" target="_blank" class="link"><i
 							class="fas fa-download"></i> Download the latest release</a>
 				</div>
@@ -558,8 +561,8 @@
 					<h4>3. Open your own</h4>
 					<pre><code>proxenos web</code></pre>
 					<p>Setup asks your name, where to keep your records (<code>~/proxenos_vault</code> unless you pick
-						another folder) and a model: one on your computer, which it checks fits your memory, or an Anthropic
-						API key. Then Connect adds your sources in any order: WhatsApp from its Mac app, every account in the
+						another folder) and a model: one on your computer, which it downloads with one button and checks fits
+						your memory, or your own key from Anthropic, OpenAI or Google Gemini. Then Connect adds your sources in any order: WhatsApp from its Mac app, every account in the
 						Mac's Mail and Calendar once Proxenos has Full Disk Access, Gmail, Google Calendar or Microsoft 365 by
 						signing in, and downloads such as Google Takeout or your health records with
 						<code>proxenos import</code>. The <a
@@ -602,7 +605,7 @@ proxenos demo</code></pre>
 				<details>
 					<summary>Is it free?</summary>
 					<p>Yes. Proxenos is open source under the MIT licence, with no account and no subscription. A model on
-						your computer costs nothing to run; Claude is billed to your own key by what you use.</p>
+						your computer costs nothing to run; a hosted one is billed to your own key by what you use.</p>
 				</details>
 				<details>
 					<summary>Will it send things for me?</summary>
@@ -611,15 +614,17 @@ proxenos demo</code></pre>
 						pay.</p>
 				</details>
 				<details>
-					<summary>Can it use Claude?</summary>
-					<p>Yes, with your own Anthropic key: for everything, or only for what you're waiting on (Ask, Think,
-						errands and calls) while the nightly work stays on a model on your computer. Before a prompt goes to
-						Claude, card numbers, passwords and keys are blanked.</p>
+					<summary>Can it use Claude, ChatGPT's models or Gemini?</summary>
+					<p>Yes, with your own key from Anthropic, OpenAI or Google: for everything, or only for what you're
+						waiting on (Ask, Think, errands and calls) while the nightly work stays on a model on your computer.
+						A ChatGPT or Gemini subscription doesn't include this; the key is billed by what you use. On Gemini's
+						free tier Google may use what's sent to improve its products, so use a key with billing on. Before a
+						prompt goes out, card numbers, passwords and keys are blanked.</p>
 				</details>
 				<details>
 					<summary>Do I need a powerful computer?</summary>
-					<p>No. See <a href="#can-your-computer-run-it">Can your computer run it?</a> With less memory, Claude
-						does the writing, and your records still stay on your computer.</p>
+					<p>No. See <a href="#can-your-computer-run-it">Can your computer run it?</a> With less memory, a hosted
+						model does the writing, and your records still stay on your computer.</p>
 				</details>
 				<details>
 					<summary>How is it different from ChatGPT's memory, or Open WebUI?</summary>
@@ -642,8 +647,8 @@ proxenos demo</code></pre>
 				<details>
 					<summary>How mature is it?</summary>
 					<p>Young. The desktop app's first release came out on 3 November 2026. One person builds Proxenos and
-						uses it every day, so its measures come from that one person so far. It's about 83,000 lines of code,
-						with 1,123 tests run on a Mac and on Windows for every change, and a preprint on it as a tool is coming
+						uses it every day, so its measures come from that one person so far. It's about 98,000 lines of code,
+						with 1,429 tests run on a Mac and on Windows for every change, and a preprint on it as a tool is coming
 						soon. Ideas and bug reports are welcome on
 						<a href="https://github.com/mindemory/proxenos/issues" target="_blank">GitHub</a>.</p>
 				</details>
@@ -662,7 +667,7 @@ proxenos demo</code></pre>
 				<span class="toolkit-tag">Next.js</span>
 				<span class="toolkit-tag">Electron</span>
 				<span class="toolkit-tag">Local models (Ollama)</span>
-				<span class="toolkit-tag">Claude</span>
+				<span class="toolkit-tag">Claude, OpenAI, Gemini</span>
 				<span class="toolkit-tag">Open source (MIT)</span>
 			</div>
 		</section>
