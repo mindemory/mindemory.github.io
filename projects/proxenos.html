@@ -33,8 +33,8 @@
 			padding: 0.6rem 0.9rem; background: color-mix(in srgb, var(--primary-color) 8%, transparent); }
 		.news b { color: var(--text-primary); }
 		.jump { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; max-width: 900px; font-size: 0.95rem !important; }
-		section ul.plain { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; padding-left: 1.2rem; max-width: 900px; }
-		section ul.plain li { margin-bottom: 0.4rem; }
+		section ul.plain, section ol.plain { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; padding-left: 1.2rem; max-width: 900px; }
+		section ul.plain li, section ol.plain li { margin-bottom: 0.4rem; }
 		code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; }
 
 		.deck { position: relative; max-width: 900px; aspect-ratio: 16 / 9; margin: 1.25rem 0 0.6rem; background: #000;
@@ -93,7 +93,7 @@
 		.way pre { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6rem 0.8rem;
 			margin: 0 0 0.75rem; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--text-primary); }
 		.way code { font-size: 0.85rem; }
-		.way ul.plain { font-size: 1rem; margin: 0 0 0.75rem; }
+		.way ul.plain, .way ol.plain { font-size: 1rem; margin: 0 0 0.75rem; }
 		.way > :last-child { margin-bottom: 0; }
 		.way .soon { display: inline-block; font-size: 0.8rem; font-weight: 600; padding: 0.15rem 0.6rem; border-radius: 999px;
 			border: 1px solid var(--primary-color); color: var(--primary-color); margin-left: 0.4rem; vertical-align: middle; }
@@ -526,15 +526,23 @@
 			<div class="ways">
 				<div class="way">
 					<h4>The desktop app <span class="soon">Out now</span></h4>
-					<p>For a Mac with Apple silicon (macOS 13 or newer) or a Windows PC. Download the <code>.dmg</code> or the
-						<code>.exe</code> from the latest release (about 200 MB) and open it: no terminal, no code. The page
-						opens in a window of its own, a menu-bar menu has Open, Sync now, Pause and Quit, and the sync and the
-						nightly run are built in.</p>
-					<p>It isn't signed yet. On a Mac, allow it once in System Settings, Privacy &amp; Security, Open Anyway;
-						on Windows, when SmartScreen warns, choose More info, Run anyway. Setup gets you a model with one
-						button: a small one on your computer first, ready in minutes, and a bigger one in the background if
-						your computer has the memory. Or use your own key from Anthropic, OpenAI or Google. Empty pages have
-						a Make it now button, so you never need a terminal.</p>
+					<p>For a Mac with Apple silicon (macOS 13 or newer) or a Windows PC. No terminal, no code.</p>
+					<ol class="plain">
+						<li>Download the <code>.dmg</code> (Mac) or the <code>.exe</code> (Windows) from the latest release
+							below. It's about 320 MB on a Mac.</li>
+						<li>On a Mac, open the <code>.dmg</code> and drag Proxenos into Applications, then open it. It isn't
+							signed yet, so macOS stops it the first time: press Done, go to <strong>System Settings →
+							Privacy &amp; Security</strong>, scroll down, and press <strong>Open Anyway</strong>. On Windows,
+							when SmartScreen warns, choose <strong>More info → Run anyway</strong>.</li>
+						<li>Setup asks your name and where to keep your records, then a model. On a Mac, <strong>In
+							Proxenos</strong> downloads one with one button (about 5 GB) and runs it inside the app, and
+							offers a bigger one later if your Mac has the memory. Or use your own key from Anthropic, OpenAI or
+							Google.</li>
+						<li>The last step, <strong>Get Proxenos ready</strong>, has one button for each thing to connect:
+							Full Disk Access (so it can read Mail and WhatsApp), Google sign-in, Slack and WhatsApp.</li>
+					</ol>
+					<p>After that, Proxenos lives in the menu bar: Open, Sync now, Pause and Quit, with the sync and the
+						nightly run built in. Empty pages have a Make it now button.</p>
 					<a href="https://github.com/mindemory/proxenos/releases/latest" target="_blank" class="link"><i
 							class="fas fa-download"></i> Download the latest release</a>
 				</div>
