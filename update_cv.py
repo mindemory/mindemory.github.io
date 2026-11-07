@@ -3,8 +3,9 @@ import re
 import json
 import PyPDF2
 
-PDF_PATH = "/Users/mrugankdake/Documents/Personal/mindemory.github.io/docs/MrugankDakeCV.pdf"
-OUTPUT_PATH = "/Users/mrugankdake/Documents/Personal/mindemory.github.io/cv_data.js"
+REPO_DIR = os.path.dirname(os.path.abspath(__file__))
+PDF_PATH = os.path.join(REPO_DIR, "docs", "MrugankDakeCV.pdf")
+OUTPUT_PATH = os.path.join(REPO_DIR, "cv_data.js")
 
 def clean_text(text):
     text = text.replace("/gl⌢be", "")
