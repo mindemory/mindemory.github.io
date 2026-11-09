@@ -105,14 +105,21 @@ const CV_DATA = {
     },
     {
       "name": "Proxenos",
-      "description": "Open-source, privacy-first agent that keeps a person’s own records on their computer and drafts the next step (emails, forms, follow-ups) for them to approve; built first for patients navigating the healthcare system.",
+      "description": "Open-source, privacy-first agent that keeps a person’s own records on their computer and drafts the next step (emails, forms, follow-ups) for them to send; built first for people getting through the healthcare system. Desktop app for Mac and Windows.",
       "status": "",
       "url": "https://www.mindemory.io/proxenos",
       "url_text": "mindemory.io/proxenos"
     },
     {
+      "name": "Thanos",
+      "description": "A lab’s memory: what a research group works out over the years, from grant and account details to equipment and where the code lives, kept in one place to search after people move on. Started for the Murray Lab (Dartmouth) and the Clay Space Lab (NYU).",
+      "status": "In development",
+      "url": "https://www.mindemory.io/thanos",
+      "url_text": "mindemory.io/thanos"
+    },
+    {
       "name": "MCN Network Graph",
-      "description": "Interactive visualization of the research network of the MBL Methods in Computational Neuroscience cohorts.",
+      "description": "Interactive 2D and 3D visualization of the research network of the MBL Methods in Computational Neuroscience cohorts.",
       "status": "",
       "url": "https://www.mindemory.io/projects/mcn-network.html",
       "url_text": "mindemory.io/projects/mcn-network"
@@ -123,6 +130,13 @@ const CV_DATA = {
       "status": "Prototype",
       "url": "https://www.alexandriasocial.net/",
       "url_text": "alexandriasocial.net"
+    },
+    {
+      "name": "Notion Paperpile Integration",
+      "description": "Turns a Paperpile library into a Notion reading list, and maps it by topic and coauthorship in 2D and 3D.",
+      "status": "",
+      "url": "https://github.com/mindemory/notion_paperpile",
+      "url_text": "github.com/mindemory/notion_paperpile"
     },
     {
       "name": "EEG/MEG Methods course materials",
@@ -182,13 +196,54 @@ const CV_DATA = {
       "date": "Nov 2023",
       "url": "docs/Dake_SfN2023_poster.pdf",
       "award": ""
+    },
+    {
+      "authors": "Khare S., Chopra S., Grover H., V ohra T., Mahmood U., Jatwani K., Kaushik D., Pandey A., Bhardwaj S., Tanwar A., Singh J., Shekhar C., Dake M. , Krishnamoorthy K., Kumar K",
+      "title": "Li-Koff: To Detect and Degrade N-Nitrosamines",
+      "venue": "Giant Jamboree (iGEM), Boston, USA",
+      "date": "Nov 2020",
+      "url": "https://2020.igem.org/Team:MRIIRS_FARIDABAD/Poster",
+      "award": "DBT India iBEC Award 2020"
+    },
+    {
+      "authors": "Amar I., Avadhani K., Bajaj M., Balasubramanian D., Bhagat S., Chutani N., Dake M. , Khatri U., Krishna N., Jacob M., Mal S., Mohapatra O., Pal A., Saha D., Tripathy B., Mukherjee R., Rao B.J",
+      "title": "CoCa coli: probiotic immunotherapy against colon cancer",
+      "venue": "Giant Jamboree (iGEM), Boston, USA",
+      "date": "Nov 2019",
+      "url": "docs/igem_poster.pdf",
+      "award": "DBT India iBEC Award 2019"
     }
   ],
   "pre_doctoral": [
     {
+      "title": "Statistical and Machine learning approaches to Squirrel Acoustics (Master’s Thesis)",
+      "date": "Aug 2020 - Aug 2021",
+      "advisor": "Dr. Nandini Rajamani, IISER Tirupati, India"
+    },
+    {
       "title": "EEG and MRS Analysis for underpinning neural correlates of attentional blink",
       "date": "June - Aug 2019",
       "advisor": "Dr. Sridharan Devarajan, IISc Bangalore, India"
+    },
+    {
+      "title": "CoCa coli: probiotic immunotherapy against colon cancer",
+      "date": "Jan 2018 - Nov 2019",
+      "advisor": "Dr. Raju Mukherjee; Dr B J Rao, IISER Tirupati, India"
+    },
+    {
+      "title": "Isolation and characterization of neurons and glia from goat hippocampal culture",
+      "date": "Sep 2018 - May 2019",
+      "advisor": "Dr. Vasudharani Devanathan, IISER Tirupati, India"
+    },
+    {
+      "title": "Identifying differentially expressing tumor suppressor genes in Drosophila melanogaster wing and haltere imaginal discs",
+      "date": "May - July 2018",
+      "advisor": "Prof. L S Shashidhara, IISER Pune, India"
+    },
+    {
+      "title": "RNA Origami (Square) using in-vitro replication and transcription",
+      "date": "Jan - March 2018",
+      "advisor": "Dr. Ashwani Sharma, IISER Tirupati, India"
     },
     {
       "title": "Head direction cell model for rodents with internal updating mechanism",
