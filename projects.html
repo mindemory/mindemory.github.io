@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords"
-		content="mrugank dake, projects, proxenos, thanos, lab memory, mcn alumni network, mbl woods hole, methods in computational neuroscience, network visualization, library map, paperpile, notion, reading list, game of life, cellular automata">
+		content="mrugank dake, projects, proxenos, thanos, lab memory, mcn alumni network, mbl woods hole, methods in computational neuroscience, network visualization, notion paperpile integration, paperpile, notion, reading list, library map, game of life, cellular automata">
 	<title> Projects · Mrugank Dake </title>
 	<link rel="icon" href="img/Logo.png">
 	<link rel="stylesheet" href="style.css">
@@ -160,30 +160,31 @@
 			</div>
 
 			<div class="research-item">
-				<h4>Library Map <span class="pub-year">2026</span></h4>
-				<p class="venue"><i>Open source · In the browser, built from my Paperpile library</i></p>
-				<p>My Paperpile library, over a thousand papers, drawn as a map. On the topic map, each paper sits beside
-					the papers most like it in title, keywords and abstract, and the clusters they form are named by their
-					most telling words, from TMS and working memory capacity to traveling waves and pupil-linked arousal. A
-					second map shows who writes with whom. Both work in 2D or 3D, and searching an author lights up all of
-					their papers. The same code keeps my Notion reading list in step with Paperpile.</p>
+				<h4>Notion Paperpile Integration <span class="pub-year">2022</span></h4>
+				<p class="venue"><i>Open source · Python, for anyone using Paperpile and Notion</i></p>
+				<p>Paperpile exports my library to GitHub as BibTeX, and this integration turns it into a reading list in
+					Notion: every paper gets a row with its authors and year, title and journal, ready for a status, tags
+					and notes. Papers are matched by title, ignoring case, accents and LaTeX braces, so re-running never
+					adds a paper twice, and duplicate rows can be cleared out without losing anything written on them. It
+					also draws the library, over a thousand papers, as a map in 2D or 3D: papers grouped by topic, from TMS
+					and working memory to traveling waves, and a network of who writes with whom.</p>
 				<div class="toolkit-tags">
 					<span class="toolkit-tag">Python</span>
-					<span class="toolkit-tag">NumPy</span>
+					<span class="toolkit-tag">Notion API</span>
+					<span class="toolkit-tag">Paperpile</span>
+					<span class="toolkit-tag">BibTeX</span>
 					<span class="toolkit-tag">NetworkX</span>
 					<span class="toolkit-tag">three.js</span>
-					<span class="toolkit-tag">Notion API</span>
-					<span class="toolkit-tag">GitHub Actions</span>
 				</div>
 				<div class="poster-links">
+					<a href="https://github.com/mindemory/notion_paperpile" target="_blank" class="link">
+						<i class="fa-brands fa-github"></i> Code on GitHub
+					</a>
 					<a href="projects/library-map.html" target="_blank" class="link">
-						<i class="fas fa-map"></i> Explore the Map
+						<i class="fas fa-map"></i> Map of My Library
 					</a>
 					<a href="projects/library-map.html#3d" target="_blank" class="link">
 						<i class="fas fa-cube"></i> Explore in 3D
-					</a>
-					<a href="https://github.com/mindemory/notion_paperpile" target="_blank" class="link">
-						<i class="fa-brands fa-github"></i> Code on GitHub
 					</a>
 				</div>
 			</div>

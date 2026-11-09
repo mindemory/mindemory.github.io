@@ -6,7 +6,7 @@ Source for [mindemory.io](https://www.mindemory.io), the website of Mrugank Dake
 
 - `index.html`: home page (about, news, research)
 - `cv.html`: interactive CV, rendered from `cv_data.js`
-- `projects.html` and `projects/`: project pages, including the [MCN Alumni Network](https://www.mindemory.io/projects/mcn-network.html), the [Library Map](https://www.mindemory.io/projects/library-map.html), [Proxenos](https://www.mindemory.io/proxenos) and [Thanos](https://www.mindemory.io/thanos)
+- `projects.html` and `projects/`: project pages, including the [MCN Alumni Network](https://www.mindemory.io/projects/mcn-network.html), the [library map](https://www.mindemory.io/projects/library-map.html) from the Notion Paperpile Integration, [Proxenos](https://www.mindemory.io/proxenos) and [Thanos](https://www.mindemory.io/thanos)
 - `proxenos/`, `thanos/`: short links to those project pages
 - `docs/`: the CV, resume, posters and Proxenos slide deck as PDFs
 - `mindemory/`: an older blog, kept but no longer linked
@@ -21,9 +21,9 @@ The interactive CV is generated from the CV PDF.
 
 The script reads the PDF's text, so it depends on the CV keeping its section titles and layout.
 
-## Updating the Library Map
+## Updating the library map
 
-`projects/library-map.html` is built by [notion_paperpile](https://github.com/mindemory/notion_paperpile) from the Paperpile export in that repo, and doesn't update by itself. With both repos side by side, refresh it from `notion_paperpile`:
+`projects/library-map.html` is drawn by the [Notion Paperpile Integration](https://github.com/mindemory/notion_paperpile) from the Paperpile export in that repo, and doesn't update by itself. With both repos side by side, refresh it from `notion_paperpile`:
 
 ```bash
 git pull
