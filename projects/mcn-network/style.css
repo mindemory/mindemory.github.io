@@ -598,6 +598,47 @@ html, body {
   animation: pulse-glow 1.5s ease-in-out infinite;
 }
 
+/* ── 3D view ─────────────────────────────────── */
+/* WebGL canvas from 3d-force-graph, in the SVG's place. */
+#graph3d {
+  position: absolute; inset: 0;
+}
+
+#graph3d[hidden], .hint-3d[hidden], .view-notice[hidden] { display: none; }
+
+/* How to steer the camera; bottom-right, clear of the legend. */
+.hint-3d {
+  position: absolute;
+  right: 16px; bottom: 16px;
+  max-width: 45%;
+  font-size: 11px; color: var(--text-secondary);
+  text-align: right;
+  pointer-events: none;
+}
+
+/* Brief message over the graph, e.g. when 3D can't start. */
+.view-notice {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: min(420px, 90%);
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-hi);
+  box-shadow: var(--shadow);
+  font-size: 12px; color: var(--text-primary);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* A legend line that explains rather than keys a color. */
+.legend-note { font-style: italic; }
+
+@media (max-width: 768px) {
+  .hint-3d { display: none; } /* touch users orbit and pinch without help */
+}
+
 /* scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }

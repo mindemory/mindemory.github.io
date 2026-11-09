@@ -1,5 +1,8 @@
 /* =============================================
-   MCN CONNECTIVITY — D3 GRAPH ENGINE
+   MCN CONNECTIVITY — GRAPH ENGINE
+   2D: D3 force simulation drawn as SVG.
+   3D: the same nodes and links drawn with 3d-force-graph (WebGL), whose
+       library is loaded on demand the first time 3D is chosen.
    ============================================= */
 
 (function () {
@@ -41,6 +44,22 @@
   // Distinct look for the two edge layers.
   const ATTEND_COLOR = "#6366f1"; // indigo — used for multi-year co-attendance
   const COLLAB_COLOR = "#fbbf24"; // amber  — co-authorship edges stand out
+
+  // ── 3D tuning ──────────────────────────────
+  // Sphere radius = ROLE_RADIUS × this, in the same units as link lengths.
+  const NODE_SCALE_3D = 0.9;
+  // Co-attendance links form one clique per cohort: ~6.5k among students but
+  // ~42k with every role shown, far more line objects than WebGL handles
+  // smoothly. Above this count 3D still uses them to shape the layout but only
+  // draws the ones touching the selected person.
+  const MAX_ATTEND_LINKS_3D = 8000;
+  // Opacity of whatever lies outside the current selection or search.
+  const DIM_ALPHA_3D = 0.1;
+  // Closest the camera comes when flying to a person or a search.
+  const FOCUS_DISTANCE_3D = 160;
+  const REDUCE_MOTION = !!(window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const ms = t => (REDUCE_MOTION ? 0 : t); // camera transition length
 
   // ── Co-authorship data (optional) ──────────
   // collabs.js defines MCN_COLLABS = { edges, resolved, aliases }. If it wasn't
@@ -124,13 +143,51 @@
     colorBy:       HAS_DOMAINS ? "domain" : "year",
     selectedDomain:"all",
     layout:        "force",
+    // "2d" (SVG) or "3d" (WebGL). A "#3d" URL opens straight into 3D, so the
+    // 3D view can be linked to directly.
+    view:          location.hash === "#3d" ? "3d" : "2d",
     searchQuery:   "",
     selectedNode:  null,
   };
 
   let simulation, allNodes, allLinks, svg, linkSel, nodeSel;
+  let attendCount = 0; // co-attendance links in the current view
   const width  = () => document.getElementById("graphContainer").clientWidth;
   const height = () => document.getElementById("graphContainer").clientHeight;
+
+  // A link's endpoint ids. Both force engines swap the id strings for node
+  // objects once they start, so accept either form.
+  function endIds(l) {
+    return [
+      typeof l.source === "object" ? l.source.id : l.source,
+      typeof l.target === "object" ? l.target.id : l.target,
+    ];
+  }
+
+  // Ids of a person plus everyone linked to them in the active layer(s).
+  function neighborhoodOf(id) {
+    const ids = new Set([id]);
+    for (const l of allLinks) {
+      const [s, t] = endIds(l);
+      if (s === id) ids.add(t);
+      else if (t === id) ids.add(s);
+    }
+    return ids;
+  }
+
+  // Ids whose name, affiliation or current role match the search box, or
+  // null when the box is empty.
+  function searchHits() {
+    const q = state.searchQuery.toLowerCase().trim();
+    if (!q) return null;
+    const hits = new Set();
+    for (const n of allNodes) {
+      const career = CAREER_INFO[n.name];
+      const haystack = [n.name, career?.affiliation, career?.role].filter(Boolean).join(" ").toLowerCase();
+      if (haystack.includes(q)) hits.add(n.id);
+    }
+    return hits;
+  }
 
   // ── Build graph data from MCN_DATA ─────────
   function buildGraphData(yearFilter = "all", roleFilter = "all") {
@@ -261,6 +318,14 @@
     return MULTI_COLOR; // multi-year attendees → white
   }
 
+  // Co-authorship links are amber; co-attendance links take their cohort's
+  // year color, or indigo when the pair shared several cohorts.
+  function linkColor(l) {
+    if (l.type === "collab") return COLLAB_COLOR;
+    const yrs = Array.from(l.years).sort();
+    return yrs.length === 1 ? yearColor(yrs[0]) : ATTEND_COLOR;
+  }
+
   // ── Legend ─────────────────────────────────
   function renderLegend() {
     const el = document.getElementById("legend");
@@ -329,6 +394,14 @@
       item.innerHTML = `<div class="legend-line" style="background:${color}"></div><span>${label}</span>`;
       el.appendChild(item);
     }
+
+    // In 3D, say so when the co-attendance layer is too big to draw in full.
+    if (state.view === "3d" && attendCount > MAX_ATTEND_LINKS_3D) {
+      const note = document.createElement("div");
+      note.className = "legend-item legend-note";
+      note.textContent = `Co-attendance lines (${attendCount.toLocaleString()}) are drawn for the selected person`;
+      el.appendChild(note);
+    }
   }
 
   // ── Update header stats ─────────────────────
@@ -339,15 +412,23 @@
   }
 
   // ── Main render ────────────────────────────
+  // Rebuild the graph data for the current filters, then hand it to whichever
+  // view is showing. Both views get fresh node/link objects every time, so
+  // neither engine sees positions or pins left behind by the other.
   function render() {
     const yearFilter = state.selectedYears.has("all") ? "all" : [...state.selectedYears][0];
     const { nodes, links } = buildGraphData(yearFilter, state.selectedRole);
     allNodes = nodes;
     allLinks = links;
+    attendCount = links.reduce((k, l) => k + (l.type === "attend" ? 1 : 0), 0);
     updateStats(nodes, links);
     renderLegend();
+    if (state.view === "3d") render3d(nodes, links);
+    else render2d(nodes, links);
+  }
 
-    const container = document.getElementById("graphContainer");
+  // ── 2D (SVG) render ────────────────────────
+  function render2d(nodes, links) {
     const W = width(), H = height();
 
     // Clear old SVG content
@@ -379,11 +460,7 @@
       .data(links)
       .join("line")
         .attr("class", d => "link " + d.type)
-        .attr("stroke", d => {
-          if (d.type === "collab") return COLLAB_COLOR;
-          const yrs = Array.from(d.years).sort();
-          return yrs.length === 1 ? yearColor(yrs[0]) : ATTEND_COLOR;
-        })
+        .attr("stroke", linkColor)
         .attr("stroke-width", d => d.type === "collab"
           ? Math.sqrt(d.weight) * 1.2 + 0.6
           : Math.sqrt(d.weight) * 0.7 + 0.3)
@@ -555,6 +632,422 @@
       .force("center", d3.forceCenter(W / 2, H / 2));
   }
 
+  // ── 3D view (3d-force-graph, WebGL) ────────
+  // One ForceGraph3D instance is made on first use and kept for the life of
+  // the page (going back to 2D only pauses it), since browsers cap how many
+  // WebGL contexts a page may open. It runs its own force simulation
+  // (d3-force-3d) on the same node and link objects the 2D view would get.
+  let graph3d = null;
+  let lib3dPromise = null;   // the library load, shared by every caller
+  let render3dToken = 0;     // id of the newest 3D render; stale async work checks it
+  let center3d = null;       // the engine's own centering force, kept so layouts can restore it
+  let cameraMoved3d = false; // the reader has taken the camera: stop auto-framing
+  let lastFrame3d = 0;       // when the camera last re-framed a moving layout
+  let emphasis3d = null;     // ids drawn at full strength, or null for everyone
+  let hovered3d = null;
+  let pointer3d = { clientX: 0, clientY: 0 }; // last pointer position, for the tooltip
+  let searchFrameTimer = null;
+  let noticeTimer = null;
+
+  const radius3d = n => (ROLE_RADIUS[n.primaryRole] || 7) * NODE_SCALE_3D;
+  const ORIGIN_3D = { x: 0, y: 0, z: 0 };
+
+  // Size the 3D canvas to the graph area. Never 0: a zero height makes the
+  // camera's aspect ratio 0/0, and one NaN there poisons every later camera
+  // move (it happens when the page loads in a hidden or collapsed frame).
+  function size3d() {
+    graph3d.width(Math.max(1, width())).height(Math.max(1, height()));
+  }
+
+  function webglAvailable() {
+    try {
+      const c = document.createElement("canvas");
+      return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl")));
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Load 3d-force-graph from #graph3d's data-lib URL: the CDN in development,
+  // the vendored copy in a built bundle. Resolves at once if already loaded.
+  function load3dLibrary() {
+    if (window.ForceGraph3D) return Promise.resolve();
+    if (!lib3dPromise) {
+      lib3dPromise = new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = document.getElementById("graph3d").dataset.lib;
+        s.onload = resolve;
+        s.onerror = () => { lib3dPromise = null; reject(new Error("3D library failed to load")); };
+        document.head.appendChild(s);
+      });
+    }
+    return lib3dPromise;
+  }
+
+  function create3d() {
+    const el = document.getElementById("graph3d");
+    const g = ForceGraph3D({ controlType: "orbit" })(el)
+      .backgroundColor("rgba(0,0,0,0)")   // let the page background show through
+      .showNavInfo(false)
+      .nodeId("id")
+      .nodeLabel(() => "")                // hovering uses the page's own tooltip
+      .linkLabel(() => "")
+      .nodeRelSize(1)
+      .nodeVal(n => Math.pow(radius3d(n), 3)) // a volume, so each sphere's radius is radius3d(n)
+      .nodeResolution(12)
+      .nodeOpacity(0.92)
+      .nodeColor(nodeColor3d)
+      .linkOpacity(1)                     // per-link opacity rides in linkColor3d's alpha
+      .linkColor(linkColor3d)
+      .linkWidth(linkWidth3d)
+      .linkVisibility(linkVisible3d)
+      .onNodeHover(hover3d)
+      .onNodeClick(n => selectNode(n))
+      .onBackgroundClick(() => { clearSelection(); closeDetail(); })
+      .onEngineTick(followLayout3d)
+      .onEngineStop(() => frame3d())
+      .warmupTicks(REDUCE_MOTION ? 300 : 0)
+      .cooldownTime(REDUCE_MOTION ? 0 : 12000);
+
+    center3d = g.d3Force("center");
+
+    // Any orbit, pan or zoom hands the camera to the reader.
+    el.addEventListener("pointerdown", () => { cameraMoved3d = true; });
+    el.addEventListener("wheel", () => { cameraMoved3d = true; }, { passive: true });
+    el.addEventListener("pointermove", e => {
+      pointer3d = e;
+      if (hovered3d) moveTooltip(e);
+    }, { passive: true });
+    el.addEventListener("pointerleave", () => { hovered3d = null; hideTooltip(); });
+    return g;
+  }
+
+  function render3d(nodes, links) {
+    const token = ++render3dToken;
+    setHint3d();
+    load3dLibrary().then(() => {
+      if (token !== render3dToken || state.view !== "3d") return; // superseded meanwhile
+      if (!graph3d) graph3d = create3d();
+      size3d();
+      tuneForces3d();
+      emphasis3d = currentEmphasis();
+      graph3d.graphData({ nodes, links });
+      apply3dLayout();
+      graph3d.resumeAnimation();
+      cameraMoved3d = false;
+      frameSearch3d(searchHits());
+    }).catch(err => {
+      if (token !== render3dToken) return;
+      console.error(err);
+      showNotice("The 3D view couldn't start in this browser, so here is the 2D view.");
+      setView("2d");
+    });
+  }
+
+  // The 2D simulation's spring lengths and repulsion, so both views spread
+  // the network alike. Two differences: lengths are floored (2D's formula
+  // turns negative past a dozen shared papers), and repulsion stops at a
+  // range, or the whole network would push its unlinked members far out and
+  // the camera, framing everyone, would shrink the linked core to a speck.
+  function tuneForces3d() {
+    graph3d.d3Force("link")
+      .distance(l => Math.max(15, 60 - (l.weight - 1) * 5))
+      .strength(0.3);
+    graph3d.d3Force("charge")
+      .strength(n => {
+        const r = ROLE_RADIUS[n.primaryRole] || 7;
+        return -(r * r * 4);
+      })
+      .distanceMax(300);
+  }
+
+  // ── 3D styling ──
+  // The 2D view fades things with CSS classes; WebGL materials can't read
+  // those, so in 3D the fade is the alpha of each node's and link's color.
+
+  // Who is in focus: the selected person and their neighbours, else the
+  // search hits, else nobody in particular (null).
+  function currentEmphasis() {
+    return state.selectedNode ? neighborhoodOf(state.selectedNode.id) : searchHits();
+  }
+
+  // `color` with the given opacity, as rgba().
+  function withAlpha(color, alpha) {
+    const c = d3.color(color);
+    if (!c) return color;
+    c.opacity = alpha;
+    return c.formatRgb();
+  }
+
+  function nodeColor3d(n) {
+    const c = nodeColor(n);
+    return emphasis3d && !emphasis3d.has(n.id) ? withAlpha(c, DIM_ALPHA_3D) : c;
+  }
+
+  function touchesSelection(l) {
+    return !!state.selectedNode && endIds(l).includes(state.selectedNode.id);
+  }
+
+  // Opacities follow the 2D stylesheet: co-authorship reads above the fainter
+  // co-attendance mesh; a selection lights the person's own links and fades
+  // the rest; a search fades links with no matching end.
+  function linkColor3d(l) {
+    const base = linkColor(l);
+    if (state.selectedNode) return withAlpha(base, touchesSelection(l) ? 0.95 : 0.04);
+    if (emphasis3d) {
+      const [s, t] = endIds(l);
+      if (!emphasis3d.has(s) && !emphasis3d.has(t)) return withAlpha(base, 0.03);
+    }
+    return withAlpha(base, l.type === "collab" ? 0.6 : 0.15);
+  }
+
+  // 0 draws a cheap 1px line. The selected person's links become tubes,
+  // co-authorship ones thicker the more papers the pair share.
+  function linkWidth3d(l) {
+    if (!touchesSelection(l)) return 0;
+    return l.type === "collab" ? Math.sqrt(l.weight) * 0.5 + 0.5 : 0.4;
+  }
+
+  // See MAX_ATTEND_LINKS_3D: an oversized co-attendance layer is drawn only
+  // around the selected person (hidden links still act on the layout).
+  function linkVisible3d(l) {
+    return l.type !== "attend" || attendCount <= MAX_ATTEND_LINKS_3D || touchesSelection(l);
+  }
+
+  // Re-read every style accessor so a change of selection, search or color
+  // mode reaches the scene. Does nothing outside 3D.
+  function restyle3d() {
+    if (!graph3d || state.view !== "3d") return;
+    emphasis3d = currentEmphasis();
+    graph3d
+      .nodeColor(graph3d.nodeColor())
+      .linkColor(graph3d.linkColor())
+      .linkWidth(graph3d.linkWidth())
+      .linkVisibility(graph3d.linkVisibility());
+  }
+
+  function hover3d(n) {
+    hovered3d = n || null;
+    if (n) showTooltip(pointer3d, n);
+    else hideTooltip();
+  }
+
+  // ── 3D camera ──
+  // Frame everyone, unless the reader has taken the camera.
+  function frame3d() {
+    if (!graph3d || cameraMoved3d || state.view !== "3d") return;
+    graph3d.zoomToFit(ms(600), 30);
+  }
+
+  // While a fresh layout spreads out, re-frame about once a second so the
+  // camera follows it (frame3d steps aside once the reader takes over).
+  function followLayout3d() {
+    const now = performance.now();
+    if (now - lastFrame3d < 1000) return;
+    lastFrame3d = now;
+    frame3d();
+  }
+
+  // Turn the camera onto `center`, keeping the current viewing direction and
+  // backing off until `members` fit the view. The 90th-percentile distance
+  // sets the reach, so one far-flung member doesn't drag the camera out.
+  // Orbiting then pivots around `center`.
+  function flyTo3d(center, members) {
+    if (!graph3d || !Number.isFinite(center.x)) return;
+    const dists = members.filter(n => Number.isFinite(n.x))
+      .map(n => Math.hypot(n.x - center.x, n.y - center.y, n.z - center.z))
+      .sort((a, b) => a - b);
+    const reach = dists.length ? dists[Math.floor(0.9 * (dists.length - 1))] : 0;
+    // The camera sees 50° top to bottom: reach / tan(25°) ≈ 2.1 × reach, plus margin.
+    const dist = Math.max(FOCUS_DISTANCE_3D, reach * 2.4);
+    const cam = graph3d.camera().position;
+    const dx = cam.x - center.x, dy = cam.y - center.y, dz = cam.z - center.z;
+    const len = Math.hypot(dx, dy, dz);
+    const [ux, uy, uz] = len > 1e-6 ? [dx / len, dy / len, dz / len] : [0, 0, 1];
+    cameraMoved3d = true; // don't let auto-framing undo this
+    graph3d.cameraPosition(
+      { x: center.x + ux * dist, y: center.y + uy * dist, z: center.z + uz * dist },
+      { x: center.x, y: center.y, z: center.z },
+      ms(900));
+  }
+
+  // Look at a selected person, far enough back to see who they connect to.
+  function focusPerson3d(d) {
+    const ids = neighborhoodOf(d.id);
+    flyTo3d(d, allNodes.filter(n => ids.has(n.id)));
+  }
+
+  // Swing round to whoever the search matched, after a pause so the camera
+  // isn't chasing every keystroke.
+  function frameSearch3d(hits) {
+    clearTimeout(searchFrameTimer);
+    if (!graph3d || !hits || !hits.size) return;
+    searchFrameTimer = setTimeout(() => {
+      if (state.view !== "3d") return;
+      const group = allNodes.filter(n => hits.has(n.id) && Number.isFinite(n.x));
+      if (!group.length) return;
+      const mean = axis => group.reduce((s, n) => s + n[axis], 0) / group.length;
+      flyTo3d({ x: mean("x"), y: mean("y"), z: mean("z") }, group);
+    }, 400);
+  }
+
+  // ── 3D layouts ──
+  // Each layout is a few extra forces on the 3D engine's simulation, so people
+  // stay draggable and keep settling under their links, as in 2D.
+
+  // Pull each node toward a target point; any axis the target omits is free.
+  function forceToward(targetOf, strength) {
+    let nodes = [];
+    function force(alpha) {
+      const k = strength * alpha;
+      for (const n of nodes) {
+        const t = targetOf(n);
+        if (!t) continue;
+        if (t.x !== undefined) n.vx += (t.x - n.x) * k;
+        if (t.y !== undefined) n.vy += (t.y - n.y) * k;
+        if (t.z !== undefined) n.vz += (t.z - n.z) * k;
+      }
+    }
+    force.initialize = ns => { nodes = ns; };
+    return force;
+  }
+
+  // Pull each node toward a circle of the given radius around the vertical axis.
+  function forceRing(radius, strength) {
+    let nodes = [];
+    function force(alpha) {
+      for (const n of nodes) {
+        const r = Math.hypot(n.x, n.z) || 1e-6;
+        const k = ((radius - r) / r) * strength * alpha;
+        n.vx += n.x * k;
+        n.vz += n.z * k;
+      }
+    }
+    force.initialize = ns => { nodes = ns; };
+    return force;
+  }
+
+  // "Radial" in 3D: one ring per cohort (people sit in their first MCN year),
+  // stacked earliest-to-latest up the vertical axis, so the 2D ring of years
+  // becomes a column to orbit. Links still pull collaborators to the same side.
+  function cohortColumn3d(nodes) {
+    const firstYear = new Map(nodes.map(n => [n.id, Math.min(...n.years)]));
+    const years = [...firstYear.values()];
+    const mid = (Math.min(...years) + Math.max(...years)) / 2;
+    const perYear = new Map();
+    for (const y of years) perYear.set(y, (perYear.get(y) || 0) + 1);
+    const biggest = Math.max(1, ...perYear.values());
+    return {
+      ringRadius: Math.max(80, (biggest * 30) / (2 * Math.PI)), // ~30 units of rim per person
+      heightOf: n => (firstYear.get(n.id) - mid) * 20,
+    };
+  }
+
+  // "Domains" in 3D: each research domain's anchor is spread evenly over a
+  // sphere (a golden-angle spiral), the 3D version of 2D's ring of anchors.
+  function domainAnchors3d(count) {
+    const labels = [...legendDomains.map(d => d.name), OTHER_DOMAIN];
+    const R = 80 + 9 * Math.sqrt(count);
+    const anchors = {};
+    labels.forEach((label, i) => {
+      const y = 1 - (2 * (i + 0.5)) / labels.length; // top to bottom, in (-1, 1)
+      const r = Math.sqrt(1 - y * y);
+      const theta = i * Math.PI * (3 - Math.sqrt(5)); // golden angle
+      anchors[label] = { x: R * r * Math.cos(theta), y: R * y, z: R * r * Math.sin(theta) };
+    });
+    return anchors;
+  }
+
+  // Swap in the forces for state.layout.
+  function apply3dLayout() {
+    graph3d.d3Force("toward", null).d3Force("ring", null).d3Force("center", center3d);
+    if (state.layout === "force") {
+      // People with no links in view feel only repulsion and drift outward;
+      // a weak pull to the origin keeps them as a halo round the linked core.
+      graph3d.d3Force("toward", forceToward(() => ORIGIN_3D, 0.03));
+    } else if (state.layout === "radial") {
+      const { ringRadius, heightOf } = cohortColumn3d(allNodes);
+      // The ring pull is strong enough to beat repulsion (which would spread
+      // each cohort into a disc) but acts only radially, so people still slide
+      // round their ring toward collaborators in other years.
+      graph3d
+        .d3Force("center", null) // the ring centres x/z, and years set y
+        .d3Force("toward", forceToward(n => ({ y: heightOf(n) }), 0.5))
+        .d3Force("ring", forceRing(ringRadius, 0.6));
+    } else if (state.layout === "domains") {
+      const anchors = domainAnchors3d(allNodes.length);
+      graph3d
+        .d3Force("center", null)
+        .d3Force("toward", forceToward(n => anchors[domainOf(n.id)] || anchors[OTHER_DOMAIN], 0.25));
+    }
+  }
+
+  // A layout button pressed while in 3D.
+  function relayout3d() {
+    setHint3d();
+    if (!graph3d) return;
+    apply3dLayout();
+    cameraMoved3d = false;
+    // With reduced motion the engine doesn't animate (cooldownTime 0), so
+    // hand it the same data again to re-run its instant warm-up instead.
+    if (REDUCE_MOTION) graph3d.graphData({ nodes: allNodes, links: allLinks });
+    else graph3d.d3ReheatSimulation();
+  }
+
+  function setHint3d() {
+    const how = "Drag to orbit · right-drag to pan · scroll to zoom";
+    const what = {
+      radial:  "One ring per cohort, earliest at the bottom",
+      domains: "One cluster per research domain",
+    }[state.layout];
+    document.getElementById("hint3d").textContent = what ? `${what} · ${how}` : how;
+  }
+
+  // A short-lived message over the graph.
+  function showNotice(text) {
+    const el = document.getElementById("viewNotice");
+    el.textContent = text;
+    el.hidden = false;
+    clearTimeout(noticeTimer);
+    noticeTimer = setTimeout(() => { el.hidden = true; }, 6000);
+  }
+
+  // ── 2D / 3D switch ─────────────────────────
+  function setView(view) {
+    // Checked only when 3D is asked for, so the 2D page never opens a WebGL
+    // context it doesn't need.
+    if (view === "3d" && !webglAvailable()) {
+      const btn3d = document.querySelector('#viewPills [data-view="3d"]');
+      if (btn3d) {
+        btn3d.disabled = true;
+        btn3d.title = "3D needs WebGL, which this browser has turned off";
+      }
+      showNotice("3D needs WebGL, which this browser has turned off.");
+      view = "2d";
+    }
+    state.view = view;
+    document.querySelectorAll("#viewPills .role-btn").forEach(b =>
+      b.classList.toggle("active", b.dataset.view === view));
+    // Keep the URL in step, so a 3D view can be shared as …#3d. The path is
+    // absolute because a deployed page may carry a <base> tag.
+    history.replaceState(null, "", location.pathname + location.search + (view === "3d" ? "#3d" : ""));
+    clearSelection(); closeDetail(); hideTooltip();
+
+    const is3d = view === "3d";
+    document.getElementById("graph").style.display = is3d ? "none" : "";
+    document.getElementById("graph3d").hidden = !is3d;
+    document.getElementById("hint3d").hidden = !is3d;
+    if (is3d) {
+      // Park the 2D view: stop its simulation and drop its SVG.
+      if (simulation) simulation.stop();
+      svg.selectAll("*").remove();
+      linkSel = nodeSel = null;
+    } else if (graph3d) {
+      graph3d.pauseAnimation(); // keep the WebGL context, just stop drawing
+    }
+    render();
+  }
+
   // ── Tooltip ────────────────────────────────
   function showTooltip(event, d) {
     const tip = document.getElementById("tooltip");
@@ -605,36 +1098,26 @@
   function selectNode(d) {
     state.selectedNode = d;
     highlightNeighbors(d);
+    if (state.view === "3d") focusPerson3d(d);
     openDetail(d);
   }
 
   function highlightNeighbors(d) {
+    if (state.view === "3d") { restyle3d(); return; }
     if (!nodeSel || !linkSel) return;
-    const neighborIds = new Set([d.id]);
-    allLinks.forEach(l => {
-      const sid = typeof l.source === "object" ? l.source.id : l.source;
-      const tid = typeof l.target === "object" ? l.target.id : l.target;
-      if (sid === d.id) neighborIds.add(tid);
-      if (tid === d.id) neighborIds.add(sid);
-    });
+    const neighborIds = neighborhoodOf(d.id);
+    const touches = l => endIds(l).includes(d.id);
     nodeSel
       .classed("highlighted", n => n.id === d.id)
       .classed("dimmed",      n => !neighborIds.has(n.id));
     linkSel
-      .classed("highlighted", l => {
-        const sid = typeof l.source === "object" ? l.source.id : l.source;
-        const tid = typeof l.target === "object" ? l.target.id : l.target;
-        return sid === d.id || tid === d.id;
-      })
-      .classed("dimmed", l => {
-        const sid = typeof l.source === "object" ? l.source.id : l.source;
-        const tid = typeof l.target === "object" ? l.target.id : l.target;
-        return sid !== d.id && tid !== d.id;
-      });
+      .classed("highlighted", l => touches(l))
+      .classed("dimmed",      l => !touches(l));
   }
 
   function clearSelection() {
     state.selectedNode = null;
+    restyle3d();
     if (!nodeSel || !linkSel) return;
     nodeSel.classed("highlighted dimmed search-hit", false);
     linkSel.classed("highlighted dimmed", false);
@@ -733,14 +1216,8 @@
     const topicChips = (domainInfo && domainInfo.topics || []).map(t =>
       `<span class="detail-topic-chip">${t}</span>`).join("");
 
-    const neighborNodes = allNodes.filter(n => {
-      if (n.id === d.id) return false;
-      return allLinks.some(l => {
-        const sid = typeof l.source === "object" ? l.source.id : l.source;
-        const tid = typeof l.target === "object" ? l.target.id : l.target;
-        return (sid === d.id && tid === n.id) || (tid === d.id && sid === n.id);
-      });
-    });
+    const neighborIds = neighborhoodOf(d.id);
+    const neighborNodes = allNodes.filter(n => n.id !== d.id && neighborIds.has(n.id));
     // Sort by role priority
     const pri = { director:0, faculty:1, lecturer:2, ta:3, student:4 };
     neighborNodes.sort((a, b) => (pri[a.primaryRole]||5) - (pri[b.primaryRole]||5));
@@ -813,26 +1290,24 @@
 
   // ── Search ─────────────────────────────────
   function applySearch() {
+    const hits = searchHits();
+    if (state.view === "3d") {
+      restyle3d();
+      frameSearch3d(hits);
+      return;
+    }
     if (!nodeSel) return;
-    const q = state.searchQuery.toLowerCase().trim();
-    if (!q) {
+    if (!hits) {
       nodeSel.classed("search-hit dimmed", false);
       linkSel.classed("dimmed", false);
       return;
-    }
-    const hits = new Set();
-    for (const n of allNodes) {
-      const career = CAREER_INFO[n.name];
-      const haystack = [n.name, career?.affiliation, career?.role].filter(Boolean).join(" ").toLowerCase();
-      if (haystack.includes(q)) hits.add(n.id);
     }
     nodeSel
       .classed("search-hit", n => hits.has(n.id))
       .classed("dimmed",     n => !hits.has(n.id));
     linkSel.classed("dimmed", l => {
-      const sid = typeof l.source === "object" ? l.source.id : l.source;
-      const tid = typeof l.target === "object" ? l.target.id : l.target;
-      return !hits.has(sid) && !hits.has(tid);
+      const [s, t] = endIds(l);
+      return !hits.has(s) && !hits.has(t);
     });
   }
 
@@ -921,6 +1396,7 @@
               return d3.color(c) ? d3.color(c).brighter(1).toString() : "#fff";
             });
         }
+        restyle3d();
         renderLegend();
       };
     });
@@ -938,9 +1414,11 @@
         if (b) b.classList.toggle("active", k === mode);
       }
     };
+    // In 3D each button swaps the 3D engine's layout forces instead.
     btns.force.onclick = () => {
       state.layout = "force";
       setActive("force");
+      if (state.view === "3d") { relayout3d(); return; }
       clearDomainLayout(width(), height());
       if (allNodes) allNodes.forEach(n => { n.fx = null; n.fy = null; });
       if (simulation) simulation.alpha(0.8).restart();
@@ -948,6 +1426,7 @@
     btns.radial.onclick = () => {
       state.layout = "radial";
       setActive("radial");
+      if (state.view === "3d") { relayout3d(); return; }
       clearDomainLayout(width(), height());
       if (allNodes && allLinks) applyRadialLayout(allNodes, allLinks, width(), height());
     };
@@ -958,6 +1437,7 @@
         if (btns.domains.disabled) return;
         state.layout = "domains";
         setActive("domains");
+        if (state.view === "3d") { relayout3d(); return; }
         if (allNodes) allNodes.forEach(n => { n.fx = null; n.fy = null; });
         applyDomainLayout(allNodes, width(), height());
       };
@@ -995,6 +1475,18 @@
     }
   }
 
+  // ── View (2D / 3D) buttons ─────────────────
+  function initViewButtons() {
+    const pills = document.getElementById("viewPills");
+    if (!pills) return;
+    pills.querySelectorAll(".role-btn").forEach(btn => {
+      btn.onclick = () => {
+        if (btn.disabled || btn.dataset.view === state.view) return;
+        setView(btn.dataset.view);
+      };
+    });
+  }
+
   // ── Search input ───────────────────────────
   function initSearch() {
     const inp = document.getElementById("searchInput");
@@ -1024,14 +1516,19 @@
     initDomainColorPill();
     initDomainFilter();
     initLayoutButtons();
+    initViewButtons();
     initSearch();
-    render();
+    setView(state.view); // shows the right surface, then renders
 
     // Re-render on resize
     let resizeTimer;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
+        if (state.view === "3d") {
+          if (graph3d) size3d();
+          return;
+        }
         if (simulation) {
           simulation.force("center", d3.forceCenter(width() / 2, height() / 2));
           simulation.alpha(0.3).restart();

@@ -74,6 +74,13 @@
       </select>
     </div>
     <div class="control-group">
+      <label class="control-label">VIEW</label>
+      <div class="role-pills" id="viewPills">
+        <button class="role-btn active" data-view="2d">2D</button>
+        <button class="role-btn" data-view="3d">3D</button>
+      </div>
+    </div>
+    <div class="control-group">
       <label class="control-label">LAYOUT</label>
       <div class="role-pills">
         <button class="role-btn active" id="btnForce">Force</button>
@@ -93,6 +100,13 @@
   <!-- Graph Canvas -->
   <div id="graphContainer">
     <svg id="graph"></svg>
+    <!-- 3D view. Its library (3d-force-graph, which bundles three.js) is
+         fetched from data-lib only when 3D is first chosen, so the 2D page
+         never downloads it. -->
+    <div id="graph3d" hidden
+         data-lib="mcn-network/vendor/3d-force-graph.min.js"></div>
+    <div id="hint3d" class="hint-3d" hidden></div>
+    <div id="viewNotice" class="view-notice" role="status" hidden></div>
     <div id="tooltip" class="tooltip hidden"></div>
     <div id="legend" class="legend"></div>
   </div>
