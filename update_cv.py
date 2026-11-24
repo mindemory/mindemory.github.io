@@ -52,7 +52,10 @@ def extract_link_uris(reader):
     # Hyperlinks embedded in the PDF keep characters (like "_") that text extraction drops
     uris = []
     for page in reader.pages:
-        for annot in page.get("/Annots") or []:
+        annots = page.get("/Annots")
+        # Some PDF engines store the annotation list as an indirect object
+        annots = annots.get_object() if annots is not None else []
+        for annot in annots:
             action = annot.get_object().get("/A")
             if action and "/URI" in action:
                 uris.append(action["/URI"])
@@ -143,7 +146,7 @@ def main():
         "contact": {
             "website": "mindemory.io",
             "email": "mrugank.dake@dartmouth.edu",
-            "company_email": "mrugank.dake@alexandriasocial.net",
+            # "company_email" held until the OPT employer report is approved
             "github": "github.com/mindemory",
             "location": "Hanover, NH"
         }

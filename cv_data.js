@@ -4,7 +4,6 @@ const CV_DATA = {
   "contact": {
     "website": "mindemory.io",
     "email": "mrugank.dake@dartmouth.edu",
-    "company_email": "mrugank.dake@alexandriasocial.net",
     "github": "github.com/mindemory",
     "location": "Hanover, NH"
   },
@@ -241,16 +240,6 @@ const CV_DATA = {
     }
   ],
   "professional_experience": [
-    {
-      "institution": "Alexandria Social Inc. (Delaware C corporation)",
-      "location": "Hanover, NH",
-      "roles": [
-        {
-          "role": "Founder",
-          "date": "Nov 2026 – Present"
-        }
-      ]
-    },
     {
       "institution": "Meta Reality Labs",
       "location": "Burlingame, CA",
