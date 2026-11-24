@@ -169,6 +169,16 @@ html {
     animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
+#sidebar p a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+#sidebar p a:hover {
+    color: var(--primary-color);
+}
+
 #sidebar ul {
     list-style: none;
     width: 100%;

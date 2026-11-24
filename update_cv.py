@@ -143,6 +143,7 @@ def main():
         "contact": {
             "website": "mindemory.io",
             "email": "mrugank.dake@dartmouth.edu",
+            "company_email": "mrugank.dake@alexandriasocial.net",
             "github": "github.com/mindemory",
             "location": "Hanover, NH"
         }
@@ -307,6 +308,13 @@ def main():
                 year = year_match.group(1).strip()
                 authors = entry[:year_match.start()].strip().rstrip(",")
                 rest = entry[year_match.end():].strip().rstrip(".")
+
+                # Pull out a trailing status, e.g. "In revision at Journal of Neurophysiology"
+                status = ""
+                status_match = re.search(r'\.?\s*(In revision at [^.]+)$', rest)
+                if status_match:
+                    status = status_match.group(1).strip()
+                    rest = rest[:status_match.start()].strip().rstrip(".")
                 
                 # Check for Journal
                 journal = ""
@@ -332,6 +340,7 @@ def main():
                     "year": year,
                     "title": title.strip().lstrip(". ,"),
                     "journal": journal,
+                    "status": status,
                     "url": url
                 })
             else:
@@ -344,7 +353,7 @@ def main():
                 })
     cv_data["publications"] = publications
 
-    # 3b. Parse Software & Tools ("Name — description. [In development. | Prototype.] [link]")
+    # 3b. Parse Software & Tools ("Name — description. [In development. | Prototype. | Live.] [link]")
     software_items = []
     if "software" in section_blocks:
         link_uris = extract_link_uris(reader)
@@ -369,7 +378,7 @@ def main():
                     break
 
             status = ""
-            for label in ["In development", "Prototype"]:
+            for label in ["In development", "Prototype", "Live"]:
                 if label + "." in description:
                     status = label
                     description = description.replace(label + ".", "").strip()
@@ -508,7 +517,7 @@ def main():
                 continue
                 
             is_inst = False
-            for keyword in ["Institute", "Labs", "University"]:
+            for keyword in ["Institute", "Labs", "University", "Inc."]:
                 if keyword in line_cleaned:
                     is_inst = True
                     break
@@ -517,7 +526,7 @@ def main():
                 if current_item:
                     prof_items.append(current_item)
                 
-                loc_match = re.search(r'(New York, NY|Burlingame, CA)$', line_cleaned)
+                loc_match = re.search(r'(New York, NY|Burlingame, CA|Hanover, NH)$', line_cleaned)
                 location = ""
                 inst_name = line_cleaned
                 if loc_match:

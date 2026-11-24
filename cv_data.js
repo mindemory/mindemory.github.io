@@ -4,6 +4,7 @@ const CV_DATA = {
   "contact": {
     "website": "mindemory.io",
     "email": "mrugank.dake@dartmouth.edu",
+    "company_email": "mrugank.dake@alexandriasocial.net",
     "github": "github.com/mindemory",
     "location": "Hanover, NH"
   },
@@ -85,6 +86,7 @@ const CV_DATA = {
       "year": "2026",
       "title": "Neural synchrony between prefrontal and visual cortex supports visual working memory",
       "journal": "bioRxiv",
+      "status": "In revision at Journal of Neurophysiology",
       "url": "https://www.biorxiv.org/content/10.64898/2026.06.05.730488v1"
     },
     {
@@ -92,6 +94,7 @@ const CV_DATA = {
       "year": "2025",
       "title": "Perturbing human V1 degrades the fidelity of visual working memory",
       "journal": "Nature Communications",
+      "status": "",
       "url": "https://www.nature.com/articles/s41467-025-57882-8"
     }
   ],
@@ -104,20 +107,6 @@ const CV_DATA = {
       "url_text": ""
     },
     {
-      "name": "Proxenos",
-      "description": "Open-source, privacy-first agent that keeps a person’s own records on their computer and drafts the next step (emails, forms, follow-ups) for them to send; built first for people getting through the healthcare system. Desktop app for Mac and Windows.",
-      "status": "",
-      "url": "https://www.mindemory.io/proxenos",
-      "url_text": "mindemory.io/proxenos"
-    },
-    {
-      "name": "Thanos",
-      "description": "A lab’s memory: what a research group works out over the years, from grant and account details to equipment and where the code lives, kept in one place to search after people move on. Started for the Murray Lab (Dartmouth) and the Clay Space Lab (NYU).",
-      "status": "In development",
-      "url": "https://www.mindemory.io/thanos",
-      "url_text": "mindemory.io/thanos"
-    },
-    {
       "name": "MCN Network Graph",
       "description": "Interactive 2D and 3D visualization of the research network of the MBL Methods in Computational Neuroscience cohorts.",
       "status": "",
@@ -126,8 +115,8 @@ const CV_DATA = {
     },
     {
       "name": "Alexαndria",
-      "description": "Platform integrating shared bibliographies with a collaborative activity space for research teams.",
-      "status": "Prototype",
+      "description": "Social network for researchers built around their reference libraries: a map of what each person reads, new papers picked from it, and a page for every paper where readers shelve, review and discuss it.",
+      "status": "Live",
       "url": "https://www.alexandriasocial.net/",
       "url_text": "alexandriasocial.net"
     },
@@ -253,11 +242,21 @@ const CV_DATA = {
   ],
   "professional_experience": [
     {
+      "institution": "Alexandria Social Inc. (Delaware C corporation)",
+      "location": "Hanover, NH",
+      "roles": [
+        {
+          "role": "Founder",
+          "date": "Nov 2026 – Present"
+        }
+      ]
+    },
+    {
       "institution": "Meta Reality Labs",
       "location": "Burlingame, CA",
       "roles": [
         {
-          "role": "Product Data Science (PhD) Intern",
+          "role": "Product Data Science Intern (PhD)",
           "date": "May – Aug 2025"
         }
       ]
@@ -283,7 +282,7 @@ const CV_DATA = {
               "semester": "Fall 2023"
             },
             {
-              "class": "Math Tools III: Linear Systems (PhD Course)",
+              "class": "Math Tools III: Linear Systems & Fourier Transforms (PhD Course)",
               "semester": "Spring 2023"
             }
           ]
@@ -294,7 +293,7 @@ const CV_DATA = {
   "service": [
     {
       "role": "Ad-hoc Reviewer",
-      "details": "Brain Structure & Function (2026), eLife, ICLR (2026), Cognitive Science Society (2025), Computational Cognitive Neuroscience (CCN 2025, 2026)",
+      "details": "Brain Structure & Function (2026), eLife (2025), ICLR (2026), Cognitive Science Society (2025), Computational Cognitive Neuroscience (CCN 2025, 2026)",
       "year": ""
     },
     {
@@ -333,6 +332,10 @@ const CV_DATA = {
     {
       "title": "Indian Biological Engineering Competition (iBEC) Grant (~$12,000 each)",
       "date": "2019 – 2020"
+    },
+    {
+      "title": "Gold Medal, iGEM Giant Jamboree, Boston (IISER Tirupati team)",
+      "date": "2019"
     },
     {
       "title": "INSPIRE Fellowship, Department of Science and Technology India",

@@ -6,9 +6,8 @@ Source for [mindemory.io](https://www.mindemory.io), the website of Mrugank Dake
 
 - `index.html`: home page (about, news, research)
 - `cv.html`: interactive CV, rendered from `cv_data.js`
-- `projects.html` and `projects/`: project pages, including the [MCN Alumni Network](https://www.mindemory.io/projects/mcn-network.html), the [library map](https://www.mindemory.io/projects/library-map.html) from the Notion Paperpile Integration, [Proxenos](https://www.mindemory.io/proxenos) and [Thanos](https://www.mindemory.io/thanos)
-- `proxenos/`, `thanos/`: short links to those project pages
-- `docs/`: the CV, resume, posters and Proxenos slide deck as PDFs
+- `projects.html` and `projects/`: project pages, including the [MCN Alumni Network](https://www.mindemory.io/projects/mcn-network.html) and the [library map](https://www.mindemory.io/projects/library-map.html) from the Notion Paperpile Integration
+- `docs/`: the CV, resume and posters as PDFs
 - `mindemory/`: an older blog, kept but no longer linked
 
 ## Updating the CV

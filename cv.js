@@ -120,7 +120,7 @@ function renderPublications() {
                     <span class="pub-year">${pub.year}</span>
                 </div>
                 <p class="pub-citation">
-                    <strong>${pub.authors}</strong> (${pub.year}). ${pub.title}. <em>${pub.journal}</em>.
+                    <strong>${pub.authors}</strong> (${pub.year}). ${pub.title}. <em>${pub.journal}</em>.${pub.status ? ' ' + pub.status + '.' : ''}
                 </p>
                 ${linksHtml ? `<div class="pub-links no-print">${linksHtml}</div>` : ''}
             </div>
